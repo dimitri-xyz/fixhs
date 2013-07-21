@@ -53,11 +53,23 @@ import Control.Applicative ( (<$>) )
 import Control.Monad ( liftM )
 import Test.QuickCheck ( arbitrary )
 
+import qualified Data.IntMap as IntMap (delete)  -- CM
+
 -- parse a specific tag and its value
 tagP :: FIXTag -> Parser FIXValue
 tagP tag = do l <- toTag -- read out tag in message
               if l == tnum tag then -- if the two tags coincide read the value
                 tparser tag else fail "wrong tag"
+
+-- parse a specific tag and its value
+tagP' :: FIXTags -> Parser (FIXTag, FIXValue)  -- CM
+tagP' tags = do 
+        l <- toTag -- read out tag in message
+        case LT.lookup l tags of
+          Nothing -> fail "wrong tag"
+          Just tag -> do
+            v <- tparser tag
+            return (tag,v) 
 
 -- parse all the specificed tags and their corresponding values
 tagsP :: FIXTags -> Parser FIXValues
@@ -83,15 +95,24 @@ tagsP ts = option LT.new (insertValue LT.new)
 groupP :: FIXGroupSpec -> Parser FIXValue
 groupP spec = let numTag = gsLength spec in 
 		 do n <- toInt           -- number of submessages
-                    b <- count n submsg  -- parse the submessages
-                    return $ FIXGroup n b
-              where
-                  submsg :: Parser FIXGroupElement
-                  submsg = 
                     let sepTag = gsSeperator spec
-                    in do s  <- tagP sepTag -- The seperator of the message
-		    	  vs <- tagsP (gsBody spec) -- The rest of the message
-			  return (FIXGroupElement (tnum sepTag) s vs)
+                        allGroupTags = LT.insert (tnum sepTag) sepTag (gsBody spec)
+                    (sepTag,s) <- tagP' allGroupTags
+                    let sepNum = tnum sepTag
+                    let groupTags = IntMap.delete sepNum allGroupTags
+                    b1vs <- tagsP groupTags
+                    let b1 = FIXGroupElement sepNum s b1vs   
+                    b2 <- count (n-1) (submsg sepTag groupTags)  -- parse the submessages
+                    return $ FIXGroup n (b1 : b2)
+              where
+                  submsg :: FIXTag -> FIXTags -> Parser FIXGroupElement 
+                  --submsg :: FIXTag -> Parser FIXGroupElement
+                  submsg sepTag groupTags =  --CM
+                  --submsg = 
+                    --let sepTag = gsSeperator spec
+                    do s  <- tagP sepTag -- The seperator of the message
+		       vs <- tagsP groupTags -- The rest of the message
+		       return (FIXGroupElement (tnum sepTag) s vs)
 
 -- | Match the next FIX message (only text) in the stream. The checksum is
 -- validated.
