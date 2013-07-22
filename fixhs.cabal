@@ -1,5 +1,5 @@
 name:                fixhs
-version:             0.1.4
+version:             0.1.4.1
 description:         Financial Information eXchange (FIX) protocol (co)parser
 homepage:            http://github.com/urv/fixhs
 synopsis:            FIX (co)parser
@@ -31,11 +31,11 @@ flag with-fix42
 
 flag with-fix43
   description: add fix43 to the module. It takes a long time to compile!
-  default: False
+  default: True
 
 flag with-fix44
   description: add fix44 to the module. It takes a long time to compile!
-  default: False
+  default: True
 
 library 
   hs-source-dirs:    src/
