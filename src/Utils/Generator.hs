@@ -349,7 +349,7 @@ fieldsOf l cs =
                 indent'' ++ "{ tName = \"" ++ n ++ "\"\n" ++
                 indent'' ++ ", tnum = tnum " ++ tName n ++ '\n' :
                 indent'' ++ ", tparser = " ++ gname ++ "P" ++ suffix' ++ '\n' :
-                indent'' ++ ", arbitraryValue = arbibtraryFIXGroup " ++
+                indent'' ++ ", arbitraryValue = arbitraryFIXGroup " ++
                                 gname ++ "Spec" ++ suffix' ++ " }\n\n" ++
                 indent' ++ gname ++ "P" ++ suffix' ++ " = groupP " ++ gname ++ "Spec" ++ suffix' ++ '\n' :
                 indent' ++ gname ++ "Spec" ++ suffix' ++ " = FGSpec\n" ++

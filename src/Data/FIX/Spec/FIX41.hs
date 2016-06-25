@@ -1599,7 +1599,7 @@ mIndicationofInterest = FMSpec
             { tName = "NoIOIQualifiers"
             , tnum = tnum tNoIOIQualifiers
             , tparser = gNoIOIQualifiersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoIOIQualifiersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoIOIQualifiersSpec''' }
 
          gNoIOIQualifiersP''' = groupP gNoIOIQualifiersSpec'''
          gNoIOIQualifiersSpec''' = FGSpec
@@ -1777,7 +1777,7 @@ mNews = FMSpec
             { tName = "LinesOfText"
             , tnum = tnum tLinesOfText
             , tparser = gLinesOfTextP'''
-            , arbitraryValue = arbibtraryFIXGroup gLinesOfTextSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gLinesOfTextSpec''' }
 
          gLinesOfTextP''' = groupP gLinesOfTextSpec'''
          gLinesOfTextSpec''' = FGSpec
@@ -1792,7 +1792,7 @@ mNews = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -1840,7 +1840,7 @@ mEmail = FMSpec
             { tName = "LinesOfText"
             , tnum = tnum tLinesOfText
             , tparser = gLinesOfTextP'''
-            , arbitraryValue = arbibtraryFIXGroup gLinesOfTextSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gLinesOfTextSpec''' }
 
          gLinesOfTextP''' = groupP gLinesOfTextSpec'''
          gLinesOfTextSpec''' = FGSpec
@@ -1855,7 +1855,7 @@ mEmail = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -2179,7 +2179,7 @@ mAllocation = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -2212,7 +2212,7 @@ mAllocation = FMSpec
                      { tName = "NoMiscFees"
                      , tnum = tnum tNoMiscFees
                      , tparser = gNoMiscFeesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec'''''' }
 
                   gNoMiscFeesP'''''' = groupP gNoMiscFeesSpec''''''
                   gNoMiscFeesSpec'''''' = FGSpec
@@ -2229,7 +2229,7 @@ mAllocation = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -2246,7 +2246,7 @@ mAllocation = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -2323,7 +2323,7 @@ mListStatus = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec

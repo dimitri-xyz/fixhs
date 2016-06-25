@@ -1,5 +1,5 @@
 -- Module  : Data.FIX.Spec.FIX44
--- License : LGPL-2.1 
+-- License : LGPL-2.1
 
 module Data.FIX.Spec.FIX44 ( fix44 ) where
 import qualified Data.ByteString.Char8 as C
@@ -7,6655 +7,6655 @@ import qualified Data.LookupTable as LT ( new, insert )
 import Data.FIX.Message
 import Data.FIX.Parser
 import Data.Functor ( (<$>) )
-import Data.FIX.Arbitrary 
+import Data.FIX.Arbitrary
 import Test.QuickCheck ( arbitrary )
 
 
 tAccount :: FIXTag
-tAccount = FIXTag 
+tAccount = FIXTag
    { tName = "Account"
    , tnum = 1
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAdvId :: FIXTag
-tAdvId = FIXTag 
+tAdvId = FIXTag
    { tName = "AdvId"
    , tnum = 2
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAdvRefID :: FIXTag
-tAdvRefID = FIXTag 
+tAdvRefID = FIXTag
    { tName = "AdvRefID"
    , tnum = 3
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAdvSide :: FIXTag
-tAdvSide = FIXTag 
+tAdvSide = FIXTag
    { tName = "AdvSide"
    , tnum = 4
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tAdvTransType :: FIXTag
-tAdvTransType = FIXTag 
+tAdvTransType = FIXTag
    { tName = "AdvTransType"
    , tnum = 5
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAvgPx :: FIXTag
-tAvgPx = FIXTag 
+tAvgPx = FIXTag
    { tName = "AvgPx"
    , tnum = 6
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBeginSeqNo :: FIXTag
-tBeginSeqNo = FIXTag 
+tBeginSeqNo = FIXTag
    { tName = "BeginSeqNo"
    , tnum = 7
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tClOrdID :: FIXTag
-tClOrdID = FIXTag 
+tClOrdID = FIXTag
    { tName = "ClOrdID"
    , tnum = 11
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCommission :: FIXTag
-tCommission = FIXTag 
+tCommission = FIXTag
    { tName = "Commission"
    , tnum = 12
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCommType :: FIXTag
-tCommType = FIXTag 
+tCommType = FIXTag
    { tName = "CommType"
    , tnum = 13
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tCumQty :: FIXTag
-tCumQty = FIXTag 
+tCumQty = FIXTag
    { tName = "CumQty"
    , tnum = 14
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCurrency :: FIXTag
-tCurrency = FIXTag 
+tCurrency = FIXTag
    { tName = "Currency"
    , tnum = 15
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEndSeqNo :: FIXTag
-tEndSeqNo = FIXTag 
+tEndSeqNo = FIXTag
    { tName = "EndSeqNo"
    , tnum = 16
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tExecID :: FIXTag
-tExecID = FIXTag 
+tExecID = FIXTag
    { tName = "ExecID"
    , tnum = 17
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tExecInst :: FIXTag
-tExecInst = FIXTag 
+tExecInst = FIXTag
    { tName = "ExecInst"
    , tnum = 18
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tExecRefID :: FIXTag
-tExecRefID = FIXTag 
+tExecRefID = FIXTag
    { tName = "ExecRefID"
    , tnum = 19
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tExecTransType :: FIXTag
-tExecTransType = FIXTag 
+tExecTransType = FIXTag
    { tName = "ExecTransType"
    , tnum = 20
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tHandlInst :: FIXTag
-tHandlInst = FIXTag 
+tHandlInst = FIXTag
    { tName = "HandlInst"
    , tnum = 21
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSecurityIDSource :: FIXTag
-tSecurityIDSource = FIXTag 
+tSecurityIDSource = FIXTag
    { tName = "SecurityIDSource"
    , tnum = 22
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIOIID :: FIXTag
-tIOIID = FIXTag 
+tIOIID = FIXTag
    { tName = "IOIID"
    , tnum = 23
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIOIOthSvc :: FIXTag
-tIOIOthSvc = FIXTag 
+tIOIOthSvc = FIXTag
    { tName = "IOIOthSvc"
    , tnum = 24
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tIOIQltyInd :: FIXTag
-tIOIQltyInd = FIXTag 
+tIOIQltyInd = FIXTag
    { tName = "IOIQltyInd"
    , tnum = 25
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tIOIRefID :: FIXTag
-tIOIRefID = FIXTag 
+tIOIRefID = FIXTag
    { tName = "IOIRefID"
    , tnum = 26
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIOIQty :: FIXTag
-tIOIQty = FIXTag 
+tIOIQty = FIXTag
    { tName = "IOIQty"
    , tnum = 27
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIOITransType :: FIXTag
-tIOITransType = FIXTag 
+tIOITransType = FIXTag
    { tName = "IOITransType"
    , tnum = 28
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLastCapacity :: FIXTag
-tLastCapacity = FIXTag 
+tLastCapacity = FIXTag
    { tName = "LastCapacity"
    , tnum = 29
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLastMkt :: FIXTag
-tLastMkt = FIXTag 
+tLastMkt = FIXTag
    { tName = "LastMkt"
    , tnum = 30
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLastPx :: FIXTag
-tLastPx = FIXTag 
+tLastPx = FIXTag
    { tName = "LastPx"
    , tnum = 31
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLastQty :: FIXTag
-tLastQty = FIXTag 
+tLastQty = FIXTag
    { tName = "LastQty"
    , tnum = 32
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoLinesOfText :: FIXTag
-tNoLinesOfText = FIXTag 
+tNoLinesOfText = FIXTag
    { tName = "NoLinesOfText"
    , tnum = 33
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMsgSeqNum :: FIXTag
-tMsgSeqNum = FIXTag 
+tMsgSeqNum = FIXTag
    { tName = "MsgSeqNum"
    , tnum = 34
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNewSeqNo :: FIXTag
-tNewSeqNo = FIXTag 
+tNewSeqNo = FIXTag
    { tName = "NewSeqNo"
    , tnum = 36
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrderID :: FIXTag
-tOrderID = FIXTag 
+tOrderID = FIXTag
    { tName = "OrderID"
    , tnum = 37
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOrderQty :: FIXTag
-tOrderQty = FIXTag 
+tOrderQty = FIXTag
    { tName = "OrderQty"
    , tnum = 38
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOrdStatus :: FIXTag
-tOrdStatus = FIXTag 
+tOrdStatus = FIXTag
    { tName = "OrdStatus"
    , tnum = 39
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tOrdType :: FIXTag
-tOrdType = FIXTag 
+tOrdType = FIXTag
    { tName = "OrdType"
    , tnum = 40
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tOrigClOrdID :: FIXTag
-tOrigClOrdID = FIXTag 
+tOrigClOrdID = FIXTag
    { tName = "OrigClOrdID"
    , tnum = 41
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOrigTime :: FIXTag
-tOrigTime = FIXTag 
+tOrigTime = FIXTag
    { tName = "OrigTime"
    , tnum = 42
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tPossDupFlag :: FIXTag
-tPossDupFlag = FIXTag 
+tPossDupFlag = FIXTag
    { tName = "PossDupFlag"
    , tnum = 43
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tPrice :: FIXTag
-tPrice = FIXTag 
+tPrice = FIXTag
    { tName = "Price"
    , tnum = 44
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tRefSeqNum :: FIXTag
-tRefSeqNum = FIXTag 
+tRefSeqNum = FIXTag
    { tName = "RefSeqNum"
    , tnum = 45
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRelatdSym :: FIXTag
-tRelatdSym = FIXTag 
+tRelatdSym = FIXTag
    { tName = "RelatdSym"
    , tnum = 46
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRule80A :: FIXTag
-tRule80A = FIXTag 
+tRule80A = FIXTag
    { tName = "Rule80A"
    , tnum = 47
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSecurityID :: FIXTag
-tSecurityID = FIXTag 
+tSecurityID = FIXTag
    { tName = "SecurityID"
    , tnum = 48
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSenderCompID :: FIXTag
-tSenderCompID = FIXTag 
+tSenderCompID = FIXTag
    { tName = "SenderCompID"
    , tnum = 49
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSenderSubID :: FIXTag
-tSenderSubID = FIXTag 
+tSenderSubID = FIXTag
    { tName = "SenderSubID"
    , tnum = 50
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSendingDate :: FIXTag
-tSendingDate = FIXTag 
+tSendingDate = FIXTag
    { tName = "SendingDate"
    , tnum = 51
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tSendingTime :: FIXTag
-tSendingTime = FIXTag 
+tSendingTime = FIXTag
    { tName = "SendingTime"
    , tnum = 52
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tQuantity :: FIXTag
-tQuantity = FIXTag 
+tQuantity = FIXTag
    { tName = "Quantity"
    , tnum = 53
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSide :: FIXTag
-tSide = FIXTag 
+tSide = FIXTag
    { tName = "Side"
    , tnum = 54
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSymbol :: FIXTag
-tSymbol = FIXTag 
+tSymbol = FIXTag
    { tName = "Symbol"
    , tnum = 55
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTargetCompID :: FIXTag
-tTargetCompID = FIXTag 
+tTargetCompID = FIXTag
    { tName = "TargetCompID"
    , tnum = 56
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTargetSubID :: FIXTag
-tTargetSubID = FIXTag 
+tTargetSubID = FIXTag
    { tName = "TargetSubID"
    , tnum = 57
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tText :: FIXTag
-tText = FIXTag 
+tText = FIXTag
    { tName = "Text"
    , tnum = 58
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTimeInForce :: FIXTag
-tTimeInForce = FIXTag 
+tTimeInForce = FIXTag
    { tName = "TimeInForce"
    , tnum = 59
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tTransactTime :: FIXTag
-tTransactTime = FIXTag 
+tTransactTime = FIXTag
    { tName = "TransactTime"
    , tnum = 60
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tUrgency :: FIXTag
-tUrgency = FIXTag 
+tUrgency = FIXTag
    { tName = "Urgency"
    , tnum = 61
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tValidUntilTime :: FIXTag
-tValidUntilTime = FIXTag 
+tValidUntilTime = FIXTag
    { tName = "ValidUntilTime"
    , tnum = 62
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tSettlType :: FIXTag
-tSettlType = FIXTag 
+tSettlType = FIXTag
    { tName = "SettlType"
    , tnum = 63
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSettlDate :: FIXTag
-tSettlDate = FIXTag 
+tSettlDate = FIXTag
    { tName = "SettlDate"
    , tnum = 64
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tSymbolSfx :: FIXTag
-tSymbolSfx = FIXTag 
+tSymbolSfx = FIXTag
    { tName = "SymbolSfx"
    , tnum = 65
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tListID :: FIXTag
-tListID = FIXTag 
+tListID = FIXTag
    { tName = "ListID"
    , tnum = 66
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tListSeqNo :: FIXTag
-tListSeqNo = FIXTag 
+tListSeqNo = FIXTag
    { tName = "ListSeqNo"
    , tnum = 67
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotNoOrders :: FIXTag
-tTotNoOrders = FIXTag 
+tTotNoOrders = FIXTag
    { tName = "TotNoOrders"
    , tnum = 68
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tListExecInst :: FIXTag
-tListExecInst = FIXTag 
+tListExecInst = FIXTag
    { tName = "ListExecInst"
    , tnum = 69
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocID :: FIXTag
-tAllocID = FIXTag 
+tAllocID = FIXTag
    { tName = "AllocID"
    , tnum = 70
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocTransType :: FIXTag
-tAllocTransType = FIXTag 
+tAllocTransType = FIXTag
    { tName = "AllocTransType"
    , tnum = 71
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tRefAllocID :: FIXTag
-tRefAllocID = FIXTag 
+tRefAllocID = FIXTag
    { tName = "RefAllocID"
    , tnum = 72
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoOrders :: FIXTag
-tNoOrders = FIXTag 
+tNoOrders = FIXTag
    { tName = "NoOrders"
    , tnum = 73
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAvgPxPrecision :: FIXTag
-tAvgPxPrecision = FIXTag 
+tAvgPxPrecision = FIXTag
    { tName = "AvgPxPrecision"
    , tnum = 74
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeDate :: FIXTag
-tTradeDate = FIXTag 
+tTradeDate = FIXTag
    { tName = "TradeDate"
    , tnum = 75
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tExecBroker :: FIXTag
-tExecBroker = FIXTag 
+tExecBroker = FIXTag
    { tName = "ExecBroker"
    , tnum = 76
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPositionEffect :: FIXTag
-tPositionEffect = FIXTag 
+tPositionEffect = FIXTag
    { tName = "PositionEffect"
    , tnum = 77
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNoAllocs :: FIXTag
-tNoAllocs = FIXTag 
+tNoAllocs = FIXTag
    { tName = "NoAllocs"
    , tnum = 78
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocAccount :: FIXTag
-tAllocAccount = FIXTag 
+tAllocAccount = FIXTag
    { tName = "AllocAccount"
    , tnum = 79
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocQty :: FIXTag
-tAllocQty = FIXTag 
+tAllocQty = FIXTag
    { tName = "AllocQty"
    , tnum = 80
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tProcessCode :: FIXTag
-tProcessCode = FIXTag 
+tProcessCode = FIXTag
    { tName = "ProcessCode"
    , tnum = 81
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNoRpts :: FIXTag
-tNoRpts = FIXTag 
+tNoRpts = FIXTag
    { tName = "NoRpts"
    , tnum = 82
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRptSeq :: FIXTag
-tRptSeq = FIXTag 
+tRptSeq = FIXTag
    { tName = "RptSeq"
    , tnum = 83
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCxlQty :: FIXTag
-tCxlQty = FIXTag 
+tCxlQty = FIXTag
    { tName = "CxlQty"
    , tnum = 84
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoDlvyInst :: FIXTag
-tNoDlvyInst = FIXTag 
+tNoDlvyInst = FIXTag
    { tName = "NoDlvyInst"
    , tnum = 85
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDlvyInst :: FIXTag
-tDlvyInst = FIXTag 
+tDlvyInst = FIXTag
    { tName = "DlvyInst"
    , tnum = 86
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocStatus :: FIXTag
-tAllocStatus = FIXTag 
+tAllocStatus = FIXTag
    { tName = "AllocStatus"
    , tnum = 87
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocRejCode :: FIXTag
-tAllocRejCode = FIXTag 
+tAllocRejCode = FIXTag
    { tName = "AllocRejCode"
    , tnum = 88
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSignature :: FIXTag
-tSignature = FIXTag 
+tSignature = FIXTag
    { tName = "Signature"
    , tnum = 89
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tSecureDataLen :: FIXTag
-tSecureDataLen = FIXTag 
+tSecureDataLen = FIXTag
    { tName = "SecureDataLen"
    , tnum = 90
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecureData :: FIXTag
-tSecureData = FIXTag 
+tSecureData = FIXTag
    { tName = "SecureData"
    , tnum = 91
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tBrokerOfCredit :: FIXTag
-tBrokerOfCredit = FIXTag 
+tBrokerOfCredit = FIXTag
    { tName = "BrokerOfCredit"
    , tnum = 92
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSignatureLength :: FIXTag
-tSignatureLength = FIXTag 
+tSignatureLength = FIXTag
    { tName = "SignatureLength"
    , tnum = 93
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEmailType :: FIXTag
-tEmailType = FIXTag 
+tEmailType = FIXTag
    { tName = "EmailType"
    , tnum = 94
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tRawDataLength :: FIXTag
-tRawDataLength = FIXTag 
+tRawDataLength = FIXTag
    { tName = "RawDataLength"
    , tnum = 95
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRawData :: FIXTag
-tRawData = FIXTag 
+tRawData = FIXTag
    { tName = "RawData"
    , tnum = 96
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tPossResend :: FIXTag
-tPossResend = FIXTag 
+tPossResend = FIXTag
    { tName = "PossResend"
    , tnum = 97
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tEncryptMethod :: FIXTag
-tEncryptMethod = FIXTag 
+tEncryptMethod = FIXTag
    { tName = "EncryptMethod"
    , tnum = 98
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStopPx :: FIXTag
-tStopPx = FIXTag 
+tStopPx = FIXTag
    { tName = "StopPx"
    , tnum = 99
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tExDestination :: FIXTag
-tExDestination = FIXTag 
+tExDestination = FIXTag
    { tName = "ExDestination"
    , tnum = 100
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCxlRejReason :: FIXTag
-tCxlRejReason = FIXTag 
+tCxlRejReason = FIXTag
    { tName = "CxlRejReason"
    , tnum = 102
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrdRejReason :: FIXTag
-tOrdRejReason = FIXTag 
+tOrdRejReason = FIXTag
    { tName = "OrdRejReason"
    , tnum = 103
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tIOIQualifier :: FIXTag
-tIOIQualifier = FIXTag 
+tIOIQualifier = FIXTag
    { tName = "IOIQualifier"
    , tnum = 104
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tWaveNo :: FIXTag
-tWaveNo = FIXTag 
+tWaveNo = FIXTag
    { tName = "WaveNo"
    , tnum = 105
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIssuer :: FIXTag
-tIssuer = FIXTag 
+tIssuer = FIXTag
    { tName = "Issuer"
    , tnum = 106
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecurityDesc :: FIXTag
-tSecurityDesc = FIXTag 
+tSecurityDesc = FIXTag
    { tName = "SecurityDesc"
    , tnum = 107
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tHeartBtInt :: FIXTag
-tHeartBtInt = FIXTag 
+tHeartBtInt = FIXTag
    { tName = "HeartBtInt"
    , tnum = 108
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tClientID :: FIXTag
-tClientID = FIXTag 
+tClientID = FIXTag
    { tName = "ClientID"
    , tnum = 109
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMinQty :: FIXTag
-tMinQty = FIXTag 
+tMinQty = FIXTag
    { tName = "MinQty"
    , tnum = 110
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMaxFloor :: FIXTag
-tMaxFloor = FIXTag 
+tMaxFloor = FIXTag
    { tName = "MaxFloor"
    , tnum = 111
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTestReqID :: FIXTag
-tTestReqID = FIXTag 
+tTestReqID = FIXTag
    { tName = "TestReqID"
    , tnum = 112
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tReportToExch :: FIXTag
-tReportToExch = FIXTag 
+tReportToExch = FIXTag
    { tName = "ReportToExch"
    , tnum = 113
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tLocateReqd :: FIXTag
-tLocateReqd = FIXTag 
+tLocateReqd = FIXTag
    { tName = "LocateReqd"
    , tnum = 114
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tOnBehalfOfCompID :: FIXTag
-tOnBehalfOfCompID = FIXTag 
+tOnBehalfOfCompID = FIXTag
    { tName = "OnBehalfOfCompID"
    , tnum = 115
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOnBehalfOfSubID :: FIXTag
-tOnBehalfOfSubID = FIXTag 
+tOnBehalfOfSubID = FIXTag
    { tName = "OnBehalfOfSubID"
    , tnum = 116
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteID :: FIXTag
-tQuoteID = FIXTag 
+tQuoteID = FIXTag
    { tName = "QuoteID"
    , tnum = 117
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNetMoney :: FIXTag
-tNetMoney = FIXTag 
+tNetMoney = FIXTag
    { tName = "NetMoney"
    , tnum = 118
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlCurrAmt :: FIXTag
-tSettlCurrAmt = FIXTag 
+tSettlCurrAmt = FIXTag
    { tName = "SettlCurrAmt"
    , tnum = 119
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlCurrency :: FIXTag
-tSettlCurrency = FIXTag 
+tSettlCurrency = FIXTag
    { tName = "SettlCurrency"
    , tnum = 120
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tForexReq :: FIXTag
-tForexReq = FIXTag 
+tForexReq = FIXTag
    { tName = "ForexReq"
    , tnum = 121
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tOrigSendingTime :: FIXTag
-tOrigSendingTime = FIXTag 
+tOrigSendingTime = FIXTag
    { tName = "OrigSendingTime"
    , tnum = 122
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tGapFillFlag :: FIXTag
-tGapFillFlag = FIXTag 
+tGapFillFlag = FIXTag
    { tName = "GapFillFlag"
    , tnum = 123
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tNoExecs :: FIXTag
-tNoExecs = FIXTag 
+tNoExecs = FIXTag
    { tName = "NoExecs"
    , tnum = 124
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCxlType :: FIXTag
-tCxlType = FIXTag 
+tCxlType = FIXTag
    { tName = "CxlType"
    , tnum = 125
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tExpireTime :: FIXTag
-tExpireTime = FIXTag 
+tExpireTime = FIXTag
    { tName = "ExpireTime"
    , tnum = 126
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tDKReason :: FIXTag
-tDKReason = FIXTag 
+tDKReason = FIXTag
    { tName = "DKReason"
    , tnum = 127
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tDeliverToCompID :: FIXTag
-tDeliverToCompID = FIXTag 
+tDeliverToCompID = FIXTag
    { tName = "DeliverToCompID"
    , tnum = 128
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDeliverToSubID :: FIXTag
-tDeliverToSubID = FIXTag 
+tDeliverToSubID = FIXTag
    { tName = "DeliverToSubID"
    , tnum = 129
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIOINaturalFlag :: FIXTag
-tIOINaturalFlag = FIXTag 
+tIOINaturalFlag = FIXTag
    { tName = "IOINaturalFlag"
    , tnum = 130
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tQuoteReqID :: FIXTag
-tQuoteReqID = FIXTag 
+tQuoteReqID = FIXTag
    { tName = "QuoteReqID"
    , tnum = 131
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBidPx :: FIXTag
-tBidPx = FIXTag 
+tBidPx = FIXTag
    { tName = "BidPx"
    , tnum = 132
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferPx :: FIXTag
-tOfferPx = FIXTag 
+tOfferPx = FIXTag
    { tName = "OfferPx"
    , tnum = 133
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBidSize :: FIXTag
-tBidSize = FIXTag 
+tBidSize = FIXTag
    { tName = "BidSize"
    , tnum = 134
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferSize :: FIXTag
-tOfferSize = FIXTag 
+tOfferSize = FIXTag
    { tName = "OfferSize"
    , tnum = 135
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoMiscFees :: FIXTag
-tNoMiscFees = FIXTag 
+tNoMiscFees = FIXTag
    { tName = "NoMiscFees"
    , tnum = 136
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMiscFeeAmt :: FIXTag
-tMiscFeeAmt = FIXTag 
+tMiscFeeAmt = FIXTag
    { tName = "MiscFeeAmt"
    , tnum = 137
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMiscFeeCurr :: FIXTag
-tMiscFeeCurr = FIXTag 
+tMiscFeeCurr = FIXTag
    { tName = "MiscFeeCurr"
    , tnum = 138
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMiscFeeType :: FIXTag
-tMiscFeeType = FIXTag 
+tMiscFeeType = FIXTag
    { tName = "MiscFeeType"
    , tnum = 139
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tPrevClosePx :: FIXTag
-tPrevClosePx = FIXTag 
+tPrevClosePx = FIXTag
    { tName = "PrevClosePx"
    , tnum = 140
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tResetSeqNumFlag :: FIXTag
-tResetSeqNumFlag = FIXTag 
+tResetSeqNumFlag = FIXTag
    { tName = "ResetSeqNumFlag"
    , tnum = 141
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tSenderLocationID :: FIXTag
-tSenderLocationID = FIXTag 
+tSenderLocationID = FIXTag
    { tName = "SenderLocationID"
    , tnum = 142
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTargetLocationID :: FIXTag
-tTargetLocationID = FIXTag 
+tTargetLocationID = FIXTag
    { tName = "TargetLocationID"
    , tnum = 143
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOnBehalfOfLocationID :: FIXTag
-tOnBehalfOfLocationID = FIXTag 
+tOnBehalfOfLocationID = FIXTag
    { tName = "OnBehalfOfLocationID"
    , tnum = 144
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDeliverToLocationID :: FIXTag
-tDeliverToLocationID = FIXTag 
+tDeliverToLocationID = FIXTag
    { tName = "DeliverToLocationID"
    , tnum = 145
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoRelatedSym :: FIXTag
-tNoRelatedSym = FIXTag 
+tNoRelatedSym = FIXTag
    { tName = "NoRelatedSym"
    , tnum = 146
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSubject :: FIXTag
-tSubject = FIXTag 
+tSubject = FIXTag
    { tName = "Subject"
    , tnum = 147
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tHeadline :: FIXTag
-tHeadline = FIXTag 
+tHeadline = FIXTag
    { tName = "Headline"
    , tnum = 148
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tURLLink :: FIXTag
-tURLLink = FIXTag 
+tURLLink = FIXTag
    { tName = "URLLink"
    , tnum = 149
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tExecType :: FIXTag
-tExecType = FIXTag 
+tExecType = FIXTag
    { tName = "ExecType"
    , tnum = 150
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLeavesQty :: FIXTag
-tLeavesQty = FIXTag 
+tLeavesQty = FIXTag
    { tName = "LeavesQty"
    , tnum = 151
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCashOrderQty :: FIXTag
-tCashOrderQty = FIXTag 
+tCashOrderQty = FIXTag
    { tName = "CashOrderQty"
    , tnum = 152
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllocAvgPx :: FIXTag
-tAllocAvgPx = FIXTag 
+tAllocAvgPx = FIXTag
    { tName = "AllocAvgPx"
    , tnum = 153
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllocNetMoney :: FIXTag
-tAllocNetMoney = FIXTag 
+tAllocNetMoney = FIXTag
    { tName = "AllocNetMoney"
    , tnum = 154
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlCurrFxRate :: FIXTag
-tSettlCurrFxRate = FIXTag 
+tSettlCurrFxRate = FIXTag
    { tName = "SettlCurrFxRate"
    , tnum = 155
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlCurrFxRateCalc :: FIXTag
-tSettlCurrFxRateCalc = FIXTag 
+tSettlCurrFxRateCalc = FIXTag
    { tName = "SettlCurrFxRateCalc"
    , tnum = 156
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNumDaysInterest :: FIXTag
-tNumDaysInterest = FIXTag 
+tNumDaysInterest = FIXTag
    { tName = "NumDaysInterest"
    , tnum = 157
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAccruedInterestRate :: FIXTag
-tAccruedInterestRate = FIXTag 
+tAccruedInterestRate = FIXTag
    { tName = "AccruedInterestRate"
    , tnum = 158
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAccruedInterestAmt :: FIXTag
-tAccruedInterestAmt = FIXTag 
+tAccruedInterestAmt = FIXTag
    { tName = "AccruedInterestAmt"
    , tnum = 159
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlInstMode :: FIXTag
-tSettlInstMode = FIXTag 
+tSettlInstMode = FIXTag
    { tName = "SettlInstMode"
    , tnum = 160
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tAllocText :: FIXTag
-tAllocText = FIXTag 
+tAllocText = FIXTag
    { tName = "AllocText"
    , tnum = 161
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstID :: FIXTag
-tSettlInstID = FIXTag 
+tSettlInstID = FIXTag
    { tName = "SettlInstID"
    , tnum = 162
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstTransType :: FIXTag
-tSettlInstTransType = FIXTag 
+tSettlInstTransType = FIXTag
    { tName = "SettlInstTransType"
    , tnum = 163
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tEmailThreadID :: FIXTag
-tEmailThreadID = FIXTag 
+tEmailThreadID = FIXTag
    { tName = "EmailThreadID"
    , tnum = 164
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstSource :: FIXTag
-tSettlInstSource = FIXTag 
+tSettlInstSource = FIXTag
    { tName = "SettlInstSource"
    , tnum = 165
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSettlLocation :: FIXTag
-tSettlLocation = FIXTag 
+tSettlLocation = FIXTag
    { tName = "SettlLocation"
    , tnum = 166
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecurityType :: FIXTag
-tSecurityType = FIXTag 
+tSecurityType = FIXTag
    { tName = "SecurityType"
    , tnum = 167
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEffectiveTime :: FIXTag
-tEffectiveTime = FIXTag 
+tEffectiveTime = FIXTag
    { tName = "EffectiveTime"
    , tnum = 168
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tStandInstDbType :: FIXTag
-tStandInstDbType = FIXTag 
+tStandInstDbType = FIXTag
    { tName = "StandInstDbType"
    , tnum = 169
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStandInstDbName :: FIXTag
-tStandInstDbName = FIXTag 
+tStandInstDbName = FIXTag
    { tName = "StandInstDbName"
    , tnum = 170
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tStandInstDbID :: FIXTag
-tStandInstDbID = FIXTag 
+tStandInstDbID = FIXTag
    { tName = "StandInstDbID"
    , tnum = 171
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlDeliveryType :: FIXTag
-tSettlDeliveryType = FIXTag 
+tSettlDeliveryType = FIXTag
    { tName = "SettlDeliveryType"
    , tnum = 172
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSettlDepositoryCode :: FIXTag
-tSettlDepositoryCode = FIXTag 
+tSettlDepositoryCode = FIXTag
    { tName = "SettlDepositoryCode"
    , tnum = 173
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlBrkrCode :: FIXTag
-tSettlBrkrCode = FIXTag 
+tSettlBrkrCode = FIXTag
    { tName = "SettlBrkrCode"
    , tnum = 174
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstCode :: FIXTag
-tSettlInstCode = FIXTag 
+tSettlInstCode = FIXTag
    { tName = "SettlInstCode"
    , tnum = 175
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentName :: FIXTag
-tSecuritySettlAgentName = FIXTag 
+tSecuritySettlAgentName = FIXTag
    { tName = "SecuritySettlAgentName"
    , tnum = 176
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentCode :: FIXTag
-tSecuritySettlAgentCode = FIXTag 
+tSecuritySettlAgentCode = FIXTag
    { tName = "SecuritySettlAgentCode"
    , tnum = 177
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentAcctNum :: FIXTag
-tSecuritySettlAgentAcctNum = FIXTag 
+tSecuritySettlAgentAcctNum = FIXTag
    { tName = "SecuritySettlAgentAcctNum"
    , tnum = 178
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentAcctName :: FIXTag
-tSecuritySettlAgentAcctName = FIXTag 
+tSecuritySettlAgentAcctName = FIXTag
    { tName = "SecuritySettlAgentAcctName"
    , tnum = 179
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentContactName :: FIXTag
-tSecuritySettlAgentContactName = FIXTag 
+tSecuritySettlAgentContactName = FIXTag
    { tName = "SecuritySettlAgentContactName"
    , tnum = 180
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySettlAgentContactPhone :: FIXTag
-tSecuritySettlAgentContactPhone = FIXTag 
+tSecuritySettlAgentContactPhone = FIXTag
    { tName = "SecuritySettlAgentContactPhone"
    , tnum = 181
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentName :: FIXTag
-tCashSettlAgentName = FIXTag 
+tCashSettlAgentName = FIXTag
    { tName = "CashSettlAgentName"
    , tnum = 182
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentCode :: FIXTag
-tCashSettlAgentCode = FIXTag 
+tCashSettlAgentCode = FIXTag
    { tName = "CashSettlAgentCode"
    , tnum = 183
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentAcctNum :: FIXTag
-tCashSettlAgentAcctNum = FIXTag 
+tCashSettlAgentAcctNum = FIXTag
    { tName = "CashSettlAgentAcctNum"
    , tnum = 184
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentAcctName :: FIXTag
-tCashSettlAgentAcctName = FIXTag 
+tCashSettlAgentAcctName = FIXTag
    { tName = "CashSettlAgentAcctName"
    , tnum = 185
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentContactName :: FIXTag
-tCashSettlAgentContactName = FIXTag 
+tCashSettlAgentContactName = FIXTag
    { tName = "CashSettlAgentContactName"
    , tnum = 186
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashSettlAgentContactPhone :: FIXTag
-tCashSettlAgentContactPhone = FIXTag 
+tCashSettlAgentContactPhone = FIXTag
    { tName = "CashSettlAgentContactPhone"
    , tnum = 187
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBidSpotRate :: FIXTag
-tBidSpotRate = FIXTag 
+tBidSpotRate = FIXTag
    { tName = "BidSpotRate"
    , tnum = 188
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBidForwardPoints :: FIXTag
-tBidForwardPoints = FIXTag 
+tBidForwardPoints = FIXTag
    { tName = "BidForwardPoints"
    , tnum = 189
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferSpotRate :: FIXTag
-tOfferSpotRate = FIXTag 
+tOfferSpotRate = FIXTag
    { tName = "OfferSpotRate"
    , tnum = 190
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferForwardPoints :: FIXTag
-tOfferForwardPoints = FIXTag 
+tOfferForwardPoints = FIXTag
    { tName = "OfferForwardPoints"
    , tnum = 191
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOrderQty2 :: FIXTag
-tOrderQty2 = FIXTag 
+tOrderQty2 = FIXTag
    { tName = "OrderQty2"
    , tnum = 192
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlDate2 :: FIXTag
-tSettlDate2 = FIXTag 
+tSettlDate2 = FIXTag
    { tName = "SettlDate2"
    , tnum = 193
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLastSpotRate :: FIXTag
-tLastSpotRate = FIXTag 
+tLastSpotRate = FIXTag
    { tName = "LastSpotRate"
    , tnum = 194
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLastForwardPoints :: FIXTag
-tLastForwardPoints = FIXTag 
+tLastForwardPoints = FIXTag
    { tName = "LastForwardPoints"
    , tnum = 195
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllocLinkID :: FIXTag
-tAllocLinkID = FIXTag 
+tAllocLinkID = FIXTag
    { tName = "AllocLinkID"
    , tnum = 196
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocLinkType :: FIXTag
-tAllocLinkType = FIXTag 
+tAllocLinkType = FIXTag
    { tName = "AllocLinkType"
    , tnum = 197
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecondaryOrderID :: FIXTag
-tSecondaryOrderID = FIXTag 
+tSecondaryOrderID = FIXTag
    { tName = "SecondaryOrderID"
    , tnum = 198
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoIOIQualifiers :: FIXTag
-tNoIOIQualifiers = FIXTag 
+tNoIOIQualifiers = FIXTag
    { tName = "NoIOIQualifiers"
    , tnum = 199
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMaturityMonthYear :: FIXTag
-tMaturityMonthYear = FIXTag 
+tMaturityMonthYear = FIXTag
    { tName = "MaturityMonthYear"
    , tnum = 200
    , tparser = toFIXMonthYear
    , arbitraryValue = FIXMonthYear <$> arbitrary }
 
 tPutOrCall :: FIXTag
-tPutOrCall = FIXTag 
+tPutOrCall = FIXTag
    { tName = "PutOrCall"
    , tnum = 201
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStrikePrice :: FIXTag
-tStrikePrice = FIXTag 
+tStrikePrice = FIXTag
    { tName = "StrikePrice"
    , tnum = 202
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCoveredOrUncovered :: FIXTag
-tCoveredOrUncovered = FIXTag 
+tCoveredOrUncovered = FIXTag
    { tName = "CoveredOrUncovered"
    , tnum = 203
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCustomerOrFirm :: FIXTag
-tCustomerOrFirm = FIXTag 
+tCustomerOrFirm = FIXTag
    { tName = "CustomerOrFirm"
    , tnum = 204
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMaturityDay :: FIXTag
-tMaturityDay = FIXTag 
+tMaturityDay = FIXTag
    { tName = "MaturityDay"
    , tnum = 205
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOptAttribute :: FIXTag
-tOptAttribute = FIXTag 
+tOptAttribute = FIXTag
    { tName = "OptAttribute"
    , tnum = 206
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSecurityExchange :: FIXTag
-tSecurityExchange = FIXTag 
+tSecurityExchange = FIXTag
    { tName = "SecurityExchange"
    , tnum = 207
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNotifyBrokerOfCredit :: FIXTag
-tNotifyBrokerOfCredit = FIXTag 
+tNotifyBrokerOfCredit = FIXTag
    { tName = "NotifyBrokerOfCredit"
    , tnum = 208
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tAllocHandlInst :: FIXTag
-tAllocHandlInst = FIXTag 
+tAllocHandlInst = FIXTag
    { tName = "AllocHandlInst"
    , tnum = 209
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMaxShow :: FIXTag
-tMaxShow = FIXTag 
+tMaxShow = FIXTag
    { tName = "MaxShow"
    , tnum = 210
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPegOffsetValue :: FIXTag
-tPegOffsetValue = FIXTag 
+tPegOffsetValue = FIXTag
    { tName = "PegOffsetValue"
    , tnum = 211
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tXmlDataLen :: FIXTag
-tXmlDataLen = FIXTag 
+tXmlDataLen = FIXTag
    { tName = "XmlDataLen"
    , tnum = 212
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tXmlData :: FIXTag
-tXmlData = FIXTag 
+tXmlData = FIXTag
    { tName = "XmlData"
    , tnum = 213
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tSettlInstRefID :: FIXTag
-tSettlInstRefID = FIXTag 
+tSettlInstRefID = FIXTag
    { tName = "SettlInstRefID"
    , tnum = 214
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoRoutingIDs :: FIXTag
-tNoRoutingIDs = FIXTag 
+tNoRoutingIDs = FIXTag
    { tName = "NoRoutingIDs"
    , tnum = 215
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRoutingType :: FIXTag
-tRoutingType = FIXTag 
+tRoutingType = FIXTag
    { tName = "RoutingType"
    , tnum = 216
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRoutingID :: FIXTag
-tRoutingID = FIXTag 
+tRoutingID = FIXTag
    { tName = "RoutingID"
    , tnum = 217
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSpread :: FIXTag
-tSpread = FIXTag 
+tSpread = FIXTag
    { tName = "Spread"
    , tnum = 218
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBenchmark :: FIXTag
-tBenchmark = FIXTag 
+tBenchmark = FIXTag
    { tName = "Benchmark"
    , tnum = 219
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tBenchmarkCurveCurrency :: FIXTag
-tBenchmarkCurveCurrency = FIXTag 
+tBenchmarkCurveCurrency = FIXTag
    { tName = "BenchmarkCurveCurrency"
    , tnum = 220
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBenchmarkCurveName :: FIXTag
-tBenchmarkCurveName = FIXTag 
+tBenchmarkCurveName = FIXTag
    { tName = "BenchmarkCurveName"
    , tnum = 221
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBenchmarkCurvePoint :: FIXTag
-tBenchmarkCurvePoint = FIXTag 
+tBenchmarkCurvePoint = FIXTag
    { tName = "BenchmarkCurvePoint"
    , tnum = 222
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCouponRate :: FIXTag
-tCouponRate = FIXTag 
+tCouponRate = FIXTag
    { tName = "CouponRate"
    , tnum = 223
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCouponPaymentDate :: FIXTag
-tCouponPaymentDate = FIXTag 
+tCouponPaymentDate = FIXTag
    { tName = "CouponPaymentDate"
    , tnum = 224
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tIssueDate :: FIXTag
-tIssueDate = FIXTag 
+tIssueDate = FIXTag
    { tName = "IssueDate"
    , tnum = 225
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tRepurchaseTerm :: FIXTag
-tRepurchaseTerm = FIXTag 
+tRepurchaseTerm = FIXTag
    { tName = "RepurchaseTerm"
    , tnum = 226
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRepurchaseRate :: FIXTag
-tRepurchaseRate = FIXTag 
+tRepurchaseRate = FIXTag
    { tName = "RepurchaseRate"
    , tnum = 227
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tFactor :: FIXTag
-tFactor = FIXTag 
+tFactor = FIXTag
    { tName = "Factor"
    , tnum = 228
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTradeOriginationDate :: FIXTag
-tTradeOriginationDate = FIXTag 
+tTradeOriginationDate = FIXTag
    { tName = "TradeOriginationDate"
    , tnum = 229
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tExDate :: FIXTag
-tExDate = FIXTag 
+tExDate = FIXTag
    { tName = "ExDate"
    , tnum = 230
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tContractMultiplier :: FIXTag
-tContractMultiplier = FIXTag 
+tContractMultiplier = FIXTag
    { tName = "ContractMultiplier"
    , tnum = 231
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoStipulations :: FIXTag
-tNoStipulations = FIXTag 
+tNoStipulations = FIXTag
    { tName = "NoStipulations"
    , tnum = 232
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStipulationType :: FIXTag
-tStipulationType = FIXTag 
+tStipulationType = FIXTag
    { tName = "StipulationType"
    , tnum = 233
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tStipulationValue :: FIXTag
-tStipulationValue = FIXTag 
+tStipulationValue = FIXTag
    { tName = "StipulationValue"
    , tnum = 234
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tYieldType :: FIXTag
-tYieldType = FIXTag 
+tYieldType = FIXTag
    { tName = "YieldType"
    , tnum = 235
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tYield :: FIXTag
-tYield = FIXTag 
+tYield = FIXTag
    { tName = "Yield"
    , tnum = 236
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTotalTakedown :: FIXTag
-tTotalTakedown = FIXTag 
+tTotalTakedown = FIXTag
    { tName = "TotalTakedown"
    , tnum = 237
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tConcession :: FIXTag
-tConcession = FIXTag 
+tConcession = FIXTag
    { tName = "Concession"
    , tnum = 238
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tRepoCollateralSecurityType :: FIXTag
-tRepoCollateralSecurityType = FIXTag 
+tRepoCollateralSecurityType = FIXTag
    { tName = "RepoCollateralSecurityType"
    , tnum = 239
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRedemptionDate :: FIXTag
-tRedemptionDate = FIXTag 
+tRedemptionDate = FIXTag
    { tName = "RedemptionDate"
    , tnum = 240
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tUnderlyingCouponPaymentDate :: FIXTag
-tUnderlyingCouponPaymentDate = FIXTag 
+tUnderlyingCouponPaymentDate = FIXTag
    { tName = "UnderlyingCouponPaymentDate"
    , tnum = 241
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tUnderlyingIssueDate :: FIXTag
-tUnderlyingIssueDate = FIXTag 
+tUnderlyingIssueDate = FIXTag
    { tName = "UnderlyingIssueDate"
    , tnum = 242
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tUnderlyingRepoCollateralSecurityType :: FIXTag
-tUnderlyingRepoCollateralSecurityType = FIXTag 
+tUnderlyingRepoCollateralSecurityType = FIXTag
    { tName = "UnderlyingRepoCollateralSecurityType"
    , tnum = 243
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingRepurchaseTerm :: FIXTag
-tUnderlyingRepurchaseTerm = FIXTag 
+tUnderlyingRepurchaseTerm = FIXTag
    { tName = "UnderlyingRepurchaseTerm"
    , tnum = 244
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingRepurchaseRate :: FIXTag
-tUnderlyingRepurchaseRate = FIXTag 
+tUnderlyingRepurchaseRate = FIXTag
    { tName = "UnderlyingRepurchaseRate"
    , tnum = 245
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingFactor :: FIXTag
-tUnderlyingFactor = FIXTag 
+tUnderlyingFactor = FIXTag
    { tName = "UnderlyingFactor"
    , tnum = 246
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingRedemptionDate :: FIXTag
-tUnderlyingRedemptionDate = FIXTag 
+tUnderlyingRedemptionDate = FIXTag
    { tName = "UnderlyingRedemptionDate"
    , tnum = 247
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLegCouponPaymentDate :: FIXTag
-tLegCouponPaymentDate = FIXTag 
+tLegCouponPaymentDate = FIXTag
    { tName = "LegCouponPaymentDate"
    , tnum = 248
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLegIssueDate :: FIXTag
-tLegIssueDate = FIXTag 
+tLegIssueDate = FIXTag
    { tName = "LegIssueDate"
    , tnum = 249
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLegRepoCollateralSecurityType :: FIXTag
-tLegRepoCollateralSecurityType = FIXTag 
+tLegRepoCollateralSecurityType = FIXTag
    { tName = "LegRepoCollateralSecurityType"
    , tnum = 250
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegRepurchaseTerm :: FIXTag
-tLegRepurchaseTerm = FIXTag 
+tLegRepurchaseTerm = FIXTag
    { tName = "LegRepurchaseTerm"
    , tnum = 251
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegRepurchaseRate :: FIXTag
-tLegRepurchaseRate = FIXTag 
+tLegRepurchaseRate = FIXTag
    { tName = "LegRepurchaseRate"
    , tnum = 252
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegFactor :: FIXTag
-tLegFactor = FIXTag 
+tLegFactor = FIXTag
    { tName = "LegFactor"
    , tnum = 253
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegRedemptionDate :: FIXTag
-tLegRedemptionDate = FIXTag 
+tLegRedemptionDate = FIXTag
    { tName = "LegRedemptionDate"
    , tnum = 254
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tCreditRating :: FIXTag
-tCreditRating = FIXTag 
+tCreditRating = FIXTag
    { tName = "CreditRating"
    , tnum = 255
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingCreditRating :: FIXTag
-tUnderlyingCreditRating = FIXTag 
+tUnderlyingCreditRating = FIXTag
    { tName = "UnderlyingCreditRating"
    , tnum = 256
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegCreditRating :: FIXTag
-tLegCreditRating = FIXTag 
+tLegCreditRating = FIXTag
    { tName = "LegCreditRating"
    , tnum = 257
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradedFlatSwitch :: FIXTag
-tTradedFlatSwitch = FIXTag 
+tTradedFlatSwitch = FIXTag
    { tName = "TradedFlatSwitch"
    , tnum = 258
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tBasisFeatureDate :: FIXTag
-tBasisFeatureDate = FIXTag 
+tBasisFeatureDate = FIXTag
    { tName = "BasisFeatureDate"
    , tnum = 259
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tBasisFeaturePrice :: FIXTag
-tBasisFeaturePrice = FIXTag 
+tBasisFeaturePrice = FIXTag
    { tName = "BasisFeaturePrice"
    , tnum = 260
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMDReqID :: FIXTag
-tMDReqID = FIXTag 
+tMDReqID = FIXTag
    { tName = "MDReqID"
    , tnum = 262
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSubscriptionRequestType :: FIXTag
-tSubscriptionRequestType = FIXTag 
+tSubscriptionRequestType = FIXTag
    { tName = "SubscriptionRequestType"
    , tnum = 263
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMarketDepth :: FIXTag
-tMarketDepth = FIXTag 
+tMarketDepth = FIXTag
    { tName = "MarketDepth"
    , tnum = 264
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMDUpdateType :: FIXTag
-tMDUpdateType = FIXTag 
+tMDUpdateType = FIXTag
    { tName = "MDUpdateType"
    , tnum = 265
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAggregatedBook :: FIXTag
-tAggregatedBook = FIXTag 
+tAggregatedBook = FIXTag
    { tName = "AggregatedBook"
    , tnum = 266
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tNoMDEntryTypes :: FIXTag
-tNoMDEntryTypes = FIXTag 
+tNoMDEntryTypes = FIXTag
    { tName = "NoMDEntryTypes"
    , tnum = 267
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoMDEntries :: FIXTag
-tNoMDEntries = FIXTag 
+tNoMDEntries = FIXTag
    { tName = "NoMDEntries"
    , tnum = 268
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMDEntryType :: FIXTag
-tMDEntryType = FIXTag 
+tMDEntryType = FIXTag
    { tName = "MDEntryType"
    , tnum = 269
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMDEntryPx :: FIXTag
-tMDEntryPx = FIXTag 
+tMDEntryPx = FIXTag
    { tName = "MDEntryPx"
    , tnum = 270
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMDEntrySize :: FIXTag
-tMDEntrySize = FIXTag 
+tMDEntrySize = FIXTag
    { tName = "MDEntrySize"
    , tnum = 271
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMDEntryDate :: FIXTag
-tMDEntryDate = FIXTag 
+tMDEntryDate = FIXTag
    { tName = "MDEntryDate"
    , tnum = 272
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tMDEntryTime :: FIXTag
-tMDEntryTime = FIXTag 
+tMDEntryTime = FIXTag
    { tName = "MDEntryTime"
    , tnum = 273
    , tparser = toFIXTimeOnly
    , arbitraryValue = FIXTimeOnly <$> arbitrary }
 
 tTickDirection :: FIXTag
-tTickDirection = FIXTag 
+tTickDirection = FIXTag
    { tName = "TickDirection"
    , tnum = 274
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMDMkt :: FIXTag
-tMDMkt = FIXTag 
+tMDMkt = FIXTag
    { tName = "MDMkt"
    , tnum = 275
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteCondition :: FIXTag
-tQuoteCondition = FIXTag 
+tQuoteCondition = FIXTag
    { tName = "QuoteCondition"
    , tnum = 276
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tTradeCondition :: FIXTag
-tTradeCondition = FIXTag 
+tTradeCondition = FIXTag
    { tName = "TradeCondition"
    , tnum = 277
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tMDEntryID :: FIXTag
-tMDEntryID = FIXTag 
+tMDEntryID = FIXTag
    { tName = "MDEntryID"
    , tnum = 278
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMDUpdateAction :: FIXTag
-tMDUpdateAction = FIXTag 
+tMDUpdateAction = FIXTag
    { tName = "MDUpdateAction"
    , tnum = 279
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMDEntryRefID :: FIXTag
-tMDEntryRefID = FIXTag 
+tMDEntryRefID = FIXTag
    { tName = "MDEntryRefID"
    , tnum = 280
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMDReqRejReason :: FIXTag
-tMDReqRejReason = FIXTag 
+tMDReqRejReason = FIXTag
    { tName = "MDReqRejReason"
    , tnum = 281
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMDEntryOriginator :: FIXTag
-tMDEntryOriginator = FIXTag 
+tMDEntryOriginator = FIXTag
    { tName = "MDEntryOriginator"
    , tnum = 282
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLocationID :: FIXTag
-tLocationID = FIXTag 
+tLocationID = FIXTag
    { tName = "LocationID"
    , tnum = 283
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDeskID :: FIXTag
-tDeskID = FIXTag 
+tDeskID = FIXTag
    { tName = "DeskID"
    , tnum = 284
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDeleteReason :: FIXTag
-tDeleteReason = FIXTag 
+tDeleteReason = FIXTag
    { tName = "DeleteReason"
    , tnum = 285
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tOpenCloseSettlFlag :: FIXTag
-tOpenCloseSettlFlag = FIXTag 
+tOpenCloseSettlFlag = FIXTag
    { tName = "OpenCloseSettlFlag"
    , tnum = 286
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tSellerDays :: FIXTag
-tSellerDays = FIXTag 
+tSellerDays = FIXTag
    { tName = "SellerDays"
    , tnum = 287
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMDEntryBuyer :: FIXTag
-tMDEntryBuyer = FIXTag 
+tMDEntryBuyer = FIXTag
    { tName = "MDEntryBuyer"
    , tnum = 288
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMDEntrySeller :: FIXTag
-tMDEntrySeller = FIXTag 
+tMDEntrySeller = FIXTag
    { tName = "MDEntrySeller"
    , tnum = 289
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMDEntryPositionNo :: FIXTag
-tMDEntryPositionNo = FIXTag 
+tMDEntryPositionNo = FIXTag
    { tName = "MDEntryPositionNo"
    , tnum = 290
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tFinancialStatus :: FIXTag
-tFinancialStatus = FIXTag 
+tFinancialStatus = FIXTag
    { tName = "FinancialStatus"
    , tnum = 291
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tCorporateAction :: FIXTag
-tCorporateAction = FIXTag 
+tCorporateAction = FIXTag
    { tName = "CorporateAction"
    , tnum = 292
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tDefBidSize :: FIXTag
-tDefBidSize = FIXTag 
+tDefBidSize = FIXTag
    { tName = "DefBidSize"
    , tnum = 293
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDefOfferSize :: FIXTag
-tDefOfferSize = FIXTag 
+tDefOfferSize = FIXTag
    { tName = "DefOfferSize"
    , tnum = 294
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoQuoteEntries :: FIXTag
-tNoQuoteEntries = FIXTag 
+tNoQuoteEntries = FIXTag
    { tName = "NoQuoteEntries"
    , tnum = 295
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoQuoteSets :: FIXTag
-tNoQuoteSets = FIXTag 
+tNoQuoteSets = FIXTag
    { tName = "NoQuoteSets"
    , tnum = 296
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteStatus :: FIXTag
-tQuoteStatus = FIXTag 
+tQuoteStatus = FIXTag
    { tName = "QuoteStatus"
    , tnum = 297
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteCancelType :: FIXTag
-tQuoteCancelType = FIXTag 
+tQuoteCancelType = FIXTag
    { tName = "QuoteCancelType"
    , tnum = 298
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteEntryID :: FIXTag
-tQuoteEntryID = FIXTag 
+tQuoteEntryID = FIXTag
    { tName = "QuoteEntryID"
    , tnum = 299
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteRejectReason :: FIXTag
-tQuoteRejectReason = FIXTag 
+tQuoteRejectReason = FIXTag
    { tName = "QuoteRejectReason"
    , tnum = 300
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteResponseLevel :: FIXTag
-tQuoteResponseLevel = FIXTag 
+tQuoteResponseLevel = FIXTag
    { tName = "QuoteResponseLevel"
    , tnum = 301
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteSetID :: FIXTag
-tQuoteSetID = FIXTag 
+tQuoteSetID = FIXTag
    { tName = "QuoteSetID"
    , tnum = 302
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteRequestType :: FIXTag
-tQuoteRequestType = FIXTag 
+tQuoteRequestType = FIXTag
    { tName = "QuoteRequestType"
    , tnum = 303
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotNoQuoteEntries :: FIXTag
-tTotNoQuoteEntries = FIXTag 
+tTotNoQuoteEntries = FIXTag
    { tName = "TotNoQuoteEntries"
    , tnum = 304
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingSecurityIDSource :: FIXTag
-tUnderlyingSecurityIDSource = FIXTag 
+tUnderlyingSecurityIDSource = FIXTag
    { tName = "UnderlyingSecurityIDSource"
    , tnum = 305
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingIssuer :: FIXTag
-tUnderlyingIssuer = FIXTag 
+tUnderlyingIssuer = FIXTag
    { tName = "UnderlyingIssuer"
    , tnum = 306
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecurityDesc :: FIXTag
-tUnderlyingSecurityDesc = FIXTag 
+tUnderlyingSecurityDesc = FIXTag
    { tName = "UnderlyingSecurityDesc"
    , tnum = 307
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecurityExchange :: FIXTag
-tUnderlyingSecurityExchange = FIXTag 
+tUnderlyingSecurityExchange = FIXTag
    { tName = "UnderlyingSecurityExchange"
    , tnum = 308
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecurityID :: FIXTag
-tUnderlyingSecurityID = FIXTag 
+tUnderlyingSecurityID = FIXTag
    { tName = "UnderlyingSecurityID"
    , tnum = 309
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecurityType :: FIXTag
-tUnderlyingSecurityType = FIXTag 
+tUnderlyingSecurityType = FIXTag
    { tName = "UnderlyingSecurityType"
    , tnum = 310
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSymbol :: FIXTag
-tUnderlyingSymbol = FIXTag 
+tUnderlyingSymbol = FIXTag
    { tName = "UnderlyingSymbol"
    , tnum = 311
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSymbolSfx :: FIXTag
-tUnderlyingSymbolSfx = FIXTag 
+tUnderlyingSymbolSfx = FIXTag
    { tName = "UnderlyingSymbolSfx"
    , tnum = 312
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingMaturityMonthYear :: FIXTag
-tUnderlyingMaturityMonthYear = FIXTag 
+tUnderlyingMaturityMonthYear = FIXTag
    { tName = "UnderlyingMaturityMonthYear"
    , tnum = 313
    , tparser = toFIXMonthYear
    , arbitraryValue = FIXMonthYear <$> arbitrary }
 
 tUnderlyingMaturityDay :: FIXTag
-tUnderlyingMaturityDay = FIXTag 
+tUnderlyingMaturityDay = FIXTag
    { tName = "UnderlyingMaturityDay"
    , tnum = 314
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingPutOrCall :: FIXTag
-tUnderlyingPutOrCall = FIXTag 
+tUnderlyingPutOrCall = FIXTag
    { tName = "UnderlyingPutOrCall"
    , tnum = 315
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingStrikePrice :: FIXTag
-tUnderlyingStrikePrice = FIXTag 
+tUnderlyingStrikePrice = FIXTag
    { tName = "UnderlyingStrikePrice"
    , tnum = 316
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingOptAttribute :: FIXTag
-tUnderlyingOptAttribute = FIXTag 
+tUnderlyingOptAttribute = FIXTag
    { tName = "UnderlyingOptAttribute"
    , tnum = 317
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tUnderlyingCurrency :: FIXTag
-tUnderlyingCurrency = FIXTag 
+tUnderlyingCurrency = FIXTag
    { tName = "UnderlyingCurrency"
    , tnum = 318
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRatioQty :: FIXTag
-tRatioQty = FIXTag 
+tRatioQty = FIXTag
    { tName = "RatioQty"
    , tnum = 319
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSecurityReqID :: FIXTag
-tSecurityReqID = FIXTag 
+tSecurityReqID = FIXTag
    { tName = "SecurityReqID"
    , tnum = 320
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecurityRequestType :: FIXTag
-tSecurityRequestType = FIXTag 
+tSecurityRequestType = FIXTag
    { tName = "SecurityRequestType"
    , tnum = 321
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecurityResponseID :: FIXTag
-tSecurityResponseID = FIXTag 
+tSecurityResponseID = FIXTag
    { tName = "SecurityResponseID"
    , tnum = 322
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecurityResponseType :: FIXTag
-tSecurityResponseType = FIXTag 
+tSecurityResponseType = FIXTag
    { tName = "SecurityResponseType"
    , tnum = 323
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecurityStatusReqID :: FIXTag
-tSecurityStatusReqID = FIXTag 
+tSecurityStatusReqID = FIXTag
    { tName = "SecurityStatusReqID"
    , tnum = 324
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnsolicitedIndicator :: FIXTag
-tUnsolicitedIndicator = FIXTag 
+tUnsolicitedIndicator = FIXTag
    { tName = "UnsolicitedIndicator"
    , tnum = 325
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tSecurityTradingStatus :: FIXTag
-tSecurityTradingStatus = FIXTag 
+tSecurityTradingStatus = FIXTag
    { tName = "SecurityTradingStatus"
    , tnum = 326
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tHaltReasonChar :: FIXTag
-tHaltReasonChar = FIXTag 
+tHaltReasonChar = FIXTag
    { tName = "HaltReasonChar"
    , tnum = 327
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tInViewOfCommon :: FIXTag
-tInViewOfCommon = FIXTag 
+tInViewOfCommon = FIXTag
    { tName = "InViewOfCommon"
    , tnum = 328
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tDueToRelated :: FIXTag
-tDueToRelated = FIXTag 
+tDueToRelated = FIXTag
    { tName = "DueToRelated"
    , tnum = 329
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tBuyVolume :: FIXTag
-tBuyVolume = FIXTag 
+tBuyVolume = FIXTag
    { tName = "BuyVolume"
    , tnum = 330
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSellVolume :: FIXTag
-tSellVolume = FIXTag 
+tSellVolume = FIXTag
    { tName = "SellVolume"
    , tnum = 331
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tHighPx :: FIXTag
-tHighPx = FIXTag 
+tHighPx = FIXTag
    { tName = "HighPx"
    , tnum = 332
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLowPx :: FIXTag
-tLowPx = FIXTag 
+tLowPx = FIXTag
    { tName = "LowPx"
    , tnum = 333
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAdjustment :: FIXTag
-tAdjustment = FIXTag 
+tAdjustment = FIXTag
    { tName = "Adjustment"
    , tnum = 334
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradSesReqID :: FIXTag
-tTradSesReqID = FIXTag 
+tTradSesReqID = FIXTag
    { tName = "TradSesReqID"
    , tnum = 335
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradingSessionID :: FIXTag
-tTradingSessionID = FIXTag 
+tTradingSessionID = FIXTag
    { tName = "TradingSessionID"
    , tnum = 336
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tContraTrader :: FIXTag
-tContraTrader = FIXTag 
+tContraTrader = FIXTag
    { tName = "ContraTrader"
    , tnum = 337
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradSesMethod :: FIXTag
-tTradSesMethod = FIXTag 
+tTradSesMethod = FIXTag
    { tName = "TradSesMethod"
    , tnum = 338
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradSesMode :: FIXTag
-tTradSesMode = FIXTag 
+tTradSesMode = FIXTag
    { tName = "TradSesMode"
    , tnum = 339
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradSesStatus :: FIXTag
-tTradSesStatus = FIXTag 
+tTradSesStatus = FIXTag
    { tName = "TradSesStatus"
    , tnum = 340
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradSesStartTime :: FIXTag
-tTradSesStartTime = FIXTag 
+tTradSesStartTime = FIXTag
    { tName = "TradSesStartTime"
    , tnum = 341
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tTradSesOpenTime :: FIXTag
-tTradSesOpenTime = FIXTag 
+tTradSesOpenTime = FIXTag
    { tName = "TradSesOpenTime"
    , tnum = 342
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tTradSesPreCloseTime :: FIXTag
-tTradSesPreCloseTime = FIXTag 
+tTradSesPreCloseTime = FIXTag
    { tName = "TradSesPreCloseTime"
    , tnum = 343
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tTradSesCloseTime :: FIXTag
-tTradSesCloseTime = FIXTag 
+tTradSesCloseTime = FIXTag
    { tName = "TradSesCloseTime"
    , tnum = 344
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tTradSesEndTime :: FIXTag
-tTradSesEndTime = FIXTag 
+tTradSesEndTime = FIXTag
    { tName = "TradSesEndTime"
    , tnum = 345
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tNumberOfOrders :: FIXTag
-tNumberOfOrders = FIXTag 
+tNumberOfOrders = FIXTag
    { tName = "NumberOfOrders"
    , tnum = 346
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMessageEncoding :: FIXTag
-tMessageEncoding = FIXTag 
+tMessageEncoding = FIXTag
    { tName = "MessageEncoding"
    , tnum = 347
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEncodedIssuerLen :: FIXTag
-tEncodedIssuerLen = FIXTag 
+tEncodedIssuerLen = FIXTag
    { tName = "EncodedIssuerLen"
    , tnum = 348
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedIssuer :: FIXTag
-tEncodedIssuer = FIXTag 
+tEncodedIssuer = FIXTag
    { tName = "EncodedIssuer"
    , tnum = 349
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedSecurityDescLen :: FIXTag
-tEncodedSecurityDescLen = FIXTag 
+tEncodedSecurityDescLen = FIXTag
    { tName = "EncodedSecurityDescLen"
    , tnum = 350
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedSecurityDesc :: FIXTag
-tEncodedSecurityDesc = FIXTag 
+tEncodedSecurityDesc = FIXTag
    { tName = "EncodedSecurityDesc"
    , tnum = 351
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedListExecInstLen :: FIXTag
-tEncodedListExecInstLen = FIXTag 
+tEncodedListExecInstLen = FIXTag
    { tName = "EncodedListExecInstLen"
    , tnum = 352
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedListExecInst :: FIXTag
-tEncodedListExecInst = FIXTag 
+tEncodedListExecInst = FIXTag
    { tName = "EncodedListExecInst"
    , tnum = 353
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedTextLen :: FIXTag
-tEncodedTextLen = FIXTag 
+tEncodedTextLen = FIXTag
    { tName = "EncodedTextLen"
    , tnum = 354
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedText :: FIXTag
-tEncodedText = FIXTag 
+tEncodedText = FIXTag
    { tName = "EncodedText"
    , tnum = 355
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedSubjectLen :: FIXTag
-tEncodedSubjectLen = FIXTag 
+tEncodedSubjectLen = FIXTag
    { tName = "EncodedSubjectLen"
    , tnum = 356
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedSubject :: FIXTag
-tEncodedSubject = FIXTag 
+tEncodedSubject = FIXTag
    { tName = "EncodedSubject"
    , tnum = 357
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedHeadlineLen :: FIXTag
-tEncodedHeadlineLen = FIXTag 
+tEncodedHeadlineLen = FIXTag
    { tName = "EncodedHeadlineLen"
    , tnum = 358
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedHeadline :: FIXTag
-tEncodedHeadline = FIXTag 
+tEncodedHeadline = FIXTag
    { tName = "EncodedHeadline"
    , tnum = 359
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedAllocTextLen :: FIXTag
-tEncodedAllocTextLen = FIXTag 
+tEncodedAllocTextLen = FIXTag
    { tName = "EncodedAllocTextLen"
    , tnum = 360
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedAllocText :: FIXTag
-tEncodedAllocText = FIXTag 
+tEncodedAllocText = FIXTag
    { tName = "EncodedAllocText"
    , tnum = 361
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedUnderlyingIssuerLen :: FIXTag
-tEncodedUnderlyingIssuerLen = FIXTag 
+tEncodedUnderlyingIssuerLen = FIXTag
    { tName = "EncodedUnderlyingIssuerLen"
    , tnum = 362
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedUnderlyingIssuer :: FIXTag
-tEncodedUnderlyingIssuer = FIXTag 
+tEncodedUnderlyingIssuer = FIXTag
    { tName = "EncodedUnderlyingIssuer"
    , tnum = 363
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tEncodedUnderlyingSecurityDescLen :: FIXTag
-tEncodedUnderlyingSecurityDescLen = FIXTag 
+tEncodedUnderlyingSecurityDescLen = FIXTag
    { tName = "EncodedUnderlyingSecurityDescLen"
    , tnum = 364
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedUnderlyingSecurityDesc :: FIXTag
-tEncodedUnderlyingSecurityDesc = FIXTag 
+tEncodedUnderlyingSecurityDesc = FIXTag
    { tName = "EncodedUnderlyingSecurityDesc"
    , tnum = 365
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tAllocPrice :: FIXTag
-tAllocPrice = FIXTag 
+tAllocPrice = FIXTag
    { tName = "AllocPrice"
    , tnum = 366
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tQuoteSetValidUntilTime :: FIXTag
-tQuoteSetValidUntilTime = FIXTag 
+tQuoteSetValidUntilTime = FIXTag
    { tName = "QuoteSetValidUntilTime"
    , tnum = 367
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tQuoteEntryRejectReason :: FIXTag
-tQuoteEntryRejectReason = FIXTag 
+tQuoteEntryRejectReason = FIXTag
    { tName = "QuoteEntryRejectReason"
    , tnum = 368
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLastMsgSeqNumProcessed :: FIXTag
-tLastMsgSeqNumProcessed = FIXTag 
+tLastMsgSeqNumProcessed = FIXTag
    { tName = "LastMsgSeqNumProcessed"
    , tnum = 369
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOnBehalfOfSendingTime :: FIXTag
-tOnBehalfOfSendingTime = FIXTag 
+tOnBehalfOfSendingTime = FIXTag
    { tName = "OnBehalfOfSendingTime"
    , tnum = 370
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tRefTagID :: FIXTag
-tRefTagID = FIXTag 
+tRefTagID = FIXTag
    { tName = "RefTagID"
    , tnum = 371
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRefMsgType :: FIXTag
-tRefMsgType = FIXTag 
+tRefMsgType = FIXTag
    { tName = "RefMsgType"
    , tnum = 372
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSessionRejectReason :: FIXTag
-tSessionRejectReason = FIXTag 
+tSessionRejectReason = FIXTag
    { tName = "SessionRejectReason"
    , tnum = 373
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBidRequestTransType :: FIXTag
-tBidRequestTransType = FIXTag 
+tBidRequestTransType = FIXTag
    { tName = "BidRequestTransType"
    , tnum = 374
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tContraBroker :: FIXTag
-tContraBroker = FIXTag 
+tContraBroker = FIXTag
    { tName = "ContraBroker"
    , tnum = 375
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tComplianceID :: FIXTag
-tComplianceID = FIXTag 
+tComplianceID = FIXTag
    { tName = "ComplianceID"
    , tnum = 376
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSolicitedFlag :: FIXTag
-tSolicitedFlag = FIXTag 
+tSolicitedFlag = FIXTag
    { tName = "SolicitedFlag"
    , tnum = 377
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tExecRestatementReason :: FIXTag
-tExecRestatementReason = FIXTag 
+tExecRestatementReason = FIXTag
    { tName = "ExecRestatementReason"
    , tnum = 378
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBusinessRejectRefID :: FIXTag
-tBusinessRejectRefID = FIXTag 
+tBusinessRejectRefID = FIXTag
    { tName = "BusinessRejectRefID"
    , tnum = 379
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBusinessRejectReason :: FIXTag
-tBusinessRejectReason = FIXTag 
+tBusinessRejectReason = FIXTag
    { tName = "BusinessRejectReason"
    , tnum = 380
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tGrossTradeAmt :: FIXTag
-tGrossTradeAmt = FIXTag 
+tGrossTradeAmt = FIXTag
    { tName = "GrossTradeAmt"
    , tnum = 381
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoContraBrokers :: FIXTag
-tNoContraBrokers = FIXTag 
+tNoContraBrokers = FIXTag
    { tName = "NoContraBrokers"
    , tnum = 382
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMaxMessageSize :: FIXTag
-tMaxMessageSize = FIXTag 
+tMaxMessageSize = FIXTag
    { tName = "MaxMessageSize"
    , tnum = 383
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoMsgTypes :: FIXTag
-tNoMsgTypes = FIXTag 
+tNoMsgTypes = FIXTag
    { tName = "NoMsgTypes"
    , tnum = 384
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMsgDirection :: FIXTag
-tMsgDirection = FIXTag 
+tMsgDirection = FIXTag
    { tName = "MsgDirection"
    , tnum = 385
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNoTradingSessions :: FIXTag
-tNoTradingSessions = FIXTag 
+tNoTradingSessions = FIXTag
    { tName = "NoTradingSessions"
    , tnum = 386
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotalVolumeTraded :: FIXTag
-tTotalVolumeTraded = FIXTag 
+tTotalVolumeTraded = FIXTag
    { tName = "TotalVolumeTraded"
    , tnum = 387
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDiscretionInst :: FIXTag
-tDiscretionInst = FIXTag 
+tDiscretionInst = FIXTag
    { tName = "DiscretionInst"
    , tnum = 388
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tDiscretionOffsetValue :: FIXTag
-tDiscretionOffsetValue = FIXTag 
+tDiscretionOffsetValue = FIXTag
    { tName = "DiscretionOffsetValue"
    , tnum = 389
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBidID :: FIXTag
-tBidID = FIXTag 
+tBidID = FIXTag
    { tName = "BidID"
    , tnum = 390
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tClientBidID :: FIXTag
-tClientBidID = FIXTag 
+tClientBidID = FIXTag
    { tName = "ClientBidID"
    , tnum = 391
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tListName :: FIXTag
-tListName = FIXTag 
+tListName = FIXTag
    { tName = "ListName"
    , tnum = 392
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotNoRelatedSym :: FIXTag
-tTotNoRelatedSym = FIXTag 
+tTotNoRelatedSym = FIXTag
    { tName = "TotNoRelatedSym"
    , tnum = 393
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBidType :: FIXTag
-tBidType = FIXTag 
+tBidType = FIXTag
    { tName = "BidType"
    , tnum = 394
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNumTickets :: FIXTag
-tNumTickets = FIXTag 
+tNumTickets = FIXTag
    { tName = "NumTickets"
    , tnum = 395
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSideValue1 :: FIXTag
-tSideValue1 = FIXTag 
+tSideValue1 = FIXTag
    { tName = "SideValue1"
    , tnum = 396
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSideValue2 :: FIXTag
-tSideValue2 = FIXTag 
+tSideValue2 = FIXTag
    { tName = "SideValue2"
    , tnum = 397
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoBidDescriptors :: FIXTag
-tNoBidDescriptors = FIXTag 
+tNoBidDescriptors = FIXTag
    { tName = "NoBidDescriptors"
    , tnum = 398
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBidDescriptorType :: FIXTag
-tBidDescriptorType = FIXTag 
+tBidDescriptorType = FIXTag
    { tName = "BidDescriptorType"
    , tnum = 399
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBidDescriptor :: FIXTag
-tBidDescriptor = FIXTag 
+tBidDescriptor = FIXTag
    { tName = "BidDescriptor"
    , tnum = 400
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSideValueInd :: FIXTag
-tSideValueInd = FIXTag 
+tSideValueInd = FIXTag
    { tName = "SideValueInd"
    , tnum = 401
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLiquidityPctLow :: FIXTag
-tLiquidityPctLow = FIXTag 
+tLiquidityPctLow = FIXTag
    { tName = "LiquidityPctLow"
    , tnum = 402
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLiquidityPctHigh :: FIXTag
-tLiquidityPctHigh = FIXTag 
+tLiquidityPctHigh = FIXTag
    { tName = "LiquidityPctHigh"
    , tnum = 403
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLiquidityValue :: FIXTag
-tLiquidityValue = FIXTag 
+tLiquidityValue = FIXTag
    { tName = "LiquidityValue"
    , tnum = 404
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tEFPTrackingError :: FIXTag
-tEFPTrackingError = FIXTag 
+tEFPTrackingError = FIXTag
    { tName = "EFPTrackingError"
    , tnum = 405
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tFairValue :: FIXTag
-tFairValue = FIXTag 
+tFairValue = FIXTag
    { tName = "FairValue"
    , tnum = 406
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOutsideIndexPct :: FIXTag
-tOutsideIndexPct = FIXTag 
+tOutsideIndexPct = FIXTag
    { tName = "OutsideIndexPct"
    , tnum = 407
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tValueOfFutures :: FIXTag
-tValueOfFutures = FIXTag 
+tValueOfFutures = FIXTag
    { tName = "ValueOfFutures"
    , tnum = 408
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLiquidityIndType :: FIXTag
-tLiquidityIndType = FIXTag 
+tLiquidityIndType = FIXTag
    { tName = "LiquidityIndType"
    , tnum = 409
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tWtAverageLiquidity :: FIXTag
-tWtAverageLiquidity = FIXTag 
+tWtAverageLiquidity = FIXTag
    { tName = "WtAverageLiquidity"
    , tnum = 410
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tExchangeForPhysical :: FIXTag
-tExchangeForPhysical = FIXTag 
+tExchangeForPhysical = FIXTag
    { tName = "ExchangeForPhysical"
    , tnum = 411
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tOutMainCntryUIndex :: FIXTag
-tOutMainCntryUIndex = FIXTag 
+tOutMainCntryUIndex = FIXTag
    { tName = "OutMainCntryUIndex"
    , tnum = 412
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCrossPercent :: FIXTag
-tCrossPercent = FIXTag 
+tCrossPercent = FIXTag
    { tName = "CrossPercent"
    , tnum = 413
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tProgRptReqs :: FIXTag
-tProgRptReqs = FIXTag 
+tProgRptReqs = FIXTag
    { tName = "ProgRptReqs"
    , tnum = 414
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tProgPeriodInterval :: FIXTag
-tProgPeriodInterval = FIXTag 
+tProgPeriodInterval = FIXTag
    { tName = "ProgPeriodInterval"
    , tnum = 415
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tIncTaxInd :: FIXTag
-tIncTaxInd = FIXTag 
+tIncTaxInd = FIXTag
    { tName = "IncTaxInd"
    , tnum = 416
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNumBidders :: FIXTag
-tNumBidders = FIXTag 
+tNumBidders = FIXTag
    { tName = "NumBidders"
    , tnum = 417
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBidTradeType :: FIXTag
-tBidTradeType = FIXTag 
+tBidTradeType = FIXTag
    { tName = "BidTradeType"
    , tnum = 418
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tBasisPxType :: FIXTag
-tBasisPxType = FIXTag 
+tBasisPxType = FIXTag
    { tName = "BasisPxType"
    , tnum = 419
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNoBidComponents :: FIXTag
-tNoBidComponents = FIXTag 
+tNoBidComponents = FIXTag
    { tName = "NoBidComponents"
    , tnum = 420
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCountry :: FIXTag
-tCountry = FIXTag 
+tCountry = FIXTag
    { tName = "Country"
    , tnum = 421
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotNoStrikes :: FIXTag
-tTotNoStrikes = FIXTag 
+tTotNoStrikes = FIXTag
    { tName = "TotNoStrikes"
    , tnum = 422
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPriceType :: FIXTag
-tPriceType = FIXTag 
+tPriceType = FIXTag
    { tName = "PriceType"
    , tnum = 423
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDayOrderQty :: FIXTag
-tDayOrderQty = FIXTag 
+tDayOrderQty = FIXTag
    { tName = "DayOrderQty"
    , tnum = 424
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDayCumQty :: FIXTag
-tDayCumQty = FIXTag 
+tDayCumQty = FIXTag
    { tName = "DayCumQty"
    , tnum = 425
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDayAvgPx :: FIXTag
-tDayAvgPx = FIXTag 
+tDayAvgPx = FIXTag
    { tName = "DayAvgPx"
    , tnum = 426
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tGTBookingInst :: FIXTag
-tGTBookingInst = FIXTag 
+tGTBookingInst = FIXTag
    { tName = "GTBookingInst"
    , tnum = 427
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoStrikes :: FIXTag
-tNoStrikes = FIXTag 
+tNoStrikes = FIXTag
    { tName = "NoStrikes"
    , tnum = 428
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tListStatusType :: FIXTag
-tListStatusType = FIXTag 
+tListStatusType = FIXTag
    { tName = "ListStatusType"
    , tnum = 429
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNetGrossInd :: FIXTag
-tNetGrossInd = FIXTag 
+tNetGrossInd = FIXTag
    { tName = "NetGrossInd"
    , tnum = 430
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tListOrderStatus :: FIXTag
-tListOrderStatus = FIXTag 
+tListOrderStatus = FIXTag
    { tName = "ListOrderStatus"
    , tnum = 431
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tExpireDate :: FIXTag
-tExpireDate = FIXTag 
+tExpireDate = FIXTag
    { tName = "ExpireDate"
    , tnum = 432
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tListExecInstType :: FIXTag
-tListExecInstType = FIXTag 
+tListExecInstType = FIXTag
    { tName = "ListExecInstType"
    , tnum = 433
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tCxlRejResponseTo :: FIXTag
-tCxlRejResponseTo = FIXTag 
+tCxlRejResponseTo = FIXTag
    { tName = "CxlRejResponseTo"
    , tnum = 434
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tUnderlyingCouponRate :: FIXTag
-tUnderlyingCouponRate = FIXTag 
+tUnderlyingCouponRate = FIXTag
    { tName = "UnderlyingCouponRate"
    , tnum = 435
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingContractMultiplier :: FIXTag
-tUnderlyingContractMultiplier = FIXTag 
+tUnderlyingContractMultiplier = FIXTag
    { tName = "UnderlyingContractMultiplier"
    , tnum = 436
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tContraTradeQty :: FIXTag
-tContraTradeQty = FIXTag 
+tContraTradeQty = FIXTag
    { tName = "ContraTradeQty"
    , tnum = 437
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tContraTradeTime :: FIXTag
-tContraTradeTime = FIXTag 
+tContraTradeTime = FIXTag
    { tName = "ContraTradeTime"
    , tnum = 438
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tClearingFirm :: FIXTag
-tClearingFirm = FIXTag 
+tClearingFirm = FIXTag
    { tName = "ClearingFirm"
    , tnum = 439
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tClearingAccount :: FIXTag
-tClearingAccount = FIXTag 
+tClearingAccount = FIXTag
    { tName = "ClearingAccount"
    , tnum = 440
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLiquidityNumSecurities :: FIXTag
-tLiquidityNumSecurities = FIXTag 
+tLiquidityNumSecurities = FIXTag
    { tName = "LiquidityNumSecurities"
    , tnum = 441
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMultiLegReportingType :: FIXTag
-tMultiLegReportingType = FIXTag 
+tMultiLegReportingType = FIXTag
    { tName = "MultiLegReportingType"
    , tnum = 442
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tStrikeTime :: FIXTag
-tStrikeTime = FIXTag 
+tStrikeTime = FIXTag
    { tName = "StrikeTime"
    , tnum = 443
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tListStatusText :: FIXTag
-tListStatusText = FIXTag 
+tListStatusText = FIXTag
    { tName = "ListStatusText"
    , tnum = 444
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEncodedListStatusTextLen :: FIXTag
-tEncodedListStatusTextLen = FIXTag 
+tEncodedListStatusTextLen = FIXTag
    { tName = "EncodedListStatusTextLen"
    , tnum = 445
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedListStatusText :: FIXTag
-tEncodedListStatusText = FIXTag 
+tEncodedListStatusText = FIXTag
    { tName = "EncodedListStatusText"
    , tnum = 446
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tPartyIDSource :: FIXTag
-tPartyIDSource = FIXTag 
+tPartyIDSource = FIXTag
    { tName = "PartyIDSource"
    , tnum = 447
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tPartyID :: FIXTag
-tPartyID = FIXTag 
+tPartyID = FIXTag
    { tName = "PartyID"
    , tnum = 448
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotalVolumeTradedDate :: FIXTag
-tTotalVolumeTradedDate = FIXTag 
+tTotalVolumeTradedDate = FIXTag
    { tName = "TotalVolumeTradedDate"
    , tnum = 449
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tTotalVolumeTradedTime :: FIXTag
-tTotalVolumeTradedTime = FIXTag 
+tTotalVolumeTradedTime = FIXTag
    { tName = "TotalVolumeTradedTime"
    , tnum = 450
    , tparser = toFIXTimeOnly
    , arbitraryValue = FIXTimeOnly <$> arbitrary }
 
 tNetChgPrevDay :: FIXTag
-tNetChgPrevDay = FIXTag 
+tNetChgPrevDay = FIXTag
    { tName = "NetChgPrevDay"
    , tnum = 451
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPartyRole :: FIXTag
-tPartyRole = FIXTag 
+tPartyRole = FIXTag
    { tName = "PartyRole"
    , tnum = 452
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoPartyIDs :: FIXTag
-tNoPartyIDs = FIXTag 
+tNoPartyIDs = FIXTag
    { tName = "NoPartyIDs"
    , tnum = 453
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoSecurityAltID :: FIXTag
-tNoSecurityAltID = FIXTag 
+tNoSecurityAltID = FIXTag
    { tName = "NoSecurityAltID"
    , tnum = 454
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecurityAltID :: FIXTag
-tSecurityAltID = FIXTag 
+tSecurityAltID = FIXTag
    { tName = "SecurityAltID"
    , tnum = 455
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecurityAltIDSource :: FIXTag
-tSecurityAltIDSource = FIXTag 
+tSecurityAltIDSource = FIXTag
    { tName = "SecurityAltIDSource"
    , tnum = 456
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoUnderlyingSecurityAltID :: FIXTag
-tNoUnderlyingSecurityAltID = FIXTag 
+tNoUnderlyingSecurityAltID = FIXTag
    { tName = "NoUnderlyingSecurityAltID"
    , tnum = 457
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingSecurityAltID :: FIXTag
-tUnderlyingSecurityAltID = FIXTag 
+tUnderlyingSecurityAltID = FIXTag
    { tName = "UnderlyingSecurityAltID"
    , tnum = 458
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecurityAltIDSource :: FIXTag
-tUnderlyingSecurityAltIDSource = FIXTag 
+tUnderlyingSecurityAltIDSource = FIXTag
    { tName = "UnderlyingSecurityAltIDSource"
    , tnum = 459
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tProduct :: FIXTag
-tProduct = FIXTag 
+tProduct = FIXTag
    { tName = "Product"
    , tnum = 460
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCFICode :: FIXTag
-tCFICode = FIXTag 
+tCFICode = FIXTag
    { tName = "CFICode"
    , tnum = 461
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingProduct :: FIXTag
-tUnderlyingProduct = FIXTag 
+tUnderlyingProduct = FIXTag
    { tName = "UnderlyingProduct"
    , tnum = 462
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingCFICode :: FIXTag
-tUnderlyingCFICode = FIXTag 
+tUnderlyingCFICode = FIXTag
    { tName = "UnderlyingCFICode"
    , tnum = 463
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTestMessageIndicator :: FIXTag
-tTestMessageIndicator = FIXTag 
+tTestMessageIndicator = FIXTag
    { tName = "TestMessageIndicator"
    , tnum = 464
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tQuantityType :: FIXTag
-tQuantityType = FIXTag 
+tQuantityType = FIXTag
    { tName = "QuantityType"
    , tnum = 465
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBookingRefID :: FIXTag
-tBookingRefID = FIXTag 
+tBookingRefID = FIXTag
    { tName = "BookingRefID"
    , tnum = 466
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tIndividualAllocID :: FIXTag
-tIndividualAllocID = FIXTag 
+tIndividualAllocID = FIXTag
    { tName = "IndividualAllocID"
    , tnum = 467
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRoundingDirection :: FIXTag
-tRoundingDirection = FIXTag 
+tRoundingDirection = FIXTag
    { tName = "RoundingDirection"
    , tnum = 468
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tRoundingModulus :: FIXTag
-tRoundingModulus = FIXTag 
+tRoundingModulus = FIXTag
    { tName = "RoundingModulus"
    , tnum = 469
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCountryOfIssue :: FIXTag
-tCountryOfIssue = FIXTag 
+tCountryOfIssue = FIXTag
    { tName = "CountryOfIssue"
    , tnum = 470
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tStateOrProvinceOfIssue :: FIXTag
-tStateOrProvinceOfIssue = FIXTag 
+tStateOrProvinceOfIssue = FIXTag
    { tName = "StateOrProvinceOfIssue"
    , tnum = 471
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLocaleOfIssue :: FIXTag
-tLocaleOfIssue = FIXTag 
+tLocaleOfIssue = FIXTag
    { tName = "LocaleOfIssue"
    , tnum = 472
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoRegistDtls :: FIXTag
-tNoRegistDtls = FIXTag 
+tNoRegistDtls = FIXTag
    { tName = "NoRegistDtls"
    , tnum = 473
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMailingDtls :: FIXTag
-tMailingDtls = FIXTag 
+tMailingDtls = FIXTag
    { tName = "MailingDtls"
    , tnum = 474
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tInvestorCountryOfResidence :: FIXTag
-tInvestorCountryOfResidence = FIXTag 
+tInvestorCountryOfResidence = FIXTag
    { tName = "InvestorCountryOfResidence"
    , tnum = 475
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPaymentRef :: FIXTag
-tPaymentRef = FIXTag 
+tPaymentRef = FIXTag
    { tName = "PaymentRef"
    , tnum = 476
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDistribPaymentMethod :: FIXTag
-tDistribPaymentMethod = FIXTag 
+tDistribPaymentMethod = FIXTag
    { tName = "DistribPaymentMethod"
    , tnum = 477
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCashDistribCurr :: FIXTag
-tCashDistribCurr = FIXTag 
+tCashDistribCurr = FIXTag
    { tName = "CashDistribCurr"
    , tnum = 478
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCommCurrency :: FIXTag
-tCommCurrency = FIXTag 
+tCommCurrency = FIXTag
    { tName = "CommCurrency"
    , tnum = 479
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCancellationRights :: FIXTag
-tCancellationRights = FIXTag 
+tCancellationRights = FIXTag
    { tName = "CancellationRights"
    , tnum = 480
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMoneyLaunderingStatus :: FIXTag
-tMoneyLaunderingStatus = FIXTag 
+tMoneyLaunderingStatus = FIXTag
    { tName = "MoneyLaunderingStatus"
    , tnum = 481
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMailingInst :: FIXTag
-tMailingInst = FIXTag 
+tMailingInst = FIXTag
    { tName = "MailingInst"
    , tnum = 482
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTransBkdTime :: FIXTag
-tTransBkdTime = FIXTag 
+tTransBkdTime = FIXTag
    { tName = "TransBkdTime"
    , tnum = 483
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tExecPriceType :: FIXTag
-tExecPriceType = FIXTag 
+tExecPriceType = FIXTag
    { tName = "ExecPriceType"
    , tnum = 484
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tExecPriceAdjustment :: FIXTag
-tExecPriceAdjustment = FIXTag 
+tExecPriceAdjustment = FIXTag
    { tName = "ExecPriceAdjustment"
    , tnum = 485
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDateOfBirth :: FIXTag
-tDateOfBirth = FIXTag 
+tDateOfBirth = FIXTag
    { tName = "DateOfBirth"
    , tnum = 486
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tTradeReportTransType :: FIXTag
-tTradeReportTransType = FIXTag 
+tTradeReportTransType = FIXTag
    { tName = "TradeReportTransType"
    , tnum = 487
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCardHolderName :: FIXTag
-tCardHolderName = FIXTag 
+tCardHolderName = FIXTag
    { tName = "CardHolderName"
    , tnum = 488
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCardNumber :: FIXTag
-tCardNumber = FIXTag 
+tCardNumber = FIXTag
    { tName = "CardNumber"
    , tnum = 489
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCardExpDate :: FIXTag
-tCardExpDate = FIXTag 
+tCardExpDate = FIXTag
    { tName = "CardExpDate"
    , tnum = 490
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tCardIssNum :: FIXTag
-tCardIssNum = FIXTag 
+tCardIssNum = FIXTag
    { tName = "CardIssNum"
    , tnum = 491
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPaymentMethod :: FIXTag
-tPaymentMethod = FIXTag 
+tPaymentMethod = FIXTag
    { tName = "PaymentMethod"
    , tnum = 492
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRegistAcctType :: FIXTag
-tRegistAcctType = FIXTag 
+tRegistAcctType = FIXTag
    { tName = "RegistAcctType"
    , tnum = 493
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDesignation :: FIXTag
-tDesignation = FIXTag 
+tDesignation = FIXTag
    { tName = "Designation"
    , tnum = 494
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTaxAdvantageType :: FIXTag
-tTaxAdvantageType = FIXTag 
+tTaxAdvantageType = FIXTag
    { tName = "TaxAdvantageType"
    , tnum = 495
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRegistRejReasonText :: FIXTag
-tRegistRejReasonText = FIXTag 
+tRegistRejReasonText = FIXTag
    { tName = "RegistRejReasonText"
    , tnum = 496
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tFundRenewWaiv :: FIXTag
-tFundRenewWaiv = FIXTag 
+tFundRenewWaiv = FIXTag
    { tName = "FundRenewWaiv"
    , tnum = 497
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tCashDistribAgentName :: FIXTag
-tCashDistribAgentName = FIXTag 
+tCashDistribAgentName = FIXTag
    { tName = "CashDistribAgentName"
    , tnum = 498
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashDistribAgentCode :: FIXTag
-tCashDistribAgentCode = FIXTag 
+tCashDistribAgentCode = FIXTag
    { tName = "CashDistribAgentCode"
    , tnum = 499
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashDistribAgentAcctNumber :: FIXTag
-tCashDistribAgentAcctNumber = FIXTag 
+tCashDistribAgentAcctNumber = FIXTag
    { tName = "CashDistribAgentAcctNumber"
    , tnum = 500
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashDistribPayRef :: FIXTag
-tCashDistribPayRef = FIXTag 
+tCashDistribPayRef = FIXTag
    { tName = "CashDistribPayRef"
    , tnum = 501
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashDistribAgentAcctName :: FIXTag
-tCashDistribAgentAcctName = FIXTag 
+tCashDistribAgentAcctName = FIXTag
    { tName = "CashDistribAgentAcctName"
    , tnum = 502
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCardStartDate :: FIXTag
-tCardStartDate = FIXTag 
+tCardStartDate = FIXTag
    { tName = "CardStartDate"
    , tnum = 503
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tPaymentDate :: FIXTag
-tPaymentDate = FIXTag 
+tPaymentDate = FIXTag
    { tName = "PaymentDate"
    , tnum = 504
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tPaymentRemitterID :: FIXTag
-tPaymentRemitterID = FIXTag 
+tPaymentRemitterID = FIXTag
    { tName = "PaymentRemitterID"
    , tnum = 505
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRegistStatus :: FIXTag
-tRegistStatus = FIXTag 
+tRegistStatus = FIXTag
    { tName = "RegistStatus"
    , tnum = 506
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tRegistRejReasonCode :: FIXTag
-tRegistRejReasonCode = FIXTag 
+tRegistRejReasonCode = FIXTag
    { tName = "RegistRejReasonCode"
    , tnum = 507
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRegistRefID :: FIXTag
-tRegistRefID = FIXTag 
+tRegistRefID = FIXTag
    { tName = "RegistRefID"
    , tnum = 508
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRegistDtls :: FIXTag
-tRegistDtls = FIXTag 
+tRegistDtls = FIXTag
    { tName = "RegistDtls"
    , tnum = 509
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoDistribInsts :: FIXTag
-tNoDistribInsts = FIXTag 
+tNoDistribInsts = FIXTag
    { tName = "NoDistribInsts"
    , tnum = 510
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRegistEmail :: FIXTag
-tRegistEmail = FIXTag 
+tRegistEmail = FIXTag
    { tName = "RegistEmail"
    , tnum = 511
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDistribPercentage :: FIXTag
-tDistribPercentage = FIXTag 
+tDistribPercentage = FIXTag
    { tName = "DistribPercentage"
    , tnum = 512
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tRegistID :: FIXTag
-tRegistID = FIXTag 
+tRegistID = FIXTag
    { tName = "RegistID"
    , tnum = 513
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRegistTransType :: FIXTag
-tRegistTransType = FIXTag 
+tRegistTransType = FIXTag
    { tName = "RegistTransType"
    , tnum = 514
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tExecValuationPoint :: FIXTag
-tExecValuationPoint = FIXTag 
+tExecValuationPoint = FIXTag
    { tName = "ExecValuationPoint"
    , tnum = 515
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tOrderPercent :: FIXTag
-tOrderPercent = FIXTag 
+tOrderPercent = FIXTag
    { tName = "OrderPercent"
    , tnum = 516
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOwnershipType :: FIXTag
-tOwnershipType = FIXTag 
+tOwnershipType = FIXTag
    { tName = "OwnershipType"
    , tnum = 517
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNoContAmts :: FIXTag
-tNoContAmts = FIXTag 
+tNoContAmts = FIXTag
    { tName = "NoContAmts"
    , tnum = 518
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tContAmtType :: FIXTag
-tContAmtType = FIXTag 
+tContAmtType = FIXTag
    { tName = "ContAmtType"
    , tnum = 519
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tContAmtValue :: FIXTag
-tContAmtValue = FIXTag 
+tContAmtValue = FIXTag
    { tName = "ContAmtValue"
    , tnum = 520
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tContAmtCurr :: FIXTag
-tContAmtCurr = FIXTag 
+tContAmtCurr = FIXTag
    { tName = "ContAmtCurr"
    , tnum = 521
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOwnerType :: FIXTag
-tOwnerType = FIXTag 
+tOwnerType = FIXTag
    { tName = "OwnerType"
    , tnum = 522
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPartySubID :: FIXTag
-tPartySubID = FIXTag 
+tPartySubID = FIXTag
    { tName = "PartySubID"
    , tnum = 523
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNestedPartyID :: FIXTag
-tNestedPartyID = FIXTag 
+tNestedPartyID = FIXTag
    { tName = "NestedPartyID"
    , tnum = 524
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNestedPartyIDSource :: FIXTag
-tNestedPartyIDSource = FIXTag 
+tNestedPartyIDSource = FIXTag
    { tName = "NestedPartyIDSource"
    , tnum = 525
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSecondaryClOrdID :: FIXTag
-tSecondaryClOrdID = FIXTag 
+tSecondaryClOrdID = FIXTag
    { tName = "SecondaryClOrdID"
    , tnum = 526
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecondaryExecID :: FIXTag
-tSecondaryExecID = FIXTag 
+tSecondaryExecID = FIXTag
    { tName = "SecondaryExecID"
    , tnum = 527
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOrderCapacity :: FIXTag
-tOrderCapacity = FIXTag 
+tOrderCapacity = FIXTag
    { tName = "OrderCapacity"
    , tnum = 528
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tOrderRestrictions :: FIXTag
-tOrderRestrictions = FIXTag 
+tOrderRestrictions = FIXTag
    { tName = "OrderRestrictions"
    , tnum = 529
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tMassCancelRequestType :: FIXTag
-tMassCancelRequestType = FIXTag 
+tMassCancelRequestType = FIXTag
    { tName = "MassCancelRequestType"
    , tnum = 530
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMassCancelResponse :: FIXTag
-tMassCancelResponse = FIXTag 
+tMassCancelResponse = FIXTag
    { tName = "MassCancelResponse"
    , tnum = 531
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMassCancelRejectReason :: FIXTag
-tMassCancelRejectReason = FIXTag 
+tMassCancelRejectReason = FIXTag
    { tName = "MassCancelRejectReason"
    , tnum = 532
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tTotalAffectedOrders :: FIXTag
-tTotalAffectedOrders = FIXTag 
+tTotalAffectedOrders = FIXTag
    { tName = "TotalAffectedOrders"
    , tnum = 533
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoAffectedOrders :: FIXTag
-tNoAffectedOrders = FIXTag 
+tNoAffectedOrders = FIXTag
    { tName = "NoAffectedOrders"
    , tnum = 534
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAffectedOrderID :: FIXTag
-tAffectedOrderID = FIXTag 
+tAffectedOrderID = FIXTag
    { tName = "AffectedOrderID"
    , tnum = 535
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAffectedSecondaryOrderID :: FIXTag
-tAffectedSecondaryOrderID = FIXTag 
+tAffectedSecondaryOrderID = FIXTag
    { tName = "AffectedSecondaryOrderID"
    , tnum = 536
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteType :: FIXTag
-tQuoteType = FIXTag 
+tQuoteType = FIXTag
    { tName = "QuoteType"
    , tnum = 537
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNestedPartyRole :: FIXTag
-tNestedPartyRole = FIXTag 
+tNestedPartyRole = FIXTag
    { tName = "NestedPartyRole"
    , tnum = 538
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoNestedPartyIDs :: FIXTag
-tNoNestedPartyIDs = FIXTag 
+tNoNestedPartyIDs = FIXTag
    { tName = "NoNestedPartyIDs"
    , tnum = 539
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotalAccruedInterestAmt :: FIXTag
-tTotalAccruedInterestAmt = FIXTag 
+tTotalAccruedInterestAmt = FIXTag
    { tName = "TotalAccruedInterestAmt"
    , tnum = 540
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMaturityDate :: FIXTag
-tMaturityDate = FIXTag 
+tMaturityDate = FIXTag
    { tName = "MaturityDate"
    , tnum = 541
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tUnderlyingMaturityDate :: FIXTag
-tUnderlyingMaturityDate = FIXTag 
+tUnderlyingMaturityDate = FIXTag
    { tName = "UnderlyingMaturityDate"
    , tnum = 542
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tInstrRegistry :: FIXTag
-tInstrRegistry = FIXTag 
+tInstrRegistry = FIXTag
    { tName = "InstrRegistry"
    , tnum = 543
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCashMargin :: FIXTag
-tCashMargin = FIXTag 
+tCashMargin = FIXTag
    { tName = "CashMargin"
    , tnum = 544
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNestedPartySubID :: FIXTag
-tNestedPartySubID = FIXTag 
+tNestedPartySubID = FIXTag
    { tName = "NestedPartySubID"
    , tnum = 545
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tScope :: FIXTag
-tScope = FIXTag 
+tScope = FIXTag
    { tName = "Scope"
    , tnum = 546
    , tparser = toFIXMultipleValueString
    , arbitraryValue = FIXMultipleValueString <$> arbitrary }
 
 tMDImplicitDelete :: FIXTag
-tMDImplicitDelete = FIXTag 
+tMDImplicitDelete = FIXTag
    { tName = "MDImplicitDelete"
    , tnum = 547
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tCrossID :: FIXTag
-tCrossID = FIXTag 
+tCrossID = FIXTag
    { tName = "CrossID"
    , tnum = 548
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCrossType :: FIXTag
-tCrossType = FIXTag 
+tCrossType = FIXTag
    { tName = "CrossType"
    , tnum = 549
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCrossPrioritization :: FIXTag
-tCrossPrioritization = FIXTag 
+tCrossPrioritization = FIXTag
    { tName = "CrossPrioritization"
    , tnum = 550
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrigCrossID :: FIXTag
-tOrigCrossID = FIXTag 
+tOrigCrossID = FIXTag
    { tName = "OrigCrossID"
    , tnum = 551
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoSides :: FIXTag
-tNoSides = FIXTag 
+tNoSides = FIXTag
    { tName = "NoSides"
    , tnum = 552
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUsername :: FIXTag
-tUsername = FIXTag 
+tUsername = FIXTag
    { tName = "Username"
    , tnum = 553
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPassword :: FIXTag
-tPassword = FIXTag 
+tPassword = FIXTag
    { tName = "Password"
    , tnum = 554
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoLegs :: FIXTag
-tNoLegs = FIXTag 
+tNoLegs = FIXTag
    { tName = "NoLegs"
    , tnum = 555
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegCurrency :: FIXTag
-tLegCurrency = FIXTag 
+tLegCurrency = FIXTag
    { tName = "LegCurrency"
    , tnum = 556
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotNoSecurityTypes :: FIXTag
-tTotNoSecurityTypes = FIXTag 
+tTotNoSecurityTypes = FIXTag
    { tName = "TotNoSecurityTypes"
    , tnum = 557
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoSecurityTypes :: FIXTag
-tNoSecurityTypes = FIXTag 
+tNoSecurityTypes = FIXTag
    { tName = "NoSecurityTypes"
    , tnum = 558
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecurityListRequestType :: FIXTag
-tSecurityListRequestType = FIXTag 
+tSecurityListRequestType = FIXTag
    { tName = "SecurityListRequestType"
    , tnum = 559
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecurityRequestResult :: FIXTag
-tSecurityRequestResult = FIXTag 
+tSecurityRequestResult = FIXTag
    { tName = "SecurityRequestResult"
    , tnum = 560
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tRoundLot :: FIXTag
-tRoundLot = FIXTag 
+tRoundLot = FIXTag
    { tName = "RoundLot"
    , tnum = 561
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMinTradeVol :: FIXTag
-tMinTradeVol = FIXTag 
+tMinTradeVol = FIXTag
    { tName = "MinTradeVol"
    , tnum = 562
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMultiLegRptTypeReq :: FIXTag
-tMultiLegRptTypeReq = FIXTag 
+tMultiLegRptTypeReq = FIXTag
    { tName = "MultiLegRptTypeReq"
    , tnum = 563
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegPositionEffect :: FIXTag
-tLegPositionEffect = FIXTag 
+tLegPositionEffect = FIXTag
    { tName = "LegPositionEffect"
    , tnum = 564
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLegCoveredOrUncovered :: FIXTag
-tLegCoveredOrUncovered = FIXTag 
+tLegCoveredOrUncovered = FIXTag
    { tName = "LegCoveredOrUncovered"
    , tnum = 565
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegPrice :: FIXTag
-tLegPrice = FIXTag 
+tLegPrice = FIXTag
    { tName = "LegPrice"
    , tnum = 566
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTradSesStatusRejReason :: FIXTag
-tTradSesStatusRejReason = FIXTag 
+tTradSesStatusRejReason = FIXTag
    { tName = "TradSesStatusRejReason"
    , tnum = 567
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeRequestID :: FIXTag
-tTradeRequestID = FIXTag 
+tTradeRequestID = FIXTag
    { tName = "TradeRequestID"
    , tnum = 568
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradeRequestType :: FIXTag
-tTradeRequestType = FIXTag 
+tTradeRequestType = FIXTag
    { tName = "TradeRequestType"
    , tnum = 569
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPreviouslyReported :: FIXTag
-tPreviouslyReported = FIXTag 
+tPreviouslyReported = FIXTag
    { tName = "PreviouslyReported"
    , tnum = 570
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tTradeReportID :: FIXTag
-tTradeReportID = FIXTag 
+tTradeReportID = FIXTag
    { tName = "TradeReportID"
    , tnum = 571
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradeReportRefID :: FIXTag
-tTradeReportRefID = FIXTag 
+tTradeReportRefID = FIXTag
    { tName = "TradeReportRefID"
    , tnum = 572
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMatchStatus :: FIXTag
-tMatchStatus = FIXTag 
+tMatchStatus = FIXTag
    { tName = "MatchStatus"
    , tnum = 573
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tMatchType :: FIXTag
-tMatchType = FIXTag 
+tMatchType = FIXTag
    { tName = "MatchType"
    , tnum = 574
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOddLot :: FIXTag
-tOddLot = FIXTag 
+tOddLot = FIXTag
    { tName = "OddLot"
    , tnum = 575
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tNoClearingInstructions :: FIXTag
-tNoClearingInstructions = FIXTag 
+tNoClearingInstructions = FIXTag
    { tName = "NoClearingInstructions"
    , tnum = 576
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tClearingInstruction :: FIXTag
-tClearingInstruction = FIXTag 
+tClearingInstruction = FIXTag
    { tName = "ClearingInstruction"
    , tnum = 577
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeInputSource :: FIXTag
-tTradeInputSource = FIXTag 
+tTradeInputSource = FIXTag
    { tName = "TradeInputSource"
    , tnum = 578
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradeInputDevice :: FIXTag
-tTradeInputDevice = FIXTag 
+tTradeInputDevice = FIXTag
    { tName = "TradeInputDevice"
    , tnum = 579
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoDates :: FIXTag
-tNoDates = FIXTag 
+tNoDates = FIXTag
    { tName = "NoDates"
    , tnum = 580
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAccountType :: FIXTag
-tAccountType = FIXTag 
+tAccountType = FIXTag
    { tName = "AccountType"
    , tnum = 581
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCustOrderCapacity :: FIXTag
-tCustOrderCapacity = FIXTag 
+tCustOrderCapacity = FIXTag
    { tName = "CustOrderCapacity"
    , tnum = 582
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tClOrdLinkID :: FIXTag
-tClOrdLinkID = FIXTag 
+tClOrdLinkID = FIXTag
    { tName = "ClOrdLinkID"
    , tnum = 583
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMassStatusReqID :: FIXTag
-tMassStatusReqID = FIXTag 
+tMassStatusReqID = FIXTag
    { tName = "MassStatusReqID"
    , tnum = 584
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMassStatusReqType :: FIXTag
-tMassStatusReqType = FIXTag 
+tMassStatusReqType = FIXTag
    { tName = "MassStatusReqType"
    , tnum = 585
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrigOrdModTime :: FIXTag
-tOrigOrdModTime = FIXTag 
+tOrigOrdModTime = FIXTag
    { tName = "OrigOrdModTime"
    , tnum = 586
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tLegSettlType :: FIXTag
-tLegSettlType = FIXTag 
+tLegSettlType = FIXTag
    { tName = "LegSettlType"
    , tnum = 587
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLegSettlDate :: FIXTag
-tLegSettlDate = FIXTag 
+tLegSettlDate = FIXTag
    { tName = "LegSettlDate"
    , tnum = 588
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tDayBookingInst :: FIXTag
-tDayBookingInst = FIXTag 
+tDayBookingInst = FIXTag
    { tName = "DayBookingInst"
    , tnum = 589
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tBookingUnit :: FIXTag
-tBookingUnit = FIXTag 
+tBookingUnit = FIXTag
    { tName = "BookingUnit"
    , tnum = 590
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tPreallocMethod :: FIXTag
-tPreallocMethod = FIXTag 
+tPreallocMethod = FIXTag
    { tName = "PreallocMethod"
    , tnum = 591
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tUnderlyingCountryOfIssue :: FIXTag
-tUnderlyingCountryOfIssue = FIXTag 
+tUnderlyingCountryOfIssue = FIXTag
    { tName = "UnderlyingCountryOfIssue"
    , tnum = 592
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingStateOrProvinceOfIssue :: FIXTag
-tUnderlyingStateOrProvinceOfIssue = FIXTag 
+tUnderlyingStateOrProvinceOfIssue = FIXTag
    { tName = "UnderlyingStateOrProvinceOfIssue"
    , tnum = 593
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingLocaleOfIssue :: FIXTag
-tUnderlyingLocaleOfIssue = FIXTag 
+tUnderlyingLocaleOfIssue = FIXTag
    { tName = "UnderlyingLocaleOfIssue"
    , tnum = 594
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingInstrRegistry :: FIXTag
-tUnderlyingInstrRegistry = FIXTag 
+tUnderlyingInstrRegistry = FIXTag
    { tName = "UnderlyingInstrRegistry"
    , tnum = 595
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegCountryOfIssue :: FIXTag
-tLegCountryOfIssue = FIXTag 
+tLegCountryOfIssue = FIXTag
    { tName = "LegCountryOfIssue"
    , tnum = 596
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegStateOrProvinceOfIssue :: FIXTag
-tLegStateOrProvinceOfIssue = FIXTag 
+tLegStateOrProvinceOfIssue = FIXTag
    { tName = "LegStateOrProvinceOfIssue"
    , tnum = 597
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegLocaleOfIssue :: FIXTag
-tLegLocaleOfIssue = FIXTag 
+tLegLocaleOfIssue = FIXTag
    { tName = "LegLocaleOfIssue"
    , tnum = 598
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegInstrRegistry :: FIXTag
-tLegInstrRegistry = FIXTag 
+tLegInstrRegistry = FIXTag
    { tName = "LegInstrRegistry"
    , tnum = 599
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSymbol :: FIXTag
-tLegSymbol = FIXTag 
+tLegSymbol = FIXTag
    { tName = "LegSymbol"
    , tnum = 600
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSymbolSfx :: FIXTag
-tLegSymbolSfx = FIXTag 
+tLegSymbolSfx = FIXTag
    { tName = "LegSymbolSfx"
    , tnum = 601
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSecurityID :: FIXTag
-tLegSecurityID = FIXTag 
+tLegSecurityID = FIXTag
    { tName = "LegSecurityID"
    , tnum = 602
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSecurityIDSource :: FIXTag
-tLegSecurityIDSource = FIXTag 
+tLegSecurityIDSource = FIXTag
    { tName = "LegSecurityIDSource"
    , tnum = 603
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoLegSecurityAltID :: FIXTag
-tNoLegSecurityAltID = FIXTag 
+tNoLegSecurityAltID = FIXTag
    { tName = "NoLegSecurityAltID"
    , tnum = 604
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegSecurityAltID :: FIXTag
-tLegSecurityAltID = FIXTag 
+tLegSecurityAltID = FIXTag
    { tName = "LegSecurityAltID"
    , tnum = 605
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSecurityAltIDSource :: FIXTag
-tLegSecurityAltIDSource = FIXTag 
+tLegSecurityAltIDSource = FIXTag
    { tName = "LegSecurityAltIDSource"
    , tnum = 606
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegProduct :: FIXTag
-tLegProduct = FIXTag 
+tLegProduct = FIXTag
    { tName = "LegProduct"
    , tnum = 607
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegCFICode :: FIXTag
-tLegCFICode = FIXTag 
+tLegCFICode = FIXTag
    { tName = "LegCFICode"
    , tnum = 608
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSecurityType :: FIXTag
-tLegSecurityType = FIXTag 
+tLegSecurityType = FIXTag
    { tName = "LegSecurityType"
    , tnum = 609
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegMaturityMonthYear :: FIXTag
-tLegMaturityMonthYear = FIXTag 
+tLegMaturityMonthYear = FIXTag
    { tName = "LegMaturityMonthYear"
    , tnum = 610
    , tparser = toFIXMonthYear
    , arbitraryValue = FIXMonthYear <$> arbitrary }
 
 tLegMaturityDate :: FIXTag
-tLegMaturityDate = FIXTag 
+tLegMaturityDate = FIXTag
    { tName = "LegMaturityDate"
    , tnum = 611
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLegStrikePrice :: FIXTag
-tLegStrikePrice = FIXTag 
+tLegStrikePrice = FIXTag
    { tName = "LegStrikePrice"
    , tnum = 612
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegOptAttribute :: FIXTag
-tLegOptAttribute = FIXTag 
+tLegOptAttribute = FIXTag
    { tName = "LegOptAttribute"
    , tnum = 613
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tLegContractMultiplier :: FIXTag
-tLegContractMultiplier = FIXTag 
+tLegContractMultiplier = FIXTag
    { tName = "LegContractMultiplier"
    , tnum = 614
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegCouponRate :: FIXTag
-tLegCouponRate = FIXTag 
+tLegCouponRate = FIXTag
    { tName = "LegCouponRate"
    , tnum = 615
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegSecurityExchange :: FIXTag
-tLegSecurityExchange = FIXTag 
+tLegSecurityExchange = FIXTag
    { tName = "LegSecurityExchange"
    , tnum = 616
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegIssuer :: FIXTag
-tLegIssuer = FIXTag 
+tLegIssuer = FIXTag
    { tName = "LegIssuer"
    , tnum = 617
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEncodedLegIssuerLen :: FIXTag
-tEncodedLegIssuerLen = FIXTag 
+tEncodedLegIssuerLen = FIXTag
    { tName = "EncodedLegIssuerLen"
    , tnum = 618
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedLegIssuer :: FIXTag
-tEncodedLegIssuer = FIXTag 
+tEncodedLegIssuer = FIXTag
    { tName = "EncodedLegIssuer"
    , tnum = 619
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tLegSecurityDesc :: FIXTag
-tLegSecurityDesc = FIXTag 
+tLegSecurityDesc = FIXTag
    { tName = "LegSecurityDesc"
    , tnum = 620
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tEncodedLegSecurityDescLen :: FIXTag
-tEncodedLegSecurityDescLen = FIXTag 
+tEncodedLegSecurityDescLen = FIXTag
    { tName = "EncodedLegSecurityDescLen"
    , tnum = 621
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEncodedLegSecurityDesc :: FIXTag
-tEncodedLegSecurityDesc = FIXTag 
+tEncodedLegSecurityDesc = FIXTag
    { tName = "EncodedLegSecurityDesc"
    , tnum = 622
    , tparser = toFIXData
    , arbitraryValue = FIXData <$> arbitrary }
 
 tLegRatioQty :: FIXTag
-tLegRatioQty = FIXTag 
+tLegRatioQty = FIXTag
    { tName = "LegRatioQty"
    , tnum = 623
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegSide :: FIXTag
-tLegSide = FIXTag 
+tLegSide = FIXTag
    { tName = "LegSide"
    , tnum = 624
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tTradingSessionSubID :: FIXTag
-tTradingSessionSubID = FIXTag 
+tTradingSessionSubID = FIXTag
    { tName = "TradingSessionSubID"
    , tnum = 625
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocType :: FIXTag
-tAllocType = FIXTag 
+tAllocType = FIXTag
    { tName = "AllocType"
    , tnum = 626
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoHops :: FIXTag
-tNoHops = FIXTag 
+tNoHops = FIXTag
    { tName = "NoHops"
    , tnum = 627
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tHopCompID :: FIXTag
-tHopCompID = FIXTag 
+tHopCompID = FIXTag
    { tName = "HopCompID"
    , tnum = 628
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tHopSendingTime :: FIXTag
-tHopSendingTime = FIXTag 
+tHopSendingTime = FIXTag
    { tName = "HopSendingTime"
    , tnum = 629
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tHopRefID :: FIXTag
-tHopRefID = FIXTag 
+tHopRefID = FIXTag
    { tName = "HopRefID"
    , tnum = 630
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMidPx :: FIXTag
-tMidPx = FIXTag 
+tMidPx = FIXTag
    { tName = "MidPx"
    , tnum = 631
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBidYield :: FIXTag
-tBidYield = FIXTag 
+tBidYield = FIXTag
    { tName = "BidYield"
    , tnum = 632
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMidYield :: FIXTag
-tMidYield = FIXTag 
+tMidYield = FIXTag
    { tName = "MidYield"
    , tnum = 633
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferYield :: FIXTag
-tOfferYield = FIXTag 
+tOfferYield = FIXTag
    { tName = "OfferYield"
    , tnum = 634
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tClearingFeeIndicator :: FIXTag
-tClearingFeeIndicator = FIXTag 
+tClearingFeeIndicator = FIXTag
    { tName = "ClearingFeeIndicator"
    , tnum = 635
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tWorkingIndicator :: FIXTag
-tWorkingIndicator = FIXTag 
+tWorkingIndicator = FIXTag
    { tName = "WorkingIndicator"
    , tnum = 636
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tLegLastPx :: FIXTag
-tLegLastPx = FIXTag 
+tLegLastPx = FIXTag
    { tName = "LegLastPx"
    , tnum = 637
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPriorityIndicator :: FIXTag
-tPriorityIndicator = FIXTag 
+tPriorityIndicator = FIXTag
    { tName = "PriorityIndicator"
    , tnum = 638
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPriceImprovement :: FIXTag
-tPriceImprovement = FIXTag 
+tPriceImprovement = FIXTag
    { tName = "PriceImprovement"
    , tnum = 639
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPrice2 :: FIXTag
-tPrice2 = FIXTag 
+tPrice2 = FIXTag
    { tName = "Price2"
    , tnum = 640
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLastForwardPoints2 :: FIXTag
-tLastForwardPoints2 = FIXTag 
+tLastForwardPoints2 = FIXTag
    { tName = "LastForwardPoints2"
    , tnum = 641
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBidForwardPoints2 :: FIXTag
-tBidForwardPoints2 = FIXTag 
+tBidForwardPoints2 = FIXTag
    { tName = "BidForwardPoints2"
    , tnum = 642
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOfferForwardPoints2 :: FIXTag
-tOfferForwardPoints2 = FIXTag 
+tOfferForwardPoints2 = FIXTag
    { tName = "OfferForwardPoints2"
    , tnum = 643
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tRFQReqID :: FIXTag
-tRFQReqID = FIXTag 
+tRFQReqID = FIXTag
    { tName = "RFQReqID"
    , tnum = 644
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMktBidPx :: FIXTag
-tMktBidPx = FIXTag 
+tMktBidPx = FIXTag
    { tName = "MktBidPx"
    , tnum = 645
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMktOfferPx :: FIXTag
-tMktOfferPx = FIXTag 
+tMktOfferPx = FIXTag
    { tName = "MktOfferPx"
    , tnum = 646
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMinBidSize :: FIXTag
-tMinBidSize = FIXTag 
+tMinBidSize = FIXTag
    { tName = "MinBidSize"
    , tnum = 647
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMinOfferSize :: FIXTag
-tMinOfferSize = FIXTag 
+tMinOfferSize = FIXTag
    { tName = "MinOfferSize"
    , tnum = 648
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tQuoteStatusReqID :: FIXTag
-tQuoteStatusReqID = FIXTag 
+tQuoteStatusReqID = FIXTag
    { tName = "QuoteStatusReqID"
    , tnum = 649
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegalConfirm :: FIXTag
-tLegalConfirm = FIXTag 
+tLegalConfirm = FIXTag
    { tName = "LegalConfirm"
    , tnum = 650
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tUnderlyingLastPx :: FIXTag
-tUnderlyingLastPx = FIXTag 
+tUnderlyingLastPx = FIXTag
    { tName = "UnderlyingLastPx"
    , tnum = 651
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingLastQty :: FIXTag
-tUnderlyingLastQty = FIXTag 
+tUnderlyingLastQty = FIXTag
    { tName = "UnderlyingLastQty"
    , tnum = 652
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSecDefStatus :: FIXTag
-tSecDefStatus = FIXTag 
+tSecDefStatus = FIXTag
    { tName = "SecDefStatus"
    , tnum = 653
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegRefID :: FIXTag
-tLegRefID = FIXTag 
+tLegRefID = FIXTag
    { tName = "LegRefID"
    , tnum = 654
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tContraLegRefID :: FIXTag
-tContraLegRefID = FIXTag 
+tContraLegRefID = FIXTag
    { tName = "ContraLegRefID"
    , tnum = 655
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlCurrBidFxRate :: FIXTag
-tSettlCurrBidFxRate = FIXTag 
+tSettlCurrBidFxRate = FIXTag
    { tName = "SettlCurrBidFxRate"
    , tnum = 656
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlCurrOfferFxRate :: FIXTag
-tSettlCurrOfferFxRate = FIXTag 
+tSettlCurrOfferFxRate = FIXTag
    { tName = "SettlCurrOfferFxRate"
    , tnum = 657
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tQuoteRequestRejectReason :: FIXTag
-tQuoteRequestRejectReason = FIXTag 
+tQuoteRequestRejectReason = FIXTag
    { tName = "QuoteRequestRejectReason"
    , tnum = 658
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSideComplianceID :: FIXTag
-tSideComplianceID = FIXTag 
+tSideComplianceID = FIXTag
    { tName = "SideComplianceID"
    , tnum = 659
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAcctIDSource :: FIXTag
-tAcctIDSource = FIXTag 
+tAcctIDSource = FIXTag
    { tName = "AcctIDSource"
    , tnum = 660
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocAcctIDSource :: FIXTag
-tAllocAcctIDSource = FIXTag 
+tAllocAcctIDSource = FIXTag
    { tName = "AllocAcctIDSource"
    , tnum = 661
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBenchmarkPrice :: FIXTag
-tBenchmarkPrice = FIXTag 
+tBenchmarkPrice = FIXTag
    { tName = "BenchmarkPrice"
    , tnum = 662
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tBenchmarkPriceType :: FIXTag
-tBenchmarkPriceType = FIXTag 
+tBenchmarkPriceType = FIXTag
    { tName = "BenchmarkPriceType"
    , tnum = 663
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tConfirmID :: FIXTag
-tConfirmID = FIXTag 
+tConfirmID = FIXTag
    { tName = "ConfirmID"
    , tnum = 664
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tConfirmStatus :: FIXTag
-tConfirmStatus = FIXTag 
+tConfirmStatus = FIXTag
    { tName = "ConfirmStatus"
    , tnum = 665
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tConfirmTransType :: FIXTag
-tConfirmTransType = FIXTag 
+tConfirmTransType = FIXTag
    { tName = "ConfirmTransType"
    , tnum = 666
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tContractSettlMonth :: FIXTag
-tContractSettlMonth = FIXTag 
+tContractSettlMonth = FIXTag
    { tName = "ContractSettlMonth"
    , tnum = 667
    , tparser = toFIXMonthYear
    , arbitraryValue = FIXMonthYear <$> arbitrary }
 
 tDeliveryForm :: FIXTag
-tDeliveryForm = FIXTag 
+tDeliveryForm = FIXTag
    { tName = "DeliveryForm"
    , tnum = 668
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLastParPx :: FIXTag
-tLastParPx = FIXTag 
+tLastParPx = FIXTag
    { tName = "LastParPx"
    , tnum = 669
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoLegAllocs :: FIXTag
-tNoLegAllocs = FIXTag 
+tNoLegAllocs = FIXTag
    { tName = "NoLegAllocs"
    , tnum = 670
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegAllocAccount :: FIXTag
-tLegAllocAccount = FIXTag 
+tLegAllocAccount = FIXTag
    { tName = "LegAllocAccount"
    , tnum = 671
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegIndividualAllocID :: FIXTag
-tLegIndividualAllocID = FIXTag 
+tLegIndividualAllocID = FIXTag
    { tName = "LegIndividualAllocID"
    , tnum = 672
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegAllocQty :: FIXTag
-tLegAllocQty = FIXTag 
+tLegAllocQty = FIXTag
    { tName = "LegAllocQty"
    , tnum = 673
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegAllocAcctIDSource :: FIXTag
-tLegAllocAcctIDSource = FIXTag 
+tLegAllocAcctIDSource = FIXTag
    { tName = "LegAllocAcctIDSource"
    , tnum = 674
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSettlCurrency :: FIXTag
-tLegSettlCurrency = FIXTag 
+tLegSettlCurrency = FIXTag
    { tName = "LegSettlCurrency"
    , tnum = 675
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegBenchmarkCurveCurrency :: FIXTag
-tLegBenchmarkCurveCurrency = FIXTag 
+tLegBenchmarkCurveCurrency = FIXTag
    { tName = "LegBenchmarkCurveCurrency"
    , tnum = 676
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegBenchmarkCurveName :: FIXTag
-tLegBenchmarkCurveName = FIXTag 
+tLegBenchmarkCurveName = FIXTag
    { tName = "LegBenchmarkCurveName"
    , tnum = 677
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegBenchmarkCurvePoint :: FIXTag
-tLegBenchmarkCurvePoint = FIXTag 
+tLegBenchmarkCurvePoint = FIXTag
    { tName = "LegBenchmarkCurvePoint"
    , tnum = 678
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegBenchmarkPrice :: FIXTag
-tLegBenchmarkPrice = FIXTag 
+tLegBenchmarkPrice = FIXTag
    { tName = "LegBenchmarkPrice"
    , tnum = 679
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegBenchmarkPriceType :: FIXTag
-tLegBenchmarkPriceType = FIXTag 
+tLegBenchmarkPriceType = FIXTag
    { tName = "LegBenchmarkPriceType"
    , tnum = 680
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegBidPx :: FIXTag
-tLegBidPx = FIXTag 
+tLegBidPx = FIXTag
    { tName = "LegBidPx"
    , tnum = 681
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegIOIQty :: FIXTag
-tLegIOIQty = FIXTag 
+tLegIOIQty = FIXTag
    { tName = "LegIOIQty"
    , tnum = 682
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoLegStipulations :: FIXTag
-tNoLegStipulations = FIXTag 
+tNoLegStipulations = FIXTag
    { tName = "NoLegStipulations"
    , tnum = 683
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegOfferPx :: FIXTag
-tLegOfferPx = FIXTag 
+tLegOfferPx = FIXTag
    { tName = "LegOfferPx"
    , tnum = 684
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegOrderQty :: FIXTag
-tLegOrderQty = FIXTag 
+tLegOrderQty = FIXTag
    { tName = "LegOrderQty"
    , tnum = 685
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegPriceType :: FIXTag
-tLegPriceType = FIXTag 
+tLegPriceType = FIXTag
    { tName = "LegPriceType"
    , tnum = 686
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegQty :: FIXTag
-tLegQty = FIXTag 
+tLegQty = FIXTag
    { tName = "LegQty"
    , tnum = 687
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegStipulationType :: FIXTag
-tLegStipulationType = FIXTag 
+tLegStipulationType = FIXTag
    { tName = "LegStipulationType"
    , tnum = 688
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegStipulationValue :: FIXTag
-tLegStipulationValue = FIXTag 
+tLegStipulationValue = FIXTag
    { tName = "LegStipulationValue"
    , tnum = 689
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSwapType :: FIXTag
-tLegSwapType = FIXTag 
+tLegSwapType = FIXTag
    { tName = "LegSwapType"
    , tnum = 690
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPool :: FIXTag
-tPool = FIXTag 
+tPool = FIXTag
    { tName = "Pool"
    , tnum = 691
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuotePriceType :: FIXTag
-tQuotePriceType = FIXTag 
+tQuotePriceType = FIXTag
    { tName = "QuotePriceType"
    , tnum = 692
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteRespID :: FIXTag
-tQuoteRespID = FIXTag 
+tQuoteRespID = FIXTag
    { tName = "QuoteRespID"
    , tnum = 693
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tQuoteRespType :: FIXTag
-tQuoteRespType = FIXTag 
+tQuoteRespType = FIXTag
    { tName = "QuoteRespType"
    , tnum = 694
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQuoteQualifier :: FIXTag
-tQuoteQualifier = FIXTag 
+tQuoteQualifier = FIXTag
    { tName = "QuoteQualifier"
    , tnum = 695
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tYieldRedemptionDate :: FIXTag
-tYieldRedemptionDate = FIXTag 
+tYieldRedemptionDate = FIXTag
    { tName = "YieldRedemptionDate"
    , tnum = 696
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tYieldRedemptionPrice :: FIXTag
-tYieldRedemptionPrice = FIXTag 
+tYieldRedemptionPrice = FIXTag
    { tName = "YieldRedemptionPrice"
    , tnum = 697
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tYieldRedemptionPriceType :: FIXTag
-tYieldRedemptionPriceType = FIXTag 
+tYieldRedemptionPriceType = FIXTag
    { tName = "YieldRedemptionPriceType"
    , tnum = 698
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBenchmarkSecurityID :: FIXTag
-tBenchmarkSecurityID = FIXTag 
+tBenchmarkSecurityID = FIXTag
    { tName = "BenchmarkSecurityID"
    , tnum = 699
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tReversalIndicator :: FIXTag
-tReversalIndicator = FIXTag 
+tReversalIndicator = FIXTag
    { tName = "ReversalIndicator"
    , tnum = 700
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tYieldCalcDate :: FIXTag
-tYieldCalcDate = FIXTag 
+tYieldCalcDate = FIXTag
    { tName = "YieldCalcDate"
    , tnum = 701
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tNoPositions :: FIXTag
-tNoPositions = FIXTag 
+tNoPositions = FIXTag
    { tName = "NoPositions"
    , tnum = 702
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosType :: FIXTag
-tPosType = FIXTag 
+tPosType = FIXTag
    { tName = "PosType"
    , tnum = 703
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLongQty :: FIXTag
-tLongQty = FIXTag 
+tLongQty = FIXTag
    { tName = "LongQty"
    , tnum = 704
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tShortQty :: FIXTag
-tShortQty = FIXTag 
+tShortQty = FIXTag
    { tName = "ShortQty"
    , tnum = 705
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPosQtyStatus :: FIXTag
-tPosQtyStatus = FIXTag 
+tPosQtyStatus = FIXTag
    { tName = "PosQtyStatus"
    , tnum = 706
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosAmtType :: FIXTag
-tPosAmtType = FIXTag 
+tPosAmtType = FIXTag
    { tName = "PosAmtType"
    , tnum = 707
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPosAmt :: FIXTag
-tPosAmt = FIXTag 
+tPosAmt = FIXTag
    { tName = "PosAmt"
    , tnum = 708
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPosTransType :: FIXTag
-tPosTransType = FIXTag 
+tPosTransType = FIXTag
    { tName = "PosTransType"
    , tnum = 709
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosReqID :: FIXTag
-tPosReqID = FIXTag 
+tPosReqID = FIXTag
    { tName = "PosReqID"
    , tnum = 710
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoUnderlyings :: FIXTag
-tNoUnderlyings = FIXTag 
+tNoUnderlyings = FIXTag
    { tName = "NoUnderlyings"
    , tnum = 711
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosMaintAction :: FIXTag
-tPosMaintAction = FIXTag 
+tPosMaintAction = FIXTag
    { tName = "PosMaintAction"
    , tnum = 712
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrigPosReqRefID :: FIXTag
-tOrigPosReqRefID = FIXTag 
+tOrigPosReqRefID = FIXTag
    { tName = "OrigPosReqRefID"
    , tnum = 713
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPosMaintRptRefID :: FIXTag
-tPosMaintRptRefID = FIXTag 
+tPosMaintRptRefID = FIXTag
    { tName = "PosMaintRptRefID"
    , tnum = 714
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tClearingBusinessDate :: FIXTag
-tClearingBusinessDate = FIXTag 
+tClearingBusinessDate = FIXTag
    { tName = "ClearingBusinessDate"
    , tnum = 715
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tSettlSessID :: FIXTag
-tSettlSessID = FIXTag 
+tSettlSessID = FIXTag
    { tName = "SettlSessID"
    , tnum = 716
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlSessSubID :: FIXTag
-tSettlSessSubID = FIXTag 
+tSettlSessSubID = FIXTag
    { tName = "SettlSessSubID"
    , tnum = 717
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAdjustmentType :: FIXTag
-tAdjustmentType = FIXTag 
+tAdjustmentType = FIXTag
    { tName = "AdjustmentType"
    , tnum = 718
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tContraryInstructionIndicator :: FIXTag
-tContraryInstructionIndicator = FIXTag 
+tContraryInstructionIndicator = FIXTag
    { tName = "ContraryInstructionIndicator"
    , tnum = 719
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tPriorSpreadIndicator :: FIXTag
-tPriorSpreadIndicator = FIXTag 
+tPriorSpreadIndicator = FIXTag
    { tName = "PriorSpreadIndicator"
    , tnum = 720
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tPosMaintRptID :: FIXTag
-tPosMaintRptID = FIXTag 
+tPosMaintRptID = FIXTag
    { tName = "PosMaintRptID"
    , tnum = 721
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPosMaintStatus :: FIXTag
-tPosMaintStatus = FIXTag 
+tPosMaintStatus = FIXTag
    { tName = "PosMaintStatus"
    , tnum = 722
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosMaintResult :: FIXTag
-tPosMaintResult = FIXTag 
+tPosMaintResult = FIXTag
    { tName = "PosMaintResult"
    , tnum = 723
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosReqType :: FIXTag
-tPosReqType = FIXTag 
+tPosReqType = FIXTag
    { tName = "PosReqType"
    , tnum = 724
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tResponseTransportType :: FIXTag
-tResponseTransportType = FIXTag 
+tResponseTransportType = FIXTag
    { tName = "ResponseTransportType"
    , tnum = 725
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tResponseDestination :: FIXTag
-tResponseDestination = FIXTag 
+tResponseDestination = FIXTag
    { tName = "ResponseDestination"
    , tnum = 726
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotalNumPosReports :: FIXTag
-tTotalNumPosReports = FIXTag 
+tTotalNumPosReports = FIXTag
    { tName = "TotalNumPosReports"
    , tnum = 727
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosReqResult :: FIXTag
-tPosReqResult = FIXTag 
+tPosReqResult = FIXTag
    { tName = "PosReqResult"
    , tnum = 728
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPosReqStatus :: FIXTag
-tPosReqStatus = FIXTag 
+tPosReqStatus = FIXTag
    { tName = "PosReqStatus"
    , tnum = 729
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSettlPrice :: FIXTag
-tSettlPrice = FIXTag 
+tSettlPrice = FIXTag
    { tName = "SettlPrice"
    , tnum = 730
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tSettlPriceType :: FIXTag
-tSettlPriceType = FIXTag 
+tSettlPriceType = FIXTag
    { tName = "SettlPriceType"
    , tnum = 731
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingSettlPrice :: FIXTag
-tUnderlyingSettlPrice = FIXTag 
+tUnderlyingSettlPrice = FIXTag
    { tName = "UnderlyingSettlPrice"
    , tnum = 732
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingSettlPriceType :: FIXTag
-tUnderlyingSettlPriceType = FIXTag 
+tUnderlyingSettlPriceType = FIXTag
    { tName = "UnderlyingSettlPriceType"
    , tnum = 733
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPriorSettlPrice :: FIXTag
-tPriorSettlPrice = FIXTag 
+tPriorSettlPrice = FIXTag
    { tName = "PriorSettlPrice"
    , tnum = 734
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoQuoteQualifiers :: FIXTag
-tNoQuoteQualifiers = FIXTag 
+tNoQuoteQualifiers = FIXTag
    { tName = "NoQuoteQualifiers"
    , tnum = 735
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocSettlCurrency :: FIXTag
-tAllocSettlCurrency = FIXTag 
+tAllocSettlCurrency = FIXTag
    { tName = "AllocSettlCurrency"
    , tnum = 736
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocSettlCurrAmt :: FIXTag
-tAllocSettlCurrAmt = FIXTag 
+tAllocSettlCurrAmt = FIXTag
    { tName = "AllocSettlCurrAmt"
    , tnum = 737
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tInterestAtMaturity :: FIXTag
-tInterestAtMaturity = FIXTag 
+tInterestAtMaturity = FIXTag
    { tName = "InterestAtMaturity"
    , tnum = 738
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLegDatedDate :: FIXTag
-tLegDatedDate = FIXTag 
+tLegDatedDate = FIXTag
    { tName = "LegDatedDate"
    , tnum = 739
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tLegPool :: FIXTag
-tLegPool = FIXTag 
+tLegPool = FIXTag
    { tName = "LegPool"
    , tnum = 740
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocInterestAtMaturity :: FIXTag
-tAllocInterestAtMaturity = FIXTag 
+tAllocInterestAtMaturity = FIXTag
    { tName = "AllocInterestAtMaturity"
    , tnum = 741
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllocAccruedInterestAmt :: FIXTag
-tAllocAccruedInterestAmt = FIXTag 
+tAllocAccruedInterestAmt = FIXTag
    { tName = "AllocAccruedInterestAmt"
    , tnum = 742
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDeliveryDate :: FIXTag
-tDeliveryDate = FIXTag 
+tDeliveryDate = FIXTag
    { tName = "DeliveryDate"
    , tnum = 743
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tAssignmentMethod :: FIXTag
-tAssignmentMethod = FIXTag 
+tAssignmentMethod = FIXTag
    { tName = "AssignmentMethod"
    , tnum = 744
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tAssignmentUnit :: FIXTag
-tAssignmentUnit = FIXTag 
+tAssignmentUnit = FIXTag
    { tName = "AssignmentUnit"
    , tnum = 745
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOpenInterest :: FIXTag
-tOpenInterest = FIXTag 
+tOpenInterest = FIXTag
    { tName = "OpenInterest"
    , tnum = 746
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tExerciseMethod :: FIXTag
-tExerciseMethod = FIXTag 
+tExerciseMethod = FIXTag
    { tName = "ExerciseMethod"
    , tnum = 747
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tTotNumTradeReports :: FIXTag
-tTotNumTradeReports = FIXTag 
+tTotNumTradeReports = FIXTag
    { tName = "TotNumTradeReports"
    , tnum = 748
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeRequestResult :: FIXTag
-tTradeRequestResult = FIXTag 
+tTradeRequestResult = FIXTag
    { tName = "TradeRequestResult"
    , tnum = 749
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeRequestStatus :: FIXTag
-tTradeRequestStatus = FIXTag 
+tTradeRequestStatus = FIXTag
    { tName = "TradeRequestStatus"
    , tnum = 750
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeReportRejectReason :: FIXTag
-tTradeReportRejectReason = FIXTag 
+tTradeReportRejectReason = FIXTag
    { tName = "TradeReportRejectReason"
    , tnum = 751
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSideMultiLegReportingType :: FIXTag
-tSideMultiLegReportingType = FIXTag 
+tSideMultiLegReportingType = FIXTag
    { tName = "SideMultiLegReportingType"
    , tnum = 752
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoPosAmt :: FIXTag
-tNoPosAmt = FIXTag 
+tNoPosAmt = FIXTag
    { tName = "NoPosAmt"
    , tnum = 753
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAutoAcceptIndicator :: FIXTag
-tAutoAcceptIndicator = FIXTag 
+tAutoAcceptIndicator = FIXTag
    { tName = "AutoAcceptIndicator"
    , tnum = 754
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tAllocReportID :: FIXTag
-tAllocReportID = FIXTag 
+tAllocReportID = FIXTag
    { tName = "AllocReportID"
    , tnum = 755
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoNested2PartyIDs :: FIXTag
-tNoNested2PartyIDs = FIXTag 
+tNoNested2PartyIDs = FIXTag
    { tName = "NoNested2PartyIDs"
    , tnum = 756
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNested2PartyID :: FIXTag
-tNested2PartyID = FIXTag 
+tNested2PartyID = FIXTag
    { tName = "Nested2PartyID"
    , tnum = 757
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNested2PartyIDSource :: FIXTag
-tNested2PartyIDSource = FIXTag 
+tNested2PartyIDSource = FIXTag
    { tName = "Nested2PartyIDSource"
    , tnum = 758
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNested2PartyRole :: FIXTag
-tNested2PartyRole = FIXTag 
+tNested2PartyRole = FIXTag
    { tName = "Nested2PartyRole"
    , tnum = 759
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNested2PartySubID :: FIXTag
-tNested2PartySubID = FIXTag 
+tNested2PartySubID = FIXTag
    { tName = "Nested2PartySubID"
    , tnum = 760
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tBenchmarkSecurityIDSource :: FIXTag
-tBenchmarkSecurityIDSource = FIXTag 
+tBenchmarkSecurityIDSource = FIXTag
    { tName = "BenchmarkSecurityIDSource"
    , tnum = 761
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecuritySubType :: FIXTag
-tSecuritySubType = FIXTag 
+tSecuritySubType = FIXTag
    { tName = "SecuritySubType"
    , tnum = 762
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingSecuritySubType :: FIXTag
-tUnderlyingSecuritySubType = FIXTag 
+tUnderlyingSecuritySubType = FIXTag
    { tName = "UnderlyingSecuritySubType"
    , tnum = 763
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegSecuritySubType :: FIXTag
-tLegSecuritySubType = FIXTag 
+tLegSecuritySubType = FIXTag
    { tName = "LegSecuritySubType"
    , tnum = 764
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllowableOneSidednessPct :: FIXTag
-tAllowableOneSidednessPct = FIXTag 
+tAllowableOneSidednessPct = FIXTag
    { tName = "AllowableOneSidednessPct"
    , tnum = 765
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllowableOneSidednessValue :: FIXTag
-tAllowableOneSidednessValue = FIXTag 
+tAllowableOneSidednessValue = FIXTag
    { tName = "AllowableOneSidednessValue"
    , tnum = 766
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tAllowableOneSidednessCurr :: FIXTag
-tAllowableOneSidednessCurr = FIXTag 
+tAllowableOneSidednessCurr = FIXTag
    { tName = "AllowableOneSidednessCurr"
    , tnum = 767
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoTrdRegTimestamps :: FIXTag
-tNoTrdRegTimestamps = FIXTag 
+tNoTrdRegTimestamps = FIXTag
    { tName = "NoTrdRegTimestamps"
    , tnum = 768
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTrdRegTimestamp :: FIXTag
-tTrdRegTimestamp = FIXTag 
+tTrdRegTimestamp = FIXTag
    { tName = "TrdRegTimestamp"
    , tnum = 769
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tTrdRegTimestampType :: FIXTag
-tTrdRegTimestampType = FIXTag 
+tTrdRegTimestampType = FIXTag
    { tName = "TrdRegTimestampType"
    , tnum = 770
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTrdRegTimestampOrigin :: FIXTag
-tTrdRegTimestampOrigin = FIXTag 
+tTrdRegTimestampOrigin = FIXTag
    { tName = "TrdRegTimestampOrigin"
    , tnum = 771
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tConfirmRefID :: FIXTag
-tConfirmRefID = FIXTag 
+tConfirmRefID = FIXTag
    { tName = "ConfirmRefID"
    , tnum = 772
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tConfirmType :: FIXTag
-tConfirmType = FIXTag 
+tConfirmType = FIXTag
    { tName = "ConfirmType"
    , tnum = 773
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tConfirmRejReason :: FIXTag
-tConfirmRejReason = FIXTag 
+tConfirmRejReason = FIXTag
    { tName = "ConfirmRejReason"
    , tnum = 774
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tBookingType :: FIXTag
-tBookingType = FIXTag 
+tBookingType = FIXTag
    { tName = "BookingType"
    , tnum = 775
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tIndividualAllocRejCode :: FIXTag
-tIndividualAllocRejCode = FIXTag 
+tIndividualAllocRejCode = FIXTag
    { tName = "IndividualAllocRejCode"
    , tnum = 776
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSettlInstMsgID :: FIXTag
-tSettlInstMsgID = FIXTag 
+tSettlInstMsgID = FIXTag
    { tName = "SettlInstMsgID"
    , tnum = 777
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoSettlInst :: FIXTag
-tNoSettlInst = FIXTag 
+tNoSettlInst = FIXTag
    { tName = "NoSettlInst"
    , tnum = 778
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLastUpdateTime :: FIXTag
-tLastUpdateTime = FIXTag 
+tLastUpdateTime = FIXTag
    { tName = "LastUpdateTime"
    , tnum = 779
    , tparser = toFIXTimestamp
    , arbitraryValue = FIXTimestamp <$> arbitrary }
 
 tAllocSettlInstType :: FIXTag
-tAllocSettlInstType = FIXTag 
+tAllocSettlInstType = FIXTag
    { tName = "AllocSettlInstType"
    , tnum = 780
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoSettlPartyIDs :: FIXTag
-tNoSettlPartyIDs = FIXTag 
+tNoSettlPartyIDs = FIXTag
    { tName = "NoSettlPartyIDs"
    , tnum = 781
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSettlPartyID :: FIXTag
-tSettlPartyID = FIXTag 
+tSettlPartyID = FIXTag
    { tName = "SettlPartyID"
    , tnum = 782
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlPartyIDSource :: FIXTag
-tSettlPartyIDSource = FIXTag 
+tSettlPartyIDSource = FIXTag
    { tName = "SettlPartyIDSource"
    , tnum = 783
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tSettlPartyRole :: FIXTag
-tSettlPartyRole = FIXTag 
+tSettlPartyRole = FIXTag
    { tName = "SettlPartyRole"
    , tnum = 784
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSettlPartySubID :: FIXTag
-tSettlPartySubID = FIXTag 
+tSettlPartySubID = FIXTag
    { tName = "SettlPartySubID"
    , tnum = 785
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlPartySubIDType :: FIXTag
-tSettlPartySubIDType = FIXTag 
+tSettlPartySubIDType = FIXTag
    { tName = "SettlPartySubIDType"
    , tnum = 786
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDlvyInstType :: FIXTag
-tDlvyInstType = FIXTag 
+tDlvyInstType = FIXTag
    { tName = "DlvyInstType"
    , tnum = 787
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tTerminationType :: FIXTag
-tTerminationType = FIXTag 
+tTerminationType = FIXTag
    { tName = "TerminationType"
    , tnum = 788
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNextExpectedMsgSeqNum :: FIXTag
-tNextExpectedMsgSeqNum = FIXTag 
+tNextExpectedMsgSeqNum = FIXTag
    { tName = "NextExpectedMsgSeqNum"
    , tnum = 789
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrdStatusReqID :: FIXTag
-tOrdStatusReqID = FIXTag 
+tOrdStatusReqID = FIXTag
    { tName = "OrdStatusReqID"
    , tnum = 790
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstReqID :: FIXTag
-tSettlInstReqID = FIXTag 
+tSettlInstReqID = FIXTag
    { tName = "SettlInstReqID"
    , tnum = 791
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSettlInstReqRejCode :: FIXTag
-tSettlInstReqRejCode = FIXTag 
+tSettlInstReqRejCode = FIXTag
    { tName = "SettlInstReqRejCode"
    , tnum = 792
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecondaryAllocID :: FIXTag
-tSecondaryAllocID = FIXTag 
+tSecondaryAllocID = FIXTag
    { tName = "SecondaryAllocID"
    , tnum = 793
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocReportType :: FIXTag
-tAllocReportType = FIXTag 
+tAllocReportType = FIXTag
    { tName = "AllocReportType"
    , tnum = 794
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocReportRefID :: FIXTag
-tAllocReportRefID = FIXTag 
+tAllocReportRefID = FIXTag
    { tName = "AllocReportRefID"
    , tnum = 795
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAllocCancReplaceReason :: FIXTag
-tAllocCancReplaceReason = FIXTag 
+tAllocCancReplaceReason = FIXTag
    { tName = "AllocCancReplaceReason"
    , tnum = 796
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCopyMsgIndicator :: FIXTag
-tCopyMsgIndicator = FIXTag 
+tCopyMsgIndicator = FIXTag
    { tName = "CopyMsgIndicator"
    , tnum = 797
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tAllocAccountType :: FIXTag
-tAllocAccountType = FIXTag 
+tAllocAccountType = FIXTag
    { tName = "AllocAccountType"
    , tnum = 798
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrderAvgPx :: FIXTag
-tOrderAvgPx = FIXTag 
+tOrderAvgPx = FIXTag
    { tName = "OrderAvgPx"
    , tnum = 799
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tOrderBookingQty :: FIXTag
-tOrderBookingQty = FIXTag 
+tOrderBookingQty = FIXTag
    { tName = "OrderBookingQty"
    , tnum = 800
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoSettlPartySubIDs :: FIXTag
-tNoSettlPartySubIDs = FIXTag 
+tNoSettlPartySubIDs = FIXTag
    { tName = "NoSettlPartySubIDs"
    , tnum = 801
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoPartySubIDs :: FIXTag
-tNoPartySubIDs = FIXTag 
+tNoPartySubIDs = FIXTag
    { tName = "NoPartySubIDs"
    , tnum = 802
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPartySubIDType :: FIXTag
-tPartySubIDType = FIXTag 
+tPartySubIDType = FIXTag
    { tName = "PartySubIDType"
    , tnum = 803
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoNestedPartySubIDs :: FIXTag
-tNoNestedPartySubIDs = FIXTag 
+tNoNestedPartySubIDs = FIXTag
    { tName = "NoNestedPartySubIDs"
    , tnum = 804
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNestedPartySubIDType :: FIXTag
-tNestedPartySubIDType = FIXTag 
+tNestedPartySubIDType = FIXTag
    { tName = "NestedPartySubIDType"
    , tnum = 805
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoNested2PartySubIDs :: FIXTag
-tNoNested2PartySubIDs = FIXTag 
+tNoNested2PartySubIDs = FIXTag
    { tName = "NoNested2PartySubIDs"
    , tnum = 806
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNested2PartySubIDType :: FIXTag
-tNested2PartySubIDType = FIXTag 
+tNested2PartySubIDType = FIXTag
    { tName = "Nested2PartySubIDType"
    , tnum = 807
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocIntermedReqType :: FIXTag
-tAllocIntermedReqType = FIXTag 
+tAllocIntermedReqType = FIXTag
    { tName = "AllocIntermedReqType"
    , tnum = 808
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingPx :: FIXTag
-tUnderlyingPx = FIXTag 
+tUnderlyingPx = FIXTag
    { tName = "UnderlyingPx"
    , tnum = 810
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPriceDelta :: FIXTag
-tPriceDelta = FIXTag 
+tPriceDelta = FIXTag
    { tName = "PriceDelta"
    , tnum = 811
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tApplQueueMax :: FIXTag
-tApplQueueMax = FIXTag 
+tApplQueueMax = FIXTag
    { tName = "ApplQueueMax"
    , tnum = 812
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tApplQueueDepth :: FIXTag
-tApplQueueDepth = FIXTag 
+tApplQueueDepth = FIXTag
    { tName = "ApplQueueDepth"
    , tnum = 813
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tApplQueueResolution :: FIXTag
-tApplQueueResolution = FIXTag 
+tApplQueueResolution = FIXTag
    { tName = "ApplQueueResolution"
    , tnum = 814
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tApplQueueAction :: FIXTag
-tApplQueueAction = FIXTag 
+tApplQueueAction = FIXTag
    { tName = "ApplQueueAction"
    , tnum = 815
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoAltMDSource :: FIXTag
-tNoAltMDSource = FIXTag 
+tNoAltMDSource = FIXTag
    { tName = "NoAltMDSource"
    , tnum = 816
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAltMDSourceID :: FIXTag
-tAltMDSourceID = FIXTag 
+tAltMDSourceID = FIXTag
    { tName = "AltMDSourceID"
    , tnum = 817
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecondaryTradeReportID :: FIXTag
-tSecondaryTradeReportID = FIXTag 
+tSecondaryTradeReportID = FIXTag
    { tName = "SecondaryTradeReportID"
    , tnum = 818
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAvgPxIndicator :: FIXTag
-tAvgPxIndicator = FIXTag 
+tAvgPxIndicator = FIXTag
    { tName = "AvgPxIndicator"
    , tnum = 819
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeLinkID :: FIXTag
-tTradeLinkID = FIXTag 
+tTradeLinkID = FIXTag
    { tName = "TradeLinkID"
    , tnum = 820
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tOrderInputDevice :: FIXTag
-tOrderInputDevice = FIXTag 
+tOrderInputDevice = FIXTag
    { tName = "OrderInputDevice"
    , tnum = 821
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingTradingSessionID :: FIXTag
-tUnderlyingTradingSessionID = FIXTag 
+tUnderlyingTradingSessionID = FIXTag
    { tName = "UnderlyingTradingSessionID"
    , tnum = 822
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingTradingSessionSubID :: FIXTag
-tUnderlyingTradingSessionSubID = FIXTag 
+tUnderlyingTradingSessionSubID = FIXTag
    { tName = "UnderlyingTradingSessionSubID"
    , tnum = 823
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradeLegRefID :: FIXTag
-tTradeLegRefID = FIXTag 
+tTradeLegRefID = FIXTag
    { tName = "TradeLegRefID"
    , tnum = 824
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tExchangeRule :: FIXTag
-tExchangeRule = FIXTag 
+tExchangeRule = FIXTag
    { tName = "ExchangeRule"
    , tnum = 825
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTradeAllocIndicator :: FIXTag
-tTradeAllocIndicator = FIXTag 
+tTradeAllocIndicator = FIXTag
    { tName = "TradeAllocIndicator"
    , tnum = 826
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tExpirationCycle :: FIXTag
-tExpirationCycle = FIXTag 
+tExpirationCycle = FIXTag
    { tName = "ExpirationCycle"
    , tnum = 827
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTrdType :: FIXTag
-tTrdType = FIXTag 
+tTrdType = FIXTag
    { tName = "TrdType"
    , tnum = 828
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTrdSubType :: FIXTag
-tTrdSubType = FIXTag 
+tTrdSubType = FIXTag
    { tName = "TrdSubType"
    , tnum = 829
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTransferReason :: FIXTag
-tTransferReason = FIXTag 
+tTransferReason = FIXTag
    { tName = "TransferReason"
    , tnum = 830
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAsgnReqID :: FIXTag
-tAsgnReqID = FIXTag 
+tAsgnReqID = FIXTag
    { tName = "AsgnReqID"
    , tnum = 831
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTotNumAssignmentReports :: FIXTag
-tTotNumAssignmentReports = FIXTag 
+tTotNumAssignmentReports = FIXTag
    { tName = "TotNumAssignmentReports"
    , tnum = 832
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAsgnRptID :: FIXTag
-tAsgnRptID = FIXTag 
+tAsgnRptID = FIXTag
    { tName = "AsgnRptID"
    , tnum = 833
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tThresholdAmount :: FIXTag
-tThresholdAmount = FIXTag 
+tThresholdAmount = FIXTag
    { tName = "ThresholdAmount"
    , tnum = 834
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPegMoveType :: FIXTag
-tPegMoveType = FIXTag 
+tPegMoveType = FIXTag
    { tName = "PegMoveType"
    , tnum = 835
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPegOffsetType :: FIXTag
-tPegOffsetType = FIXTag 
+tPegOffsetType = FIXTag
    { tName = "PegOffsetType"
    , tnum = 836
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPegLimitType :: FIXTag
-tPegLimitType = FIXTag 
+tPegLimitType = FIXTag
    { tName = "PegLimitType"
    , tnum = 837
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPegRoundDirection :: FIXTag
-tPegRoundDirection = FIXTag 
+tPegRoundDirection = FIXTag
    { tName = "PegRoundDirection"
    , tnum = 838
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPeggedPrice :: FIXTag
-tPeggedPrice = FIXTag 
+tPeggedPrice = FIXTag
    { tName = "PeggedPrice"
    , tnum = 839
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tPegScope :: FIXTag
-tPegScope = FIXTag 
+tPegScope = FIXTag
    { tName = "PegScope"
    , tnum = 840
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDiscretionMoveType :: FIXTag
-tDiscretionMoveType = FIXTag 
+tDiscretionMoveType = FIXTag
    { tName = "DiscretionMoveType"
    , tnum = 841
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDiscretionOffsetType :: FIXTag
-tDiscretionOffsetType = FIXTag 
+tDiscretionOffsetType = FIXTag
    { tName = "DiscretionOffsetType"
    , tnum = 842
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDiscretionLimitType :: FIXTag
-tDiscretionLimitType = FIXTag 
+tDiscretionLimitType = FIXTag
    { tName = "DiscretionLimitType"
    , tnum = 843
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDiscretionRoundDirection :: FIXTag
-tDiscretionRoundDirection = FIXTag 
+tDiscretionRoundDirection = FIXTag
    { tName = "DiscretionRoundDirection"
    , tnum = 844
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tDiscretionPrice :: FIXTag
-tDiscretionPrice = FIXTag 
+tDiscretionPrice = FIXTag
    { tName = "DiscretionPrice"
    , tnum = 845
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tDiscretionScope :: FIXTag
-tDiscretionScope = FIXTag 
+tDiscretionScope = FIXTag
    { tName = "DiscretionScope"
    , tnum = 846
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTargetStrategy :: FIXTag
-tTargetStrategy = FIXTag 
+tTargetStrategy = FIXTag
    { tName = "TargetStrategy"
    , tnum = 847
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTargetStrategyParameters :: FIXTag
-tTargetStrategyParameters = FIXTag 
+tTargetStrategyParameters = FIXTag
    { tName = "TargetStrategyParameters"
    , tnum = 848
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tParticipationRate :: FIXTag
-tParticipationRate = FIXTag 
+tParticipationRate = FIXTag
    { tName = "ParticipationRate"
    , tnum = 849
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTargetStrategyPerformance :: FIXTag
-tTargetStrategyPerformance = FIXTag 
+tTargetStrategyPerformance = FIXTag
    { tName = "TargetStrategyPerformance"
    , tnum = 850
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tLastLiquidityInd :: FIXTag
-tLastLiquidityInd = FIXTag 
+tLastLiquidityInd = FIXTag
    { tName = "LastLiquidityInd"
    , tnum = 851
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tPublishTrdIndicator :: FIXTag
-tPublishTrdIndicator = FIXTag 
+tPublishTrdIndicator = FIXTag
    { tName = "PublishTrdIndicator"
    , tnum = 852
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tShortSaleReason :: FIXTag
-tShortSaleReason = FIXTag 
+tShortSaleReason = FIXTag
    { tName = "ShortSaleReason"
    , tnum = 853
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tQtyType :: FIXTag
-tQtyType = FIXTag 
+tQtyType = FIXTag
    { tName = "QtyType"
    , tnum = 854
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSecondaryTrdType :: FIXTag
-tSecondaryTrdType = FIXTag 
+tSecondaryTrdType = FIXTag
    { tName = "SecondaryTrdType"
    , tnum = 855
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTradeReportType :: FIXTag
-tTradeReportType = FIXTag 
+tTradeReportType = FIXTag
    { tName = "TradeReportType"
    , tnum = 856
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAllocNoOrdersType :: FIXTag
-tAllocNoOrdersType = FIXTag 
+tAllocNoOrdersType = FIXTag
    { tName = "AllocNoOrdersType"
    , tnum = 857
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tSharedCommission :: FIXTag
-tSharedCommission = FIXTag 
+tSharedCommission = FIXTag
    { tName = "SharedCommission"
    , tnum = 858
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tConfirmReqID :: FIXTag
-tConfirmReqID = FIXTag 
+tConfirmReqID = FIXTag
    { tName = "ConfirmReqID"
    , tnum = 859
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAvgParPx :: FIXTag
-tAvgParPx = FIXTag 
+tAvgParPx = FIXTag
    { tName = "AvgParPx"
    , tnum = 860
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tReportedPx :: FIXTag
-tReportedPx = FIXTag 
+tReportedPx = FIXTag
    { tName = "ReportedPx"
    , tnum = 861
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoCapacities :: FIXTag
-tNoCapacities = FIXTag 
+tNoCapacities = FIXTag
    { tName = "NoCapacities"
    , tnum = 862
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tOrderCapacityQty :: FIXTag
-tOrderCapacityQty = FIXTag 
+tOrderCapacityQty = FIXTag
    { tName = "OrderCapacityQty"
    , tnum = 863
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoEvents :: FIXTag
-tNoEvents = FIXTag 
+tNoEvents = FIXTag
    { tName = "NoEvents"
    , tnum = 864
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEventType :: FIXTag
-tEventType = FIXTag 
+tEventType = FIXTag
    { tName = "EventType"
    , tnum = 865
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEventDate :: FIXTag
-tEventDate = FIXTag 
+tEventDate = FIXTag
    { tName = "EventDate"
    , tnum = 866
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tEventPx :: FIXTag
-tEventPx = FIXTag 
+tEventPx = FIXTag
    { tName = "EventPx"
    , tnum = 867
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tEventText :: FIXTag
-tEventText = FIXTag 
+tEventText = FIXTag
    { tName = "EventText"
    , tnum = 868
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tPctAtRisk :: FIXTag
-tPctAtRisk = FIXTag 
+tPctAtRisk = FIXTag
    { tName = "PctAtRisk"
    , tnum = 869
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoInstrAttrib :: FIXTag
-tNoInstrAttrib = FIXTag 
+tNoInstrAttrib = FIXTag
    { tName = "NoInstrAttrib"
    , tnum = 870
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tInstrAttribType :: FIXTag
-tInstrAttribType = FIXTag 
+tInstrAttribType = FIXTag
    { tName = "InstrAttribType"
    , tnum = 871
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tInstrAttribValue :: FIXTag
-tInstrAttribValue = FIXTag 
+tInstrAttribValue = FIXTag
    { tName = "InstrAttribValue"
    , tnum = 872
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDatedDate :: FIXTag
-tDatedDate = FIXTag 
+tDatedDate = FIXTag
    { tName = "DatedDate"
    , tnum = 873
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tInterestAccrualDate :: FIXTag
-tInterestAccrualDate = FIXTag 
+tInterestAccrualDate = FIXTag
    { tName = "InterestAccrualDate"
    , tnum = 874
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tCPProgram :: FIXTag
-tCPProgram = FIXTag 
+tCPProgram = FIXTag
    { tName = "CPProgram"
    , tnum = 875
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCPRegType :: FIXTag
-tCPRegType = FIXTag 
+tCPRegType = FIXTag
    { tName = "CPRegType"
    , tnum = 876
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingCPProgram :: FIXTag
-tUnderlyingCPProgram = FIXTag 
+tUnderlyingCPProgram = FIXTag
    { tName = "UnderlyingCPProgram"
    , tnum = 877
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingCPRegType :: FIXTag
-tUnderlyingCPRegType = FIXTag 
+tUnderlyingCPRegType = FIXTag
    { tName = "UnderlyingCPRegType"
    , tnum = 878
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingQty :: FIXTag
-tUnderlyingQty = FIXTag 
+tUnderlyingQty = FIXTag
    { tName = "UnderlyingQty"
    , tnum = 879
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTrdMatchID :: FIXTag
-tTrdMatchID = FIXTag 
+tTrdMatchID = FIXTag
    { tName = "TrdMatchID"
    , tnum = 880
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tSecondaryTradeReportRefID :: FIXTag
-tSecondaryTradeReportRefID = FIXTag 
+tSecondaryTradeReportRefID = FIXTag
    { tName = "SecondaryTradeReportRefID"
    , tnum = 881
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingDirtyPrice :: FIXTag
-tUnderlyingDirtyPrice = FIXTag 
+tUnderlyingDirtyPrice = FIXTag
    { tName = "UnderlyingDirtyPrice"
    , tnum = 882
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingEndPrice :: FIXTag
-tUnderlyingEndPrice = FIXTag 
+tUnderlyingEndPrice = FIXTag
    { tName = "UnderlyingEndPrice"
    , tnum = 883
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingStartValue :: FIXTag
-tUnderlyingStartValue = FIXTag 
+tUnderlyingStartValue = FIXTag
    { tName = "UnderlyingStartValue"
    , tnum = 884
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingCurrentValue :: FIXTag
-tUnderlyingCurrentValue = FIXTag 
+tUnderlyingCurrentValue = FIXTag
    { tName = "UnderlyingCurrentValue"
    , tnum = 885
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUnderlyingEndValue :: FIXTag
-tUnderlyingEndValue = FIXTag 
+tUnderlyingEndValue = FIXTag
    { tName = "UnderlyingEndValue"
    , tnum = 886
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tNoUnderlyingStips :: FIXTag
-tNoUnderlyingStips = FIXTag 
+tNoUnderlyingStips = FIXTag
    { tName = "NoUnderlyingStips"
    , tnum = 887
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingStipType :: FIXTag
-tUnderlyingStipType = FIXTag 
+tUnderlyingStipType = FIXTag
    { tName = "UnderlyingStipType"
    , tnum = 888
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUnderlyingStipValue :: FIXTag
-tUnderlyingStipValue = FIXTag 
+tUnderlyingStipValue = FIXTag
    { tName = "UnderlyingStipValue"
    , tnum = 889
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tMaturityNetMoney :: FIXTag
-tMaturityNetMoney = FIXTag 
+tMaturityNetMoney = FIXTag
    { tName = "MaturityNetMoney"
    , tnum = 890
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMiscFeeBasis :: FIXTag
-tMiscFeeBasis = FIXTag 
+tMiscFeeBasis = FIXTag
    { tName = "MiscFeeBasis"
    , tnum = 891
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotNoAllocs :: FIXTag
-tTotNoAllocs = FIXTag 
+tTotNoAllocs = FIXTag
    { tName = "TotNoAllocs"
    , tnum = 892
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLastFragment :: FIXTag
-tLastFragment = FIXTag 
+tLastFragment = FIXTag
    { tName = "LastFragment"
    , tnum = 893
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tCollReqID :: FIXTag
-tCollReqID = FIXTag 
+tCollReqID = FIXTag
    { tName = "CollReqID"
    , tnum = 894
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollAsgnReason :: FIXTag
-tCollAsgnReason = FIXTag 
+tCollAsgnReason = FIXTag
    { tName = "CollAsgnReason"
    , tnum = 895
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollInquiryQualifier :: FIXTag
-tCollInquiryQualifier = FIXTag 
+tCollInquiryQualifier = FIXTag
    { tName = "CollInquiryQualifier"
    , tnum = 896
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoTrades :: FIXTag
-tNoTrades = FIXTag 
+tNoTrades = FIXTag
    { tName = "NoTrades"
    , tnum = 897
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tMarginRatio :: FIXTag
-tMarginRatio = FIXTag 
+tMarginRatio = FIXTag
    { tName = "MarginRatio"
    , tnum = 898
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tMarginExcess :: FIXTag
-tMarginExcess = FIXTag 
+tMarginExcess = FIXTag
    { tName = "MarginExcess"
    , tnum = 899
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tTotalNetValue :: FIXTag
-tTotalNetValue = FIXTag 
+tTotalNetValue = FIXTag
    { tName = "TotalNetValue"
    , tnum = 900
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCashOutstanding :: FIXTag
-tCashOutstanding = FIXTag 
+tCashOutstanding = FIXTag
    { tName = "CashOutstanding"
    , tnum = 901
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tCollAsgnID :: FIXTag
-tCollAsgnID = FIXTag 
+tCollAsgnID = FIXTag
    { tName = "CollAsgnID"
    , tnum = 902
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollAsgnTransType :: FIXTag
-tCollAsgnTransType = FIXTag 
+tCollAsgnTransType = FIXTag
    { tName = "CollAsgnTransType"
    , tnum = 903
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollRespID :: FIXTag
-tCollRespID = FIXTag 
+tCollRespID = FIXTag
    { tName = "CollRespID"
    , tnum = 904
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollAsgnRespType :: FIXTag
-tCollAsgnRespType = FIXTag 
+tCollAsgnRespType = FIXTag
    { tName = "CollAsgnRespType"
    , tnum = 905
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollAsgnRejectReason :: FIXTag
-tCollAsgnRejectReason = FIXTag 
+tCollAsgnRejectReason = FIXTag
    { tName = "CollAsgnRejectReason"
    , tnum = 906
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollAsgnRefID :: FIXTag
-tCollAsgnRefID = FIXTag 
+tCollAsgnRefID = FIXTag
    { tName = "CollAsgnRefID"
    , tnum = 907
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollRptID :: FIXTag
-tCollRptID = FIXTag 
+tCollRptID = FIXTag
    { tName = "CollRptID"
    , tnum = 908
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollInquiryID :: FIXTag
-tCollInquiryID = FIXTag 
+tCollInquiryID = FIXTag
    { tName = "CollInquiryID"
    , tnum = 909
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollStatus :: FIXTag
-tCollStatus = FIXTag 
+tCollStatus = FIXTag
    { tName = "CollStatus"
    , tnum = 910
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTotNumReports :: FIXTag
-tTotNumReports = FIXTag 
+tTotNumReports = FIXTag
    { tName = "TotNumReports"
    , tnum = 911
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLastRptRequested :: FIXTag
-tLastRptRequested = FIXTag 
+tLastRptRequested = FIXTag
    { tName = "LastRptRequested"
    , tnum = 912
    , tparser = toFIXBool
    , arbitraryValue = FIXBool <$> arbitrary }
 
 tAgreementDesc :: FIXTag
-tAgreementDesc = FIXTag 
+tAgreementDesc = FIXTag
    { tName = "AgreementDesc"
    , tnum = 913
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAgreementID :: FIXTag
-tAgreementID = FIXTag 
+tAgreementID = FIXTag
    { tName = "AgreementID"
    , tnum = 914
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tAgreementDate :: FIXTag
-tAgreementDate = FIXTag 
+tAgreementDate = FIXTag
    { tName = "AgreementDate"
    , tnum = 915
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tStartDate :: FIXTag
-tStartDate = FIXTag 
+tStartDate = FIXTag
    { tName = "StartDate"
    , tnum = 916
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tEndDate :: FIXTag
-tEndDate = FIXTag 
+tEndDate = FIXTag
    { tName = "EndDate"
    , tnum = 917
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 tAgreementCurrency :: FIXTag
-tAgreementCurrency = FIXTag 
+tAgreementCurrency = FIXTag
    { tName = "AgreementCurrency"
    , tnum = 918
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tDeliveryType :: FIXTag
-tDeliveryType = FIXTag 
+tDeliveryType = FIXTag
    { tName = "DeliveryType"
    , tnum = 919
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tEndAccruedInterestAmt :: FIXTag
-tEndAccruedInterestAmt = FIXTag 
+tEndAccruedInterestAmt = FIXTag
    { tName = "EndAccruedInterestAmt"
    , tnum = 920
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tStartCash :: FIXTag
-tStartCash = FIXTag 
+tStartCash = FIXTag
    { tName = "StartCash"
    , tnum = 921
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tEndCash :: FIXTag
-tEndCash = FIXTag 
+tEndCash = FIXTag
    { tName = "EndCash"
    , tnum = 922
    , tparser = toFIXDouble
    , arbitraryValue = FIXDouble <$> (return (-2.112 :: Double)) }
 
 tUserRequestID :: FIXTag
-tUserRequestID = FIXTag 
+tUserRequestID = FIXTag
    { tName = "UserRequestID"
    , tnum = 923
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUserRequestType :: FIXTag
-tUserRequestType = FIXTag 
+tUserRequestType = FIXTag
    { tName = "UserRequestType"
    , tnum = 924
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNewPassword :: FIXTag
-tNewPassword = FIXTag 
+tNewPassword = FIXTag
    { tName = "NewPassword"
    , tnum = 925
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tUserStatus :: FIXTag
-tUserStatus = FIXTag 
+tUserStatus = FIXTag
    { tName = "UserStatus"
    , tnum = 926
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUserStatusText :: FIXTag
-tUserStatusText = FIXTag 
+tUserStatusText = FIXTag
    { tName = "UserStatusText"
    , tnum = 927
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tStatusValue :: FIXTag
-tStatusValue = FIXTag 
+tStatusValue = FIXTag
    { tName = "StatusValue"
    , tnum = 928
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStatusText :: FIXTag
-tStatusText = FIXTag 
+tStatusText = FIXTag
    { tName = "StatusText"
    , tnum = 929
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRefCompID :: FIXTag
-tRefCompID = FIXTag 
+tRefCompID = FIXTag
    { tName = "RefCompID"
    , tnum = 930
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tRefSubID :: FIXTag
-tRefSubID = FIXTag 
+tRefSubID = FIXTag
    { tName = "RefSubID"
    , tnum = 931
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNetworkResponseID :: FIXTag
-tNetworkResponseID = FIXTag 
+tNetworkResponseID = FIXTag
    { tName = "NetworkResponseID"
    , tnum = 932
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNetworkRequestID :: FIXTag
-tNetworkRequestID = FIXTag 
+tNetworkRequestID = FIXTag
    { tName = "NetworkRequestID"
    , tnum = 933
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLastNetworkResponseID :: FIXTag
-tLastNetworkResponseID = FIXTag 
+tLastNetworkResponseID = FIXTag
    { tName = "LastNetworkResponseID"
    , tnum = 934
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNetworkRequestType :: FIXTag
-tNetworkRequestType = FIXTag 
+tNetworkRequestType = FIXTag
    { tName = "NetworkRequestType"
    , tnum = 935
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoCompIDs :: FIXTag
-tNoCompIDs = FIXTag 
+tNoCompIDs = FIXTag
    { tName = "NoCompIDs"
    , tnum = 936
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNetworkStatusResponseType :: FIXTag
-tNetworkStatusResponseType = FIXTag 
+tNetworkStatusResponseType = FIXTag
    { tName = "NetworkStatusResponseType"
    , tnum = 937
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoCollInquiryQualifier :: FIXTag
-tNoCollInquiryQualifier = FIXTag 
+tNoCollInquiryQualifier = FIXTag
    { tName = "NoCollInquiryQualifier"
    , tnum = 938
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tTrdRptStatus :: FIXTag
-tTrdRptStatus = FIXTag 
+tTrdRptStatus = FIXTag
    { tName = "TrdRptStatus"
    , tnum = 939
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tAffirmStatus :: FIXTag
-tAffirmStatus = FIXTag 
+tAffirmStatus = FIXTag
    { tName = "AffirmStatus"
    , tnum = 940
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tUnderlyingStrikeCurrency :: FIXTag
-tUnderlyingStrikeCurrency = FIXTag 
+tUnderlyingStrikeCurrency = FIXTag
    { tName = "UnderlyingStrikeCurrency"
    , tnum = 941
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tLegStrikeCurrency :: FIXTag
-tLegStrikeCurrency = FIXTag 
+tLegStrikeCurrency = FIXTag
    { tName = "LegStrikeCurrency"
    , tnum = 942
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tTimeBracket :: FIXTag
-tTimeBracket = FIXTag 
+tTimeBracket = FIXTag
    { tName = "TimeBracket"
    , tnum = 943
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tCollAction :: FIXTag
-tCollAction = FIXTag 
+tCollAction = FIXTag
    { tName = "CollAction"
    , tnum = 944
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollInquiryStatus :: FIXTag
-tCollInquiryStatus = FIXTag 
+tCollInquiryStatus = FIXTag
    { tName = "CollInquiryStatus"
    , tnum = 945
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tCollInquiryResult :: FIXTag
-tCollInquiryResult = FIXTag 
+tCollInquiryResult = FIXTag
    { tName = "CollInquiryResult"
    , tnum = 946
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tStrikeCurrency :: FIXTag
-tStrikeCurrency = FIXTag 
+tStrikeCurrency = FIXTag
    { tName = "StrikeCurrency"
    , tnum = 947
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNoNested3PartyIDs :: FIXTag
-tNoNested3PartyIDs = FIXTag 
+tNoNested3PartyIDs = FIXTag
    { tName = "NoNested3PartyIDs"
    , tnum = 948
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNested3PartyID :: FIXTag
-tNested3PartyID = FIXTag 
+tNested3PartyID = FIXTag
    { tName = "Nested3PartyID"
    , tnum = 949
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNested3PartyIDSource :: FIXTag
-tNested3PartyIDSource = FIXTag 
+tNested3PartyIDSource = FIXTag
    { tName = "Nested3PartyIDSource"
    , tnum = 950
    , tparser = toFIXChar
    , arbitraryValue = FIXChar <$> (return 'A') }
 
 tNested3PartyRole :: FIXTag
-tNested3PartyRole = FIXTag 
+tNested3PartyRole = FIXTag
    { tName = "Nested3PartyRole"
    , tnum = 951
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNoNested3PartySubIDs :: FIXTag
-tNoNested3PartySubIDs = FIXTag 
+tNoNested3PartySubIDs = FIXTag
    { tName = "NoNested3PartySubIDs"
    , tnum = 952
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tNested3PartySubID :: FIXTag
-tNested3PartySubID = FIXTag 
+tNested3PartySubID = FIXTag
    { tName = "Nested3PartySubID"
    , tnum = 953
    , tparser = toFIXString
    , arbitraryValue = FIXString <$> arbitrary }
 
 tNested3PartySubIDType :: FIXTag
-tNested3PartySubIDType = FIXTag 
+tNested3PartySubIDType = FIXTag
    { tName = "Nested3PartySubIDType"
    , tnum = 954
    , tparser = toFIXInt
    , arbitraryValue = FIXInt <$> arbitrary }
 
 tLegContractSettlMonth :: FIXTag
-tLegContractSettlMonth = FIXTag 
+tLegContractSettlMonth = FIXTag
    { tName = "LegContractSettlMonth"
    , tnum = 955
    , tparser = toFIXMonthYear
    , arbitraryValue = FIXMonthYear <$> arbitrary }
 
 tLegInterestAccrualDate :: FIXTag
-tLegInterestAccrualDate = FIXTag 
+tLegInterestAccrualDate = FIXTag
    { tName = "LegInterestAccrualDate"
    , tnum = 956
    , tparser = toFIXDateOnly
    , arbitraryValue = FIXDateOnly <$> arbitrary }
 
 headerFIX44 :: FIXTags
-headerFIX44 = 
+headerFIX44 =
    LT.insert (tnum tSenderCompID) tSenderCompID $
    LT.insert (tnum tTargetCompID) tTargetCompID $
    LT.insert (tnum tOnBehalfOfCompID) tOnBehalfOfCompID $
@@ -6685,7 +6685,7 @@ headerFIX44 =
          { tName = "NoHops"
          , tnum = tnum tNoHops
          , tparser = gNoHopsP''
-         , arbitraryValue = arbibtraryFIXGroup gNoHopsSpec'' }
+         , arbitraryValue = arbitraryFIXGroup gNoHopsSpec'' }
 
       gNoHopsP'' = groupP gNoHopsSpec''
       gNoHopsSpec'' = FGSpec
@@ -6693,14 +6693,14 @@ headerFIX44 =
          , gsSeperator = tHopCompID
          , gsBody = gNoHopsBody'' }
          where
-         gNoHopsBody'' = 
+         gNoHopsBody'' =
             LT.insert (tnum tHopSendingTime) tHopSendingTime $
             LT.insert (tnum tHopRefID) tHopRefID             LT.new
 
 
 
 trailerFIX44 :: FIXTags
-trailerFIX44 = 
+trailerFIX44 =
    LT.insert (tnum tSignatureLength) tSignatureLength $
    LT.insert (tnum tSignature) tSignature    LT.new
 
@@ -6713,7 +6713,7 @@ mHeartbeat = FMSpec
    , msBody = mHeartbeatBody
    , msTrailer = trailerFIX44 }
    where
-   mHeartbeatBody = 
+   mHeartbeatBody =
       LT.insert (tnum tTestReqID) tTestReqID       LT.new
 
 
@@ -6725,7 +6725,7 @@ mTestRequest = FMSpec
    , msBody = mTestRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mTestRequestBody = 
+   mTestRequestBody =
       LT.insert (tnum tTestReqID) tTestReqID       LT.new
 
 
@@ -6737,7 +6737,7 @@ mResendRequest = FMSpec
    , msBody = mResendRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mResendRequestBody = 
+   mResendRequestBody =
       LT.insert (tnum tBeginSeqNo) tBeginSeqNo $
       LT.insert (tnum tEndSeqNo) tEndSeqNo       LT.new
 
@@ -6750,7 +6750,7 @@ mReject = FMSpec
    , msBody = mRejectBody
    , msTrailer = trailerFIX44 }
    where
-   mRejectBody = 
+   mRejectBody =
       LT.insert (tnum tRefSeqNum) tRefSeqNum $
       LT.insert (tnum tRefTagID) tRefTagID $
       LT.insert (tnum tRefMsgType) tRefMsgType $
@@ -6768,7 +6768,7 @@ mSequenceReset = FMSpec
    , msBody = mSequenceResetBody
    , msTrailer = trailerFIX44 }
    where
-   mSequenceResetBody = 
+   mSequenceResetBody =
       LT.insert (tnum tGapFillFlag) tGapFillFlag $
       LT.insert (tnum tNewSeqNo) tNewSeqNo       LT.new
 
@@ -6781,7 +6781,7 @@ mLogout = FMSpec
    , msBody = mLogoutBody
    , msTrailer = trailerFIX44 }
    where
-   mLogoutBody = 
+   mLogoutBody =
       LT.insert (tnum tText) tText $
       LT.insert (tnum tEncodedTextLen) tEncodedTextLen $
       LT.insert (tnum tEncodedText) tEncodedText       LT.new
@@ -6795,7 +6795,7 @@ mIOI = FMSpec
    , msBody = mIOIBody
    , msTrailer = trailerFIX44 }
    where
-   mIOIBody = 
+   mIOIBody =
       LT.insert (tnum tIOIID) tIOIID $
       LT.insert (tnum tIOITransType) tIOITransType $
       LT.insert (tnum tIOIRefID) tIOIRefID $
@@ -6893,7 +6893,7 @@ mIOI = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -6901,7 +6901,7 @@ mIOI = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -6910,7 +6910,7 @@ mIOI = FMSpec
             { tName = "NoIOIQualifiers"
             , tnum = tnum tNoIOIQualifiers
             , tparser = gNoIOIQualifiersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoIOIQualifiersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoIOIQualifiersSpec''' }
 
          gNoIOIQualifiersP''' = groupP gNoIOIQualifiersSpec'''
          gNoIOIQualifiersSpec''' = FGSpec
@@ -6918,14 +6918,14 @@ mIOI = FMSpec
             , gsSeperator = tIOIQualifier
             , gsBody = gNoIOIQualifiersBody''' }
             where
-            gNoIOIQualifiersBody''' = 
+            gNoIOIQualifiersBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -6933,7 +6933,7 @@ mIOI = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -6982,7 +6982,7 @@ mIOI = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -6990,14 +6990,14 @@ mIOI = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -7005,7 +7005,7 @@ mIOI = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
 
@@ -7013,7 +7013,7 @@ mIOI = FMSpec
             { tName = "NoRoutingIDs"
             , tnum = tnum tNoRoutingIDs
             , tparser = gNoRoutingIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRoutingIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRoutingIDsSpec''' }
 
          gNoRoutingIDsP''' = groupP gNoRoutingIDsSpec'''
          gNoRoutingIDsSpec''' = FGSpec
@@ -7021,14 +7021,14 @@ mIOI = FMSpec
             , gsSeperator = tRoutingType
             , gsBody = gNoRoutingIDsBody''' }
             where
-            gNoRoutingIDsBody''' = 
+            gNoRoutingIDsBody''' =
                LT.insert (tnum tRoutingID) tRoutingID                LT.new
 
          gNoSecurityAltID''' = FIXTag
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -7036,14 +7036,14 @@ mIOI = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -7051,14 +7051,14 @@ mIOI = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -7066,7 +7066,7 @@ mIOI = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -7117,7 +7117,7 @@ mIOI = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -7125,14 +7125,14 @@ mIOI = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -7140,7 +7140,7 @@ mIOI = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -7154,7 +7154,7 @@ mAdvertisement = FMSpec
    , msBody = mAdvertisementBody
    , msTrailer = trailerFIX44 }
    where
-   mAdvertisementBody = 
+   mAdvertisementBody =
       LT.insert (tnum tAdvId) tAdvId $
       LT.insert (tnum tAdvTransType) tAdvTransType $
       LT.insert (tnum tAdvRefID) tAdvRefID $
@@ -7221,7 +7221,7 @@ mAdvertisement = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -7229,7 +7229,7 @@ mAdvertisement = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -7238,7 +7238,7 @@ mAdvertisement = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -7246,7 +7246,7 @@ mAdvertisement = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -7293,7 +7293,7 @@ mAdvertisement = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -7301,7 +7301,7 @@ mAdvertisement = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -7309,7 +7309,7 @@ mAdvertisement = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -7317,14 +7317,14 @@ mAdvertisement = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -7332,7 +7332,7 @@ mAdvertisement = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -7383,7 +7383,7 @@ mAdvertisement = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -7391,14 +7391,14 @@ mAdvertisement = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -7406,7 +7406,7 @@ mAdvertisement = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -7420,7 +7420,7 @@ mExecutionReport = FMSpec
    , msBody = mExecutionReportBody
    , msTrailer = trailerFIX44 }
    where
-   mExecutionReportBody = 
+   mExecutionReportBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -7643,7 +7643,7 @@ mExecutionReport = FMSpec
             { tName = "NoContAmts"
             , tnum = tnum tNoContAmts
             , tparser = gNoContAmtsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoContAmtsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoContAmtsSpec''' }
 
          gNoContAmtsP''' = groupP gNoContAmtsSpec'''
          gNoContAmtsSpec''' = FGSpec
@@ -7651,7 +7651,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tContAmtType
             , gsBody = gNoContAmtsBody''' }
             where
-            gNoContAmtsBody''' = 
+            gNoContAmtsBody''' =
                LT.insert (tnum tContAmtValue) tContAmtValue $
                LT.insert (tnum tContAmtCurr) tContAmtCurr                LT.new
 
@@ -7659,7 +7659,7 @@ mExecutionReport = FMSpec
             { tName = "NoContraBrokers"
             , tnum = tnum tNoContraBrokers
             , tparser = gNoContraBrokersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoContraBrokersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoContraBrokersSpec''' }
 
          gNoContraBrokersP''' = groupP gNoContraBrokersSpec'''
          gNoContraBrokersSpec''' = FGSpec
@@ -7667,7 +7667,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tContraBroker
             , gsBody = gNoContraBrokersBody''' }
             where
-            gNoContraBrokersBody''' = 
+            gNoContraBrokersBody''' =
                LT.insert (tnum tContraTrader) tContraTrader $
                LT.insert (tnum tContraTradeQty) tContraTradeQty $
                LT.insert (tnum tContraTradeTime) tContraTradeTime $
@@ -7677,7 +7677,7 @@ mExecutionReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -7685,7 +7685,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -7694,7 +7694,7 @@ mExecutionReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -7702,7 +7702,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -7760,7 +7760,7 @@ mExecutionReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -7768,14 +7768,14 @@ mExecutionReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -7783,14 +7783,14 @@ mExecutionReport = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -7798,7 +7798,7 @@ mExecutionReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -7807,7 +7807,7 @@ mExecutionReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -7815,7 +7815,7 @@ mExecutionReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -7824,7 +7824,7 @@ mExecutionReport = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -7832,7 +7832,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -7841,7 +7841,7 @@ mExecutionReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -7849,7 +7849,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -7858,7 +7858,7 @@ mExecutionReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -7866,7 +7866,7 @@ mExecutionReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -7874,7 +7874,7 @@ mExecutionReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -7882,14 +7882,14 @@ mExecutionReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -7897,14 +7897,14 @@ mExecutionReport = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -7912,7 +7912,7 @@ mExecutionReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -7963,7 +7963,7 @@ mExecutionReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -7971,14 +7971,14 @@ mExecutionReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -7986,7 +7986,7 @@ mExecutionReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -8000,7 +8000,7 @@ mOrderCancelReject = FMSpec
    , msBody = mOrderCancelRejectBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderCancelRejectBody = 
+   mOrderCancelRejectBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -8032,7 +8032,7 @@ mLogon = FMSpec
    , msBody = mLogonBody
    , msTrailer = trailerFIX44 }
    where
-   mLogonBody = 
+   mLogonBody =
       LT.insert (tnum tEncryptMethod) tEncryptMethod $
       LT.insert (tnum tHeartBtInt) tHeartBtInt $
       LT.insert (tnum tRawDataLength) tRawDataLength $
@@ -8049,7 +8049,7 @@ mLogon = FMSpec
             { tName = "NoMsgTypes"
             , tnum = tnum tNoMsgTypes
             , tparser = gNoMsgTypesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMsgTypesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMsgTypesSpec''' }
 
          gNoMsgTypesP''' = groupP gNoMsgTypesSpec'''
          gNoMsgTypesSpec''' = FGSpec
@@ -8057,7 +8057,7 @@ mLogon = FMSpec
             , gsSeperator = tRefMsgType
             , gsBody = gNoMsgTypesBody''' }
             where
-            gNoMsgTypesBody''' = 
+            gNoMsgTypesBody''' =
                LT.insert (tnum tMsgDirection) tMsgDirection                LT.new
 
 
@@ -8070,7 +8070,7 @@ mNews = FMSpec
    , msBody = mNewsBody
    , msTrailer = trailerFIX44 }
    where
-   mNewsBody = 
+   mNewsBody =
       LT.insert (tnum tOrigTime) tOrigTime $
       LT.insert (tnum tUrgency) tUrgency $
       LT.insert (tnum tHeadline) tHeadline $
@@ -8089,7 +8089,7 @@ mNews = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -8097,7 +8097,7 @@ mNews = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -8144,7 +8144,7 @@ mNews = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -8152,7 +8152,7 @@ mNews = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -8160,7 +8160,7 @@ mNews = FMSpec
             { tName = "NoLinesOfText"
             , tnum = tnum tNoLinesOfText
             , tparser = gNoLinesOfTextP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLinesOfTextSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLinesOfTextSpec''' }
 
          gNoLinesOfTextP''' = groupP gNoLinesOfTextSpec'''
          gNoLinesOfTextSpec''' = FGSpec
@@ -8168,7 +8168,7 @@ mNews = FMSpec
             , gsSeperator = tText
             , gsBody = gNoLinesOfTextBody''' }
             where
-            gNoLinesOfTextBody''' = 
+            gNoLinesOfTextBody''' =
                LT.insert (tnum tEncodedTextLen) tEncodedTextLen $
                LT.insert (tnum tEncodedText) tEncodedText                LT.new
 
@@ -8176,7 +8176,7 @@ mNews = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -8184,7 +8184,7 @@ mNews = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -8231,7 +8231,7 @@ mNews = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -8239,7 +8239,7 @@ mNews = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -8248,7 +8248,7 @@ mNews = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -8256,7 +8256,7 @@ mNews = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
 
@@ -8264,7 +8264,7 @@ mNews = FMSpec
             { tName = "NoRoutingIDs"
             , tnum = tnum tNoRoutingIDs
             , tparser = gNoRoutingIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRoutingIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRoutingIDsSpec''' }
 
          gNoRoutingIDsP''' = groupP gNoRoutingIDsSpec'''
          gNoRoutingIDsSpec''' = FGSpec
@@ -8272,14 +8272,14 @@ mNews = FMSpec
             , gsSeperator = tRoutingType
             , gsBody = gNoRoutingIDsBody''' }
             where
-            gNoRoutingIDsBody''' = 
+            gNoRoutingIDsBody''' =
                LT.insert (tnum tRoutingID) tRoutingID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -8287,7 +8287,7 @@ mNews = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -8338,7 +8338,7 @@ mNews = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -8346,14 +8346,14 @@ mNews = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -8361,7 +8361,7 @@ mNews = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -8375,7 +8375,7 @@ mEmail = FMSpec
    , msBody = mEmailBody
    , msTrailer = trailerFIX44 }
    where
-   mEmailBody = 
+   mEmailBody =
       LT.insert (tnum tEmailThreadID) tEmailThreadID $
       LT.insert (tnum tEmailType) tEmailType $
       LT.insert (tnum tOrigTime) tOrigTime $
@@ -8396,7 +8396,7 @@ mEmail = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -8404,7 +8404,7 @@ mEmail = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -8451,7 +8451,7 @@ mEmail = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -8459,7 +8459,7 @@ mEmail = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -8467,7 +8467,7 @@ mEmail = FMSpec
             { tName = "NoLinesOfText"
             , tnum = tnum tNoLinesOfText
             , tparser = gNoLinesOfTextP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLinesOfTextSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLinesOfTextSpec''' }
 
          gNoLinesOfTextP''' = groupP gNoLinesOfTextSpec'''
          gNoLinesOfTextSpec''' = FGSpec
@@ -8475,7 +8475,7 @@ mEmail = FMSpec
             , gsSeperator = tText
             , gsBody = gNoLinesOfTextBody''' }
             where
-            gNoLinesOfTextBody''' = 
+            gNoLinesOfTextBody''' =
                LT.insert (tnum tEncodedTextLen) tEncodedTextLen $
                LT.insert (tnum tEncodedText) tEncodedText                LT.new
 
@@ -8483,7 +8483,7 @@ mEmail = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -8491,7 +8491,7 @@ mEmail = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -8538,7 +8538,7 @@ mEmail = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -8546,7 +8546,7 @@ mEmail = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -8555,7 +8555,7 @@ mEmail = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -8563,7 +8563,7 @@ mEmail = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
 
@@ -8571,7 +8571,7 @@ mEmail = FMSpec
             { tName = "NoRoutingIDs"
             , tnum = tnum tNoRoutingIDs
             , tparser = gNoRoutingIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRoutingIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRoutingIDsSpec''' }
 
          gNoRoutingIDsP''' = groupP gNoRoutingIDsSpec'''
          gNoRoutingIDsSpec''' = FGSpec
@@ -8579,14 +8579,14 @@ mEmail = FMSpec
             , gsSeperator = tRoutingType
             , gsBody = gNoRoutingIDsBody''' }
             where
-            gNoRoutingIDsBody''' = 
+            gNoRoutingIDsBody''' =
                LT.insert (tnum tRoutingID) tRoutingID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -8594,7 +8594,7 @@ mEmail = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -8645,7 +8645,7 @@ mEmail = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -8653,14 +8653,14 @@ mEmail = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -8668,7 +8668,7 @@ mEmail = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -8682,7 +8682,7 @@ mNewOrderSingle = FMSpec
    , msBody = mNewOrderSingleBody
    , msTrailer = trailerFIX44 }
    where
-   mNewOrderSingleBody = 
+   mNewOrderSingleBody =
       LT.insert (tnum tClOrdID) tClOrdID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
       LT.insert (tnum tClOrdLinkID) tClOrdLinkID $
@@ -8843,7 +8843,7 @@ mNewOrderSingle = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -8851,7 +8851,7 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -8862,7 +8862,7 @@ mNewOrderSingle = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -8870,7 +8870,7 @@ mNewOrderSingle = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -8879,7 +8879,7 @@ mNewOrderSingle = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -8887,7 +8887,7 @@ mNewOrderSingle = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -8896,7 +8896,7 @@ mNewOrderSingle = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -8904,7 +8904,7 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -8913,7 +8913,7 @@ mNewOrderSingle = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -8921,7 +8921,7 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -8930,7 +8930,7 @@ mNewOrderSingle = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -8938,7 +8938,7 @@ mNewOrderSingle = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -8946,7 +8946,7 @@ mNewOrderSingle = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -8954,14 +8954,14 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -8969,14 +8969,14 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -8984,14 +8984,14 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -8999,7 +8999,7 @@ mNewOrderSingle = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -9050,7 +9050,7 @@ mNewOrderSingle = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -9058,14 +9058,14 @@ mNewOrderSingle = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -9073,7 +9073,7 @@ mNewOrderSingle = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -9087,7 +9087,7 @@ mNewOrderList = FMSpec
    , msBody = mNewOrderListBody
    , msTrailer = trailerFIX44 }
    where
-   mNewOrderListBody = 
+   mNewOrderListBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tBidID) tBidID $
       LT.insert (tnum tClientBidID) tClientBidID $
@@ -9112,7 +9112,7 @@ mNewOrderList = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -9120,7 +9120,7 @@ mNewOrderList = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
                LT.insert (tnum tListSeqNo) tListSeqNo $
                LT.insert (tnum tClOrdLinkID) tClOrdLinkID $
@@ -9271,7 +9271,7 @@ mNewOrderList = FMSpec
                      { tName = "NoAllocs"
                      , tnum = tnum tNoAllocs
                      , tparser = gNoAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec'''''' }
 
                   gNoAllocsP'''''' = groupP gNoAllocsSpec''''''
                   gNoAllocsSpec'''''' = FGSpec
@@ -9279,7 +9279,7 @@ mNewOrderList = FMSpec
                      , gsSeperator = tAllocAccount
                      , gsBody = gNoAllocsBody'''''' }
                      where
-                     gNoAllocsBody'''''' = 
+                     gNoAllocsBody'''''' =
                         LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                         LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                         LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -9290,7 +9290,7 @@ mNewOrderList = FMSpec
                               { tName = "NoNestedPartyIDs"
                               , tnum = tnum tNoNestedPartyIDs
                               , tparser = gNoNestedPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
 
                            gNoNestedPartyIDsP''''''''' = groupP gNoNestedPartyIDsSpec'''''''''
                            gNoNestedPartyIDsSpec''''''''' = FGSpec
@@ -9298,7 +9298,7 @@ mNewOrderList = FMSpec
                               , gsSeperator = tNestedPartyID
                               , gsBody = gNoNestedPartyIDsBody''''''''' }
                               where
-                              gNoNestedPartyIDsBody''''''''' = 
+                              gNoNestedPartyIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                                  LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                                  LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs''''''''''''                                  LT.new
@@ -9307,7 +9307,7 @@ mNewOrderList = FMSpec
                                        { tName = "NoNestedPartySubIDs"
                                        , tnum = tnum tNoNestedPartySubIDs
                                        , tparser = gNoNestedPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
 
                                     gNoNestedPartySubIDsP'''''''''''' = groupP gNoNestedPartySubIDsSpec''''''''''''
                                     gNoNestedPartySubIDsSpec'''''''''''' = FGSpec
@@ -9315,7 +9315,7 @@ mNewOrderList = FMSpec
                                        , gsSeperator = tNestedPartySubID
                                        , gsBody = gNoNestedPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNestedPartySubIDsBody'''''''''''' = 
+                                       gNoNestedPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                           LT.new
 
 
@@ -9324,7 +9324,7 @@ mNewOrderList = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -9332,7 +9332,7 @@ mNewOrderList = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -9341,7 +9341,7 @@ mNewOrderList = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -9349,7 +9349,7 @@ mNewOrderList = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -9358,7 +9358,7 @@ mNewOrderList = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -9366,7 +9366,7 @@ mNewOrderList = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -9374,7 +9374,7 @@ mNewOrderList = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -9382,14 +9382,14 @@ mNewOrderList = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoStipulations'''''' = FIXTag
                      { tName = "NoStipulations"
                      , tnum = tnum tNoStipulations
                      , tparser = gNoStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec'''''' }
 
                   gNoStipulationsP'''''' = groupP gNoStipulationsSpec''''''
                   gNoStipulationsSpec'''''' = FGSpec
@@ -9397,14 +9397,14 @@ mNewOrderList = FMSpec
                      , gsSeperator = tStipulationType
                      , gsBody = gNoStipulationsBody'''''' }
                      where
-                     gNoStipulationsBody'''''' = 
+                     gNoStipulationsBody'''''' =
                         LT.insert (tnum tStipulationValue) tStipulationValue                         LT.new
 
                   gNoTradingSessions'''''' = FIXTag
                      { tName = "NoTradingSessions"
                      , tnum = tnum tNoTradingSessions
                      , tparser = gNoTradingSessionsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec'''''' }
 
                   gNoTradingSessionsP'''''' = groupP gNoTradingSessionsSpec''''''
                   gNoTradingSessionsSpec'''''' = FGSpec
@@ -9412,14 +9412,14 @@ mNewOrderList = FMSpec
                      , gsSeperator = tTradingSessionID
                      , gsBody = gNoTradingSessionsBody'''''' }
                      where
-                     gNoTradingSessionsBody'''''' = 
+                     gNoTradingSessionsBody'''''' =
                         LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -9427,7 +9427,7 @@ mNewOrderList = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -9478,7 +9478,7 @@ mNewOrderList = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -9486,14 +9486,14 @@ mNewOrderList = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -9501,7 +9501,7 @@ mNewOrderList = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -9516,7 +9516,7 @@ mOrderCancelRequest = FMSpec
    , msBody = mOrderCancelRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderCancelRequestBody = 
+   mOrderCancelRequestBody =
       LT.insert (tnum tOrigClOrdID) tOrigClOrdID $
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tClOrdID) tClOrdID $
@@ -9596,7 +9596,7 @@ mOrderCancelRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -9604,7 +9604,7 @@ mOrderCancelRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -9613,7 +9613,7 @@ mOrderCancelRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -9621,7 +9621,7 @@ mOrderCancelRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -9630,7 +9630,7 @@ mOrderCancelRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -9638,7 +9638,7 @@ mOrderCancelRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -9646,7 +9646,7 @@ mOrderCancelRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -9654,14 +9654,14 @@ mOrderCancelRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -9669,7 +9669,7 @@ mOrderCancelRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -9720,7 +9720,7 @@ mOrderCancelRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -9728,14 +9728,14 @@ mOrderCancelRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -9743,7 +9743,7 @@ mOrderCancelRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -9757,7 +9757,7 @@ mOrderCancelReplaceRequest = FMSpec
    , msBody = mOrderCancelReplaceRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderCancelReplaceRequestBody = 
+   mOrderCancelReplaceRequestBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tNoPartyIDs) gNoPartyIDs''' $
       LT.insert (tnum tTradeOriginationDate) tTradeOriginationDate $
@@ -9917,7 +9917,7 @@ mOrderCancelReplaceRequest = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -9925,7 +9925,7 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -9936,7 +9936,7 @@ mOrderCancelReplaceRequest = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -9944,7 +9944,7 @@ mOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -9953,7 +9953,7 @@ mOrderCancelReplaceRequest = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -9961,7 +9961,7 @@ mOrderCancelReplaceRequest = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -9970,7 +9970,7 @@ mOrderCancelReplaceRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -9978,7 +9978,7 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -9987,7 +9987,7 @@ mOrderCancelReplaceRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -9995,7 +9995,7 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -10004,7 +10004,7 @@ mOrderCancelReplaceRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -10012,7 +10012,7 @@ mOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -10020,7 +10020,7 @@ mOrderCancelReplaceRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -10028,14 +10028,14 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -10043,14 +10043,14 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -10058,7 +10058,7 @@ mOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -10109,7 +10109,7 @@ mOrderCancelReplaceRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -10117,14 +10117,14 @@ mOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -10132,7 +10132,7 @@ mOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -10146,7 +10146,7 @@ mOrderStatusRequest = FMSpec
    , msBody = mOrderStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderStatusRequestBody = 
+   mOrderStatusRequestBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tClOrdID) tClOrdID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -10213,7 +10213,7 @@ mOrderStatusRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -10221,7 +10221,7 @@ mOrderStatusRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -10230,7 +10230,7 @@ mOrderStatusRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -10238,7 +10238,7 @@ mOrderStatusRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -10247,7 +10247,7 @@ mOrderStatusRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -10255,7 +10255,7 @@ mOrderStatusRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -10263,7 +10263,7 @@ mOrderStatusRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -10271,14 +10271,14 @@ mOrderStatusRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -10286,7 +10286,7 @@ mOrderStatusRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -10337,7 +10337,7 @@ mOrderStatusRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -10345,14 +10345,14 @@ mOrderStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -10360,7 +10360,7 @@ mOrderStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -10374,7 +10374,7 @@ mAllocationInstruction = FMSpec
    , msBody = mAllocationInstructionBody
    , msTrailer = trailerFIX44 }
    where
-   mAllocationInstructionBody = 
+   mAllocationInstructionBody =
       LT.insert (tnum tAllocID) tAllocID $
       LT.insert (tnum tAllocTransType) tAllocTransType $
       LT.insert (tnum tAllocType) tAllocType $
@@ -10506,7 +10506,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -10514,7 +10514,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tMatchStatus) tMatchStatus $
                LT.insert (tnum tAllocPrice) tAllocPrice $
@@ -10555,7 +10555,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoClearingInstructions"
                      , tnum = tnum tNoClearingInstructions
                      , tparser = gNoClearingInstructionsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoClearingInstructionsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoClearingInstructionsSpec'''''' }
 
                   gNoClearingInstructionsP'''''' = groupP gNoClearingInstructionsSpec''''''
                   gNoClearingInstructionsSpec'''''' = FGSpec
@@ -10563,14 +10563,14 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tClearingInstruction
                      , gsBody = gNoClearingInstructionsBody'''''' }
                      where
-                     gNoClearingInstructionsBody'''''' = 
+                     gNoClearingInstructionsBody'''''' =
                         LT.new
 
                   gNoDlvyInst'''''' = FIXTag
                      { tName = "NoDlvyInst"
                      , tnum = tnum tNoDlvyInst
                      , tparser = gNoDlvyInstP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec'''''' }
 
                   gNoDlvyInstP'''''' = groupP gNoDlvyInstSpec''''''
                   gNoDlvyInstSpec'''''' = FGSpec
@@ -10578,7 +10578,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tSettlInstSource
                      , gsBody = gNoDlvyInstBody'''''' }
                      where
-                     gNoDlvyInstBody'''''' = 
+                     gNoDlvyInstBody'''''' =
                         LT.insert (tnum tDlvyInstType) tDlvyInstType $
                         LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs'''''''''                         LT.new
                         where
@@ -10586,7 +10586,7 @@ mAllocationInstruction = FMSpec
                               { tName = "NoSettlPartyIDs"
                               , tnum = tnum tNoSettlPartyIDs
                               , tparser = gNoSettlPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
 
                            gNoSettlPartyIDsP''''''''' = groupP gNoSettlPartyIDsSpec'''''''''
                            gNoSettlPartyIDsSpec''''''''' = FGSpec
@@ -10594,7 +10594,7 @@ mAllocationInstruction = FMSpec
                               , gsSeperator = tSettlPartyID
                               , gsBody = gNoSettlPartyIDsBody''''''''' }
                               where
-                              gNoSettlPartyIDsBody''''''''' = 
+                              gNoSettlPartyIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                                  LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                                  LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs''''''''''''                                  LT.new
@@ -10603,7 +10603,7 @@ mAllocationInstruction = FMSpec
                                        { tName = "NoSettlPartySubIDs"
                                        , tnum = tnum tNoSettlPartySubIDs
                                        , tparser = gNoSettlPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
 
                                     gNoSettlPartySubIDsP'''''''''''' = groupP gNoSettlPartySubIDsSpec''''''''''''
                                     gNoSettlPartySubIDsSpec'''''''''''' = FGSpec
@@ -10611,7 +10611,7 @@ mAllocationInstruction = FMSpec
                                        , gsSeperator = tSettlPartySubID
                                        , gsBody = gNoSettlPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoSettlPartySubIDsBody'''''''''''' = 
+                                       gNoSettlPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                           LT.new
 
 
@@ -10620,7 +10620,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoMiscFees"
                      , tnum = tnum tNoMiscFees
                      , tparser = gNoMiscFeesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec'''''' }
 
                   gNoMiscFeesP'''''' = groupP gNoMiscFeesSpec''''''
                   gNoMiscFeesSpec'''''' = FGSpec
@@ -10628,7 +10628,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tMiscFeeAmt
                      , gsBody = gNoMiscFeesBody'''''' }
                      where
-                     gNoMiscFeesBody'''''' = 
+                     gNoMiscFeesBody'''''' =
                         LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                         LT.insert (tnum tMiscFeeType) tMiscFeeType $
                         LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                         LT.new
@@ -10637,7 +10637,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -10645,7 +10645,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -10654,7 +10654,7 @@ mAllocationInstruction = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -10662,7 +10662,7 @@ mAllocationInstruction = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -10671,7 +10671,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -10679,7 +10679,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -10688,7 +10688,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -10696,7 +10696,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tLastQty
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.insert (tnum tExecID) tExecID $
                LT.insert (tnum tSecondaryExecID) tSecondaryExecID $
                LT.insert (tnum tLastPx) tLastPx $
@@ -10707,7 +10707,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -10715,14 +10715,14 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -10730,7 +10730,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -10777,7 +10777,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -10785,7 +10785,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -10793,7 +10793,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -10801,7 +10801,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tOrderID) tOrderID $
                LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -10815,7 +10815,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoNested2PartyIDs"
                      , tnum = tnum tNoNested2PartyIDs
                      , tparser = gNoNested2PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec'''''' }
 
                   gNoNested2PartyIDsP'''''' = groupP gNoNested2PartyIDsSpec''''''
                   gNoNested2PartyIDsSpec'''''' = FGSpec
@@ -10823,7 +10823,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tNested2PartyID
                      , gsBody = gNoNested2PartyIDsBody'''''' }
                      where
-                     gNoNested2PartyIDsBody'''''' = 
+                     gNoNested2PartyIDsBody'''''' =
                         LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                         LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                         LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs'''''''''                         LT.new
@@ -10832,7 +10832,7 @@ mAllocationInstruction = FMSpec
                               { tName = "NoNested2PartySubIDs"
                               , tnum = tnum tNoNested2PartySubIDs
                               , tparser = gNoNested2PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
 
                            gNoNested2PartySubIDsP''''''''' = groupP gNoNested2PartySubIDsSpec'''''''''
                            gNoNested2PartySubIDsSpec''''''''' = FGSpec
@@ -10840,7 +10840,7 @@ mAllocationInstruction = FMSpec
                               , gsSeperator = tNested2PartySubID
                               , gsBody = gNoNested2PartySubIDsBody''''''''' }
                               where
-                              gNoNested2PartySubIDsBody''''''''' = 
+                              gNoNested2PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                  LT.new
 
 
@@ -10849,7 +10849,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -10857,7 +10857,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -10866,7 +10866,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -10874,7 +10874,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -10882,7 +10882,7 @@ mAllocationInstruction = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -10890,14 +10890,14 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -10905,14 +10905,14 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -10920,7 +10920,7 @@ mAllocationInstruction = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -10971,7 +10971,7 @@ mAllocationInstruction = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -10979,14 +10979,14 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -10994,7 +10994,7 @@ mAllocationInstruction = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -11008,7 +11008,7 @@ mListCancelRequest = FMSpec
    , msBody = mListCancelRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mListCancelRequestBody = 
+   mListCancelRequestBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tTransactTime) tTransactTime $
       LT.insert (tnum tTradeOriginationDate) tTradeOriginationDate $
@@ -11026,7 +11026,7 @@ mListExecute = FMSpec
    , msBody = mListExecuteBody
    , msTrailer = trailerFIX44 }
    where
-   mListExecuteBody = 
+   mListExecuteBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tClientBidID) tClientBidID $
       LT.insert (tnum tBidID) tBidID $
@@ -11044,7 +11044,7 @@ mListStatusRequest = FMSpec
    , msBody = mListStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mListStatusRequestBody = 
+   mListStatusRequestBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tText) tText $
       LT.insert (tnum tEncodedTextLen) tEncodedTextLen $
@@ -11059,7 +11059,7 @@ mListStatus = FMSpec
    , msBody = mListStatusBody
    , msTrailer = trailerFIX44 }
    where
-   mListStatusBody = 
+   mListStatusBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tListStatusType) tListStatusType $
       LT.insert (tnum tNoRpts) tNoRpts $
@@ -11077,7 +11077,7 @@ mListStatus = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -11085,7 +11085,7 @@ mListStatus = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
                LT.insert (tnum tCumQty) tCumQty $
                LT.insert (tnum tOrdStatus) tOrdStatus $
@@ -11108,7 +11108,7 @@ mAllocationInstructionAck = FMSpec
    , msBody = mAllocationInstructionAckBody
    , msTrailer = trailerFIX44 }
    where
-   mAllocationInstructionAckBody = 
+   mAllocationInstructionAckBody =
       LT.insert (tnum tAllocID) tAllocID $
       LT.insert (tnum tNoPartyIDs) gNoPartyIDs''' $
       LT.insert (tnum tSecondaryAllocID) tSecondaryAllocID $
@@ -11130,7 +11130,7 @@ mAllocationInstructionAck = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -11138,7 +11138,7 @@ mAllocationInstructionAck = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocPrice) tAllocPrice $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -11151,7 +11151,7 @@ mAllocationInstructionAck = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -11159,7 +11159,7 @@ mAllocationInstructionAck = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -11168,7 +11168,7 @@ mAllocationInstructionAck = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -11176,7 +11176,7 @@ mAllocationInstructionAck = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -11190,7 +11190,7 @@ mDontKnowTrade = FMSpec
    , msBody = mDontKnowTradeBody
    , msTrailer = trailerFIX44 }
    where
-   mDontKnowTradeBody = 
+   mDontKnowTradeBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
       LT.insert (tnum tExecID) tExecID $
@@ -11255,7 +11255,7 @@ mDontKnowTrade = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -11263,7 +11263,7 @@ mDontKnowTrade = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -11272,7 +11272,7 @@ mDontKnowTrade = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -11280,7 +11280,7 @@ mDontKnowTrade = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -11327,7 +11327,7 @@ mDontKnowTrade = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -11335,7 +11335,7 @@ mDontKnowTrade = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -11343,7 +11343,7 @@ mDontKnowTrade = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -11351,14 +11351,14 @@ mDontKnowTrade = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -11366,7 +11366,7 @@ mDontKnowTrade = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -11417,7 +11417,7 @@ mDontKnowTrade = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -11425,14 +11425,14 @@ mDontKnowTrade = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -11440,7 +11440,7 @@ mDontKnowTrade = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -11454,7 +11454,7 @@ mQuoteRequest = FMSpec
    , msBody = mQuoteRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteRequestBody = 
+   mQuoteRequestBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tRFQReqID) tRFQReqID $
       LT.insert (tnum tClOrdID) tClOrdID $
@@ -11468,7 +11468,7 @@ mQuoteRequest = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -11476,7 +11476,7 @@ mQuoteRequest = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -11580,7 +11580,7 @@ mQuoteRequest = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -11588,7 +11588,7 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -11597,7 +11597,7 @@ mQuoteRequest = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -11605,7 +11605,7 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -11663,7 +11663,7 @@ mQuoteRequest = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -11671,14 +11671,14 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
                            gNoLegStipulations''''''''' = FIXTag
                               { tName = "NoLegStipulations"
                               , tnum = tnum tNoLegStipulations
                               , tparser = gNoLegStipulationsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec''''''''' }
 
                            gNoLegStipulationsP''''''''' = groupP gNoLegStipulationsSpec'''''''''
                            gNoLegStipulationsSpec''''''''' = FGSpec
@@ -11686,14 +11686,14 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tLegStipulationType
                               , gsBody = gNoLegStipulationsBody''''''''' }
                               where
-                              gNoLegStipulationsBody''''''''' = 
+                              gNoLegStipulationsBody''''''''' =
                                  LT.insert (tnum tLegStipulationValue) tLegStipulationValue                                  LT.new
 
                            gNoNestedPartyIDs''''''''' = FIXTag
                               { tName = "NoNestedPartyIDs"
                               , tnum = tnum tNoNestedPartyIDs
                               , tparser = gNoNestedPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
 
                            gNoNestedPartyIDsP''''''''' = groupP gNoNestedPartyIDsSpec'''''''''
                            gNoNestedPartyIDsSpec''''''''' = FGSpec
@@ -11701,7 +11701,7 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tNestedPartyID
                               , gsBody = gNoNestedPartyIDsBody''''''''' }
                               where
-                              gNoNestedPartyIDsBody''''''''' = 
+                              gNoNestedPartyIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                                  LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                                  LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs''''''''''''                                  LT.new
@@ -11710,7 +11710,7 @@ mQuoteRequest = FMSpec
                                        { tName = "NoNestedPartySubIDs"
                                        , tnum = tnum tNoNestedPartySubIDs
                                        , tparser = gNoNestedPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
 
                                     gNoNestedPartySubIDsP'''''''''''' = groupP gNoNestedPartySubIDsSpec''''''''''''
                                     gNoNestedPartySubIDsSpec'''''''''''' = FGSpec
@@ -11718,7 +11718,7 @@ mQuoteRequest = FMSpec
                                        , gsSeperator = tNestedPartySubID
                                        , gsBody = gNoNestedPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNestedPartySubIDsBody'''''''''''' = 
+                                       gNoNestedPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                           LT.new
 
 
@@ -11727,7 +11727,7 @@ mQuoteRequest = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -11735,7 +11735,7 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -11744,7 +11744,7 @@ mQuoteRequest = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -11752,7 +11752,7 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -11760,7 +11760,7 @@ mQuoteRequest = FMSpec
                      { tName = "NoQuoteQualifiers"
                      , tnum = tnum tNoQuoteQualifiers
                      , tparser = gNoQuoteQualifiersP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoQuoteQualifiersSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoQuoteQualifiersSpec'''''' }
 
                   gNoQuoteQualifiersP'''''' = groupP gNoQuoteQualifiersSpec''''''
                   gNoQuoteQualifiersSpec'''''' = FGSpec
@@ -11768,14 +11768,14 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tQuoteQualifier
                      , gsBody = gNoQuoteQualifiersBody'''''' }
                      where
-                     gNoQuoteQualifiersBody'''''' = 
+                     gNoQuoteQualifiersBody'''''' =
                         LT.new
 
                   gNoSecurityAltID'''''' = FIXTag
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -11783,14 +11783,14 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoStipulations'''''' = FIXTag
                      { tName = "NoStipulations"
                      , tnum = tnum tNoStipulations
                      , tparser = gNoStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec'''''' }
 
                   gNoStipulationsP'''''' = groupP gNoStipulationsSpec''''''
                   gNoStipulationsSpec'''''' = FGSpec
@@ -11798,14 +11798,14 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tStipulationType
                      , gsBody = gNoStipulationsBody'''''' }
                      where
-                     gNoStipulationsBody'''''' = 
+                     gNoStipulationsBody'''''' =
                         LT.insert (tnum tStipulationValue) tStipulationValue                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -11813,7 +11813,7 @@ mQuoteRequest = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -11864,7 +11864,7 @@ mQuoteRequest = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -11872,14 +11872,14 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -11887,7 +11887,7 @@ mQuoteRequest = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -11902,7 +11902,7 @@ mQuote = FMSpec
    , msBody = mQuoteBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteBody = 
+   mQuoteBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tQuoteRespID) tQuoteRespID $
@@ -12032,7 +12032,7 @@ mQuote = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -12040,7 +12040,7 @@ mQuote = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -12049,7 +12049,7 @@ mQuote = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -12057,7 +12057,7 @@ mQuote = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -12118,7 +12118,7 @@ mQuote = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -12126,14 +12126,14 @@ mQuote = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -12141,14 +12141,14 @@ mQuote = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -12156,7 +12156,7 @@ mQuote = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -12165,7 +12165,7 @@ mQuote = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -12173,7 +12173,7 @@ mQuote = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -12182,7 +12182,7 @@ mQuote = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -12190,7 +12190,7 @@ mQuote = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -12199,7 +12199,7 @@ mQuote = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -12207,7 +12207,7 @@ mQuote = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -12215,7 +12215,7 @@ mQuote = FMSpec
             { tName = "NoQuoteQualifiers"
             , tnum = tnum tNoQuoteQualifiers
             , tparser = gNoQuoteQualifiersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteQualifiersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteQualifiersSpec''' }
 
          gNoQuoteQualifiersP''' = groupP gNoQuoteQualifiersSpec'''
          gNoQuoteQualifiersSpec''' = FGSpec
@@ -12223,14 +12223,14 @@ mQuote = FMSpec
             , gsSeperator = tQuoteQualifier
             , gsBody = gNoQuoteQualifiersBody''' }
             where
-            gNoQuoteQualifiersBody''' = 
+            gNoQuoteQualifiersBody''' =
                LT.new
 
          gNoSecurityAltID''' = FIXTag
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -12238,14 +12238,14 @@ mQuote = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -12253,14 +12253,14 @@ mQuote = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -12268,7 +12268,7 @@ mQuote = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -12319,7 +12319,7 @@ mQuote = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -12327,14 +12327,14 @@ mQuote = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -12342,7 +12342,7 @@ mQuote = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -12356,7 +12356,7 @@ mSettlementInstructions = FMSpec
    , msBody = mSettlementInstructionsBody
    , msTrailer = trailerFIX44 }
    where
-   mSettlementInstructionsBody = 
+   mSettlementInstructionsBody =
       LT.insert (tnum tSettlInstMsgID) tSettlInstMsgID $
       LT.insert (tnum tSettlInstReqID) tSettlInstReqID $
       LT.insert (tnum tSettlInstMode) tSettlInstMode $
@@ -12372,7 +12372,7 @@ mSettlementInstructions = FMSpec
             { tName = "NoSettlInst"
             , tnum = tnum tNoSettlInst
             , tparser = gNoSettlInstP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSettlInstSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSettlInstSpec''' }
 
          gNoSettlInstP''' = groupP gNoSettlInstSpec'''
          gNoSettlInstSpec''' = FGSpec
@@ -12380,7 +12380,7 @@ mSettlementInstructions = FMSpec
             , gsSeperator = tSettlInstID
             , gsBody = gNoSettlInstBody''' }
             where
-            gNoSettlInstBody''' = 
+            gNoSettlInstBody''' =
                LT.insert (tnum tSettlInstTransType) tSettlInstTransType $
                LT.insert (tnum tSettlInstRefID) tSettlInstRefID $
                LT.insert (tnum tNoPartyIDs) gNoPartyIDs'''''' $
@@ -12410,7 +12410,7 @@ mSettlementInstructions = FMSpec
                      { tName = "NoDlvyInst"
                      , tnum = tnum tNoDlvyInst
                      , tparser = gNoDlvyInstP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec'''''' }
 
                   gNoDlvyInstP'''''' = groupP gNoDlvyInstSpec''''''
                   gNoDlvyInstSpec'''''' = FGSpec
@@ -12418,7 +12418,7 @@ mSettlementInstructions = FMSpec
                      , gsSeperator = tSettlInstSource
                      , gsBody = gNoDlvyInstBody'''''' }
                      where
-                     gNoDlvyInstBody'''''' = 
+                     gNoDlvyInstBody'''''' =
                         LT.insert (tnum tDlvyInstType) tDlvyInstType $
                         LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs'''''''''                         LT.new
                         where
@@ -12426,7 +12426,7 @@ mSettlementInstructions = FMSpec
                               { tName = "NoSettlPartyIDs"
                               , tnum = tnum tNoSettlPartyIDs
                               , tparser = gNoSettlPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
 
                            gNoSettlPartyIDsP''''''''' = groupP gNoSettlPartyIDsSpec'''''''''
                            gNoSettlPartyIDsSpec''''''''' = FGSpec
@@ -12434,7 +12434,7 @@ mSettlementInstructions = FMSpec
                               , gsSeperator = tSettlPartyID
                               , gsBody = gNoSettlPartyIDsBody''''''''' }
                               where
-                              gNoSettlPartyIDsBody''''''''' = 
+                              gNoSettlPartyIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                                  LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                                  LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs''''''''''''                                  LT.new
@@ -12443,7 +12443,7 @@ mSettlementInstructions = FMSpec
                                        { tName = "NoSettlPartySubIDs"
                                        , tnum = tnum tNoSettlPartySubIDs
                                        , tparser = gNoSettlPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
 
                                     gNoSettlPartySubIDsP'''''''''''' = groupP gNoSettlPartySubIDsSpec''''''''''''
                                     gNoSettlPartySubIDsSpec'''''''''''' = FGSpec
@@ -12451,7 +12451,7 @@ mSettlementInstructions = FMSpec
                                        , gsSeperator = tSettlPartySubID
                                        , gsBody = gNoSettlPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoSettlPartySubIDsBody'''''''''''' = 
+                                       gNoSettlPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                           LT.new
 
 
@@ -12460,7 +12460,7 @@ mSettlementInstructions = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -12468,7 +12468,7 @@ mSettlementInstructions = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -12477,7 +12477,7 @@ mSettlementInstructions = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -12485,7 +12485,7 @@ mSettlementInstructions = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -12500,7 +12500,7 @@ mMarketDataRequest = FMSpec
    , msBody = mMarketDataRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mMarketDataRequestBody = 
+   mMarketDataRequestBody =
       LT.insert (tnum tMDReqID) tMDReqID $
       LT.insert (tnum tSubscriptionRequestType) tSubscriptionRequestType $
       LT.insert (tnum tMarketDepth) tMarketDepth $
@@ -12516,7 +12516,7 @@ mMarketDataRequest = FMSpec
             { tName = "NoMDEntryTypes"
             , tnum = tnum tNoMDEntryTypes
             , tparser = gNoMDEntryTypesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMDEntryTypesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMDEntryTypesSpec''' }
 
          gNoMDEntryTypesP''' = groupP gNoMDEntryTypesSpec'''
          gNoMDEntryTypesSpec''' = FGSpec
@@ -12524,14 +12524,14 @@ mMarketDataRequest = FMSpec
             , gsSeperator = tMDEntryType
             , gsBody = gNoMDEntryTypesBody''' }
             where
-            gNoMDEntryTypesBody''' = 
+            gNoMDEntryTypesBody''' =
                LT.new
 
          gNoRelatedSym''' = FIXTag
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -12539,7 +12539,7 @@ mMarketDataRequest = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -12591,7 +12591,7 @@ mMarketDataRequest = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -12599,7 +12599,7 @@ mMarketDataRequest = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -12608,7 +12608,7 @@ mMarketDataRequest = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -12616,7 +12616,7 @@ mMarketDataRequest = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -12663,7 +12663,7 @@ mMarketDataRequest = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -12671,7 +12671,7 @@ mMarketDataRequest = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
 
@@ -12679,7 +12679,7 @@ mMarketDataRequest = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -12687,14 +12687,14 @@ mMarketDataRequest = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoTradingSessions'''''' = FIXTag
                      { tName = "NoTradingSessions"
                      , tnum = tnum tNoTradingSessions
                      , tparser = gNoTradingSessionsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec'''''' }
 
                   gNoTradingSessionsP'''''' = groupP gNoTradingSessionsSpec''''''
                   gNoTradingSessionsSpec'''''' = FGSpec
@@ -12702,14 +12702,14 @@ mMarketDataRequest = FMSpec
                      , gsSeperator = tTradingSessionID
                      , gsBody = gNoTradingSessionsBody'''''' }
                      where
-                     gNoTradingSessionsBody'''''' = 
+                     gNoTradingSessionsBody'''''' =
                         LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -12717,7 +12717,7 @@ mMarketDataRequest = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -12768,7 +12768,7 @@ mMarketDataRequest = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -12776,14 +12776,14 @@ mMarketDataRequest = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -12791,7 +12791,7 @@ mMarketDataRequest = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -12806,7 +12806,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
    , msBody = mMarketDataSnapshotFullRefreshBody
    , msTrailer = trailerFIX44 }
    where
-   mMarketDataSnapshotFullRefreshBody = 
+   mMarketDataSnapshotFullRefreshBody =
       LT.insert (tnum tMDReqID) tMDReqID $
       LT.insert (tnum tSymbol) tSymbol $
       LT.insert (tnum tSymbolSfx) tSymbolSfx $
@@ -12863,7 +12863,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -12871,7 +12871,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -12880,7 +12880,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -12888,7 +12888,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -12935,7 +12935,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -12943,7 +12943,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -12951,7 +12951,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             { tName = "NoMDEntries"
             , tnum = tnum tNoMDEntries
             , tparser = gNoMDEntriesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMDEntriesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMDEntriesSpec''' }
 
          gNoMDEntriesP''' = groupP gNoMDEntriesSpec'''
          gNoMDEntriesSpec''' = FGSpec
@@ -12959,7 +12959,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             , gsSeperator = tMDEntryType
             , gsBody = gNoMDEntriesBody''' }
             where
-            gNoMDEntriesBody''' = 
+            gNoMDEntriesBody''' =
                LT.insert (tnum tMDEntryPx) tMDEntryPx $
                LT.insert (tnum tCurrency) tCurrency $
                LT.insert (tnum tMDEntrySize) tMDEntrySize $
@@ -12997,7 +12997,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -13005,14 +13005,14 @@ mMarketDataSnapshotFullRefresh = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -13020,7 +13020,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -13071,7 +13071,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -13079,14 +13079,14 @@ mMarketDataSnapshotFullRefresh = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -13094,7 +13094,7 @@ mMarketDataSnapshotFullRefresh = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -13108,7 +13108,7 @@ mMarketDataIncrementalRefresh = FMSpec
    , msBody = mMarketDataIncrementalRefreshBody
    , msTrailer = trailerFIX44 }
    where
-   mMarketDataIncrementalRefreshBody = 
+   mMarketDataIncrementalRefreshBody =
       LT.insert (tnum tMDReqID) tMDReqID $
       LT.insert (tnum tNoMDEntries) gNoMDEntries''' $
       LT.insert (tnum tApplQueueDepth) tApplQueueDepth $
@@ -13118,7 +13118,7 @@ mMarketDataIncrementalRefresh = FMSpec
             { tName = "NoMDEntries"
             , tnum = tnum tNoMDEntries
             , tparser = gNoMDEntriesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMDEntriesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMDEntriesSpec''' }
 
          gNoMDEntriesP''' = groupP gNoMDEntriesSpec'''
          gNoMDEntriesSpec''' = FGSpec
@@ -13126,7 +13126,7 @@ mMarketDataIncrementalRefresh = FMSpec
             , gsSeperator = tMDUpdateAction
             , gsBody = gNoMDEntriesBody''' }
             where
-            gNoMDEntriesBody''' = 
+            gNoMDEntriesBody''' =
                LT.insert (tnum tDeleteReason) tDeleteReason $
                LT.insert (tnum tMDEntryType) tMDEntryType $
                LT.insert (tnum tMDEntryID) tMDEntryID $
@@ -13215,7 +13215,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -13223,7 +13223,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -13232,7 +13232,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -13240,7 +13240,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -13287,7 +13287,7 @@ mMarketDataIncrementalRefresh = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -13295,7 +13295,7 @@ mMarketDataIncrementalRefresh = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
 
@@ -13303,7 +13303,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -13311,14 +13311,14 @@ mMarketDataIncrementalRefresh = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -13326,7 +13326,7 @@ mMarketDataIncrementalRefresh = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -13377,7 +13377,7 @@ mMarketDataIncrementalRefresh = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -13385,14 +13385,14 @@ mMarketDataIncrementalRefresh = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -13400,7 +13400,7 @@ mMarketDataIncrementalRefresh = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -13415,7 +13415,7 @@ mMarketDataRequestReject = FMSpec
    , msBody = mMarketDataRequestRejectBody
    , msTrailer = trailerFIX44 }
    where
-   mMarketDataRequestRejectBody = 
+   mMarketDataRequestRejectBody =
       LT.insert (tnum tMDReqID) tMDReqID $
       LT.insert (tnum tMDReqRejReason) tMDReqRejReason $
       LT.insert (tnum tNoAltMDSource) gNoAltMDSource''' $
@@ -13427,7 +13427,7 @@ mMarketDataRequestReject = FMSpec
             { tName = "NoAltMDSource"
             , tnum = tnum tNoAltMDSource
             , tparser = gNoAltMDSourceP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAltMDSourceSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAltMDSourceSpec''' }
 
          gNoAltMDSourceP''' = groupP gNoAltMDSourceSpec'''
          gNoAltMDSourceSpec''' = FGSpec
@@ -13435,7 +13435,7 @@ mMarketDataRequestReject = FMSpec
             , gsSeperator = tAltMDSourceID
             , gsBody = gNoAltMDSourceBody''' }
             where
-            gNoAltMDSourceBody''' = 
+            gNoAltMDSourceBody''' =
                LT.new
 
 
@@ -13448,7 +13448,7 @@ mQuoteCancel = FMSpec
    , msBody = mQuoteCancelBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteCancelBody = 
+   mQuoteCancelBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tQuoteCancelType) tQuoteCancelType $
@@ -13465,7 +13465,7 @@ mQuoteCancel = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -13473,7 +13473,7 @@ mQuoteCancel = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -13482,7 +13482,7 @@ mQuoteCancel = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -13490,7 +13490,7 @@ mQuoteCancel = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -13498,7 +13498,7 @@ mQuoteCancel = FMSpec
             { tName = "NoQuoteEntries"
             , tnum = tnum tNoQuoteEntries
             , tparser = gNoQuoteEntriesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteEntriesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteEntriesSpec''' }
 
          gNoQuoteEntriesP''' = groupP gNoQuoteEntriesSpec'''
          gNoQuoteEntriesSpec''' = FGSpec
@@ -13506,7 +13506,7 @@ mQuoteCancel = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoQuoteEntriesBody''' }
             where
-            gNoQuoteEntriesBody''' = 
+            gNoQuoteEntriesBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -13564,7 +13564,7 @@ mQuoteCancel = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -13572,7 +13572,7 @@ mQuoteCancel = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -13581,7 +13581,7 @@ mQuoteCancel = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -13589,7 +13589,7 @@ mQuoteCancel = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -13636,7 +13636,7 @@ mQuoteCancel = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -13644,7 +13644,7 @@ mQuoteCancel = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
 
@@ -13652,7 +13652,7 @@ mQuoteCancel = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -13660,14 +13660,14 @@ mQuoteCancel = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -13675,7 +13675,7 @@ mQuoteCancel = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -13726,7 +13726,7 @@ mQuoteCancel = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -13734,14 +13734,14 @@ mQuoteCancel = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -13749,7 +13749,7 @@ mQuoteCancel = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -13764,7 +13764,7 @@ mQuoteStatusRequest = FMSpec
    , msBody = mQuoteStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteStatusRequestBody = 
+   mQuoteStatusRequestBody =
       LT.insert (tnum tQuoteStatusReqID) tQuoteStatusReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tSymbol) tSymbol $
@@ -13832,7 +13832,7 @@ mQuoteStatusRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -13840,7 +13840,7 @@ mQuoteStatusRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -13849,7 +13849,7 @@ mQuoteStatusRequest = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -13857,7 +13857,7 @@ mQuoteStatusRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -13904,7 +13904,7 @@ mQuoteStatusRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -13912,7 +13912,7 @@ mQuoteStatusRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -13920,7 +13920,7 @@ mQuoteStatusRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -13928,7 +13928,7 @@ mQuoteStatusRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -13937,7 +13937,7 @@ mQuoteStatusRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -13945,7 +13945,7 @@ mQuoteStatusRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -13953,7 +13953,7 @@ mQuoteStatusRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -13961,14 +13961,14 @@ mQuoteStatusRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -13976,7 +13976,7 @@ mQuoteStatusRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -14027,7 +14027,7 @@ mQuoteStatusRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -14035,14 +14035,14 @@ mQuoteStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -14050,7 +14050,7 @@ mQuoteStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -14064,7 +14064,7 @@ mMassQuoteAcknowledgement = FMSpec
    , msBody = mMassQuoteAcknowledgementBody
    , msTrailer = trailerFIX44 }
    where
-   mMassQuoteAcknowledgementBody = 
+   mMassQuoteAcknowledgementBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tQuoteStatus) tQuoteStatus $
@@ -14084,7 +14084,7 @@ mMassQuoteAcknowledgement = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -14092,7 +14092,7 @@ mMassQuoteAcknowledgement = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -14101,7 +14101,7 @@ mMassQuoteAcknowledgement = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -14109,7 +14109,7 @@ mMassQuoteAcknowledgement = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -14117,7 +14117,7 @@ mMassQuoteAcknowledgement = FMSpec
             { tName = "NoQuoteSets"
             , tnum = tnum tNoQuoteSets
             , tparser = gNoQuoteSetsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteSetsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteSetsSpec''' }
 
          gNoQuoteSetsP''' = groupP gNoQuoteSetsSpec'''
          gNoQuoteSetsSpec''' = FGSpec
@@ -14125,7 +14125,7 @@ mMassQuoteAcknowledgement = FMSpec
             , gsSeperator = tQuoteSetID
             , gsBody = gNoQuoteSetsBody''' }
             where
-            gNoQuoteSetsBody''' = 
+            gNoQuoteSetsBody''' =
                LT.insert (tnum tUnderlyingSymbol) tUnderlyingSymbol $
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
@@ -14180,7 +14180,7 @@ mMassQuoteAcknowledgement = FMSpec
                      { tName = "NoQuoteEntries"
                      , tnum = tnum tNoQuoteEntries
                      , tparser = gNoQuoteEntriesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoQuoteEntriesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoQuoteEntriesSpec'''''' }
 
                   gNoQuoteEntriesP'''''' = groupP gNoQuoteEntriesSpec''''''
                   gNoQuoteEntriesSpec'''''' = FGSpec
@@ -14188,7 +14188,7 @@ mMassQuoteAcknowledgement = FMSpec
                      , gsSeperator = tQuoteEntryID
                      , gsBody = gNoQuoteEntriesBody'''''' }
                      where
-                     gNoQuoteEntriesBody'''''' = 
+                     gNoQuoteEntriesBody'''''' =
                         LT.insert (tnum tSymbol) tSymbol $
                         LT.insert (tnum tSymbolSfx) tSymbolSfx $
                         LT.insert (tnum tSecurityID) tSecurityID $
@@ -14261,7 +14261,7 @@ mMassQuoteAcknowledgement = FMSpec
                               { tName = "NoEvents"
                               , tnum = tnum tNoEvents
                               , tparser = gNoEventsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''''''''' }
 
                            gNoEventsP''''''''' = groupP gNoEventsSpec'''''''''
                            gNoEventsSpec''''''''' = FGSpec
@@ -14269,7 +14269,7 @@ mMassQuoteAcknowledgement = FMSpec
                               , gsSeperator = tEventType
                               , gsBody = gNoEventsBody''''''''' }
                               where
-                              gNoEventsBody''''''''' = 
+                              gNoEventsBody''''''''' =
                                  LT.insert (tnum tEventDate) tEventDate $
                                  LT.insert (tnum tEventPx) tEventPx $
                                  LT.insert (tnum tEventText) tEventText                                  LT.new
@@ -14278,7 +14278,7 @@ mMassQuoteAcknowledgement = FMSpec
                               { tName = "NoLegs"
                               , tnum = tnum tNoLegs
                               , tparser = gNoLegsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''''''''' }
 
                            gNoLegsP''''''''' = groupP gNoLegsSpec'''''''''
                            gNoLegsSpec''''''''' = FGSpec
@@ -14286,7 +14286,7 @@ mMassQuoteAcknowledgement = FMSpec
                               , gsSeperator = tLegSymbol
                               , gsBody = gNoLegsBody''''''''' }
                               where
-                              gNoLegsBody''''''''' = 
+                              gNoLegsBody''''''''' =
                                  LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                                  LT.insert (tnum tLegSecurityID) tLegSecurityID $
                                  LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -14333,7 +14333,7 @@ mMassQuoteAcknowledgement = FMSpec
                                        { tName = "NoLegSecurityAltID"
                                        , tnum = tnum tNoLegSecurityAltID
                                        , tparser = gNoLegSecurityAltIDP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''''''''' }
 
                                     gNoLegSecurityAltIDP'''''''''''' = groupP gNoLegSecurityAltIDSpec''''''''''''
                                     gNoLegSecurityAltIDSpec'''''''''''' = FGSpec
@@ -14341,7 +14341,7 @@ mMassQuoteAcknowledgement = FMSpec
                                        , gsSeperator = tLegSecurityAltID
                                        , gsBody = gNoLegSecurityAltIDBody'''''''''''' }
                                        where
-                                       gNoLegSecurityAltIDBody'''''''''''' = 
+                                       gNoLegSecurityAltIDBody'''''''''''' =
                                           LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                           LT.new
 
 
@@ -14349,7 +14349,7 @@ mMassQuoteAcknowledgement = FMSpec
                               { tName = "NoSecurityAltID"
                               , tnum = tnum tNoSecurityAltID
                               , tparser = gNoSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''''''''' }
 
                            gNoSecurityAltIDP''''''''' = groupP gNoSecurityAltIDSpec'''''''''
                            gNoSecurityAltIDSpec''''''''' = FGSpec
@@ -14357,7 +14357,7 @@ mMassQuoteAcknowledgement = FMSpec
                               , gsSeperator = tSecurityAltID
                               , gsBody = gNoSecurityAltIDBody''''''''' }
                               where
-                              gNoSecurityAltIDBody''''''''' = 
+                              gNoSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                                  LT.new
 
 
@@ -14365,7 +14365,7 @@ mMassQuoteAcknowledgement = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -14373,14 +14373,14 @@ mMassQuoteAcknowledgement = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -14388,7 +14388,7 @@ mMassQuoteAcknowledgement = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -14402,7 +14402,7 @@ mSecurityDefinitionRequest = FMSpec
    , msBody = mSecurityDefinitionRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityDefinitionRequestBody = 
+   mSecurityDefinitionRequestBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityRequestType) tSecurityRequestType $
       LT.insert (tnum tSymbol) tSymbol $
@@ -14465,7 +14465,7 @@ mSecurityDefinitionRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -14473,7 +14473,7 @@ mSecurityDefinitionRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -14482,7 +14482,7 @@ mSecurityDefinitionRequest = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -14490,14 +14490,14 @@ mSecurityDefinitionRequest = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -14505,7 +14505,7 @@ mSecurityDefinitionRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -14552,7 +14552,7 @@ mSecurityDefinitionRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -14560,7 +14560,7 @@ mSecurityDefinitionRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -14568,7 +14568,7 @@ mSecurityDefinitionRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -14576,14 +14576,14 @@ mSecurityDefinitionRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -14591,7 +14591,7 @@ mSecurityDefinitionRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -14642,7 +14642,7 @@ mSecurityDefinitionRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -14650,14 +14650,14 @@ mSecurityDefinitionRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -14665,7 +14665,7 @@ mSecurityDefinitionRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -14679,7 +14679,7 @@ mSecurityDefinition = FMSpec
    , msBody = mSecurityDefinitionBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityDefinitionBody = 
+   mSecurityDefinitionBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityResponseID) tSecurityResponseID $
       LT.insert (tnum tSecurityResponseType) tSecurityResponseType $
@@ -14744,7 +14744,7 @@ mSecurityDefinition = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -14752,7 +14752,7 @@ mSecurityDefinition = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -14761,7 +14761,7 @@ mSecurityDefinition = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -14769,14 +14769,14 @@ mSecurityDefinition = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -14784,7 +14784,7 @@ mSecurityDefinition = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -14831,7 +14831,7 @@ mSecurityDefinition = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -14839,7 +14839,7 @@ mSecurityDefinition = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -14847,7 +14847,7 @@ mSecurityDefinition = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -14855,14 +14855,14 @@ mSecurityDefinition = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -14870,7 +14870,7 @@ mSecurityDefinition = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -14921,7 +14921,7 @@ mSecurityDefinition = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -14929,14 +14929,14 @@ mSecurityDefinition = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -14944,7 +14944,7 @@ mSecurityDefinition = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -14958,7 +14958,7 @@ mSecurityStatusRequest = FMSpec
    , msBody = mSecurityStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityStatusRequestBody = 
+   mSecurityStatusRequestBody =
       LT.insert (tnum tSecurityStatusReqID) tSecurityStatusReqID $
       LT.insert (tnum tSymbol) tSymbol $
       LT.insert (tnum tSymbolSfx) tSymbolSfx $
@@ -15016,7 +15016,7 @@ mSecurityStatusRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -15024,7 +15024,7 @@ mSecurityStatusRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -15033,7 +15033,7 @@ mSecurityStatusRequest = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -15041,14 +15041,14 @@ mSecurityStatusRequest = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -15056,7 +15056,7 @@ mSecurityStatusRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -15103,7 +15103,7 @@ mSecurityStatusRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -15111,7 +15111,7 @@ mSecurityStatusRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -15119,7 +15119,7 @@ mSecurityStatusRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -15127,14 +15127,14 @@ mSecurityStatusRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -15142,7 +15142,7 @@ mSecurityStatusRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -15193,7 +15193,7 @@ mSecurityStatusRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -15201,14 +15201,14 @@ mSecurityStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -15216,7 +15216,7 @@ mSecurityStatusRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -15230,7 +15230,7 @@ mSecurityStatus = FMSpec
    , msBody = mSecurityStatusBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityStatusBody = 
+   mSecurityStatusBody =
       LT.insert (tnum tSecurityStatusReqID) tSecurityStatusReqID $
       LT.insert (tnum tSymbol) tSymbol $
       LT.insert (tnum tSymbolSfx) tSymbolSfx $
@@ -15304,7 +15304,7 @@ mSecurityStatus = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -15312,7 +15312,7 @@ mSecurityStatus = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -15321,7 +15321,7 @@ mSecurityStatus = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -15329,14 +15329,14 @@ mSecurityStatus = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -15344,7 +15344,7 @@ mSecurityStatus = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -15391,7 +15391,7 @@ mSecurityStatus = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -15399,7 +15399,7 @@ mSecurityStatus = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -15407,7 +15407,7 @@ mSecurityStatus = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -15415,14 +15415,14 @@ mSecurityStatus = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -15430,7 +15430,7 @@ mSecurityStatus = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -15481,7 +15481,7 @@ mSecurityStatus = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -15489,14 +15489,14 @@ mSecurityStatus = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -15504,7 +15504,7 @@ mSecurityStatus = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -15518,7 +15518,7 @@ mTradingSessionStatusRequest = FMSpec
    , msBody = mTradingSessionStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mTradingSessionStatusRequestBody = 
+   mTradingSessionStatusRequestBody =
       LT.insert (tnum tTradSesReqID) tTradSesReqID $
       LT.insert (tnum tTradingSessionID) tTradingSessionID $
       LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID $
@@ -15535,7 +15535,7 @@ mTradingSessionStatus = FMSpec
    , msBody = mTradingSessionStatusBody
    , msTrailer = trailerFIX44 }
    where
-   mTradingSessionStatusBody = 
+   mTradingSessionStatusBody =
       LT.insert (tnum tTradSesReqID) tTradSesReqID $
       LT.insert (tnum tTradingSessionID) tTradingSessionID $
       LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID $
@@ -15563,7 +15563,7 @@ mMassQuote = FMSpec
    , msBody = mMassQuoteBody
    , msTrailer = trailerFIX44 }
    where
-   mMassQuoteBody = 
+   mMassQuoteBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tQuoteType) tQuoteType $
@@ -15580,7 +15580,7 @@ mMassQuote = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -15588,7 +15588,7 @@ mMassQuote = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -15597,7 +15597,7 @@ mMassQuote = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -15605,7 +15605,7 @@ mMassQuote = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -15613,7 +15613,7 @@ mMassQuote = FMSpec
             { tName = "NoQuoteSets"
             , tnum = tnum tNoQuoteSets
             , tparser = gNoQuoteSetsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteSetsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteSetsSpec''' }
 
          gNoQuoteSetsP''' = groupP gNoQuoteSetsSpec'''
          gNoQuoteSetsSpec''' = FGSpec
@@ -15621,7 +15621,7 @@ mMassQuote = FMSpec
             , gsSeperator = tQuoteSetID
             , gsBody = gNoQuoteSetsBody''' }
             where
-            gNoQuoteSetsBody''' = 
+            gNoQuoteSetsBody''' =
                LT.insert (tnum tUnderlyingSymbol) tUnderlyingSymbol $
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
@@ -15677,7 +15677,7 @@ mMassQuote = FMSpec
                      { tName = "NoQuoteEntries"
                      , tnum = tnum tNoQuoteEntries
                      , tparser = gNoQuoteEntriesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoQuoteEntriesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoQuoteEntriesSpec'''''' }
 
                   gNoQuoteEntriesP'''''' = groupP gNoQuoteEntriesSpec''''''
                   gNoQuoteEntriesSpec'''''' = FGSpec
@@ -15685,7 +15685,7 @@ mMassQuote = FMSpec
                      , gsSeperator = tQuoteEntryID
                      , gsBody = gNoQuoteEntriesBody'''''' }
                      where
-                     gNoQuoteEntriesBody'''''' = 
+                     gNoQuoteEntriesBody'''''' =
                         LT.insert (tnum tSymbol) tSymbol $
                         LT.insert (tnum tSymbolSfx) tSymbolSfx $
                         LT.insert (tnum tSecurityID) tSecurityID $
@@ -15757,7 +15757,7 @@ mMassQuote = FMSpec
                               { tName = "NoEvents"
                               , tnum = tnum tNoEvents
                               , tparser = gNoEventsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''''''''' }
 
                            gNoEventsP''''''''' = groupP gNoEventsSpec'''''''''
                            gNoEventsSpec''''''''' = FGSpec
@@ -15765,7 +15765,7 @@ mMassQuote = FMSpec
                               , gsSeperator = tEventType
                               , gsBody = gNoEventsBody''''''''' }
                               where
-                              gNoEventsBody''''''''' = 
+                              gNoEventsBody''''''''' =
                                  LT.insert (tnum tEventDate) tEventDate $
                                  LT.insert (tnum tEventPx) tEventPx $
                                  LT.insert (tnum tEventText) tEventText                                  LT.new
@@ -15774,7 +15774,7 @@ mMassQuote = FMSpec
                               { tName = "NoLegs"
                               , tnum = tnum tNoLegs
                               , tparser = gNoLegsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''''''''' }
 
                            gNoLegsP''''''''' = groupP gNoLegsSpec'''''''''
                            gNoLegsSpec''''''''' = FGSpec
@@ -15782,7 +15782,7 @@ mMassQuote = FMSpec
                               , gsSeperator = tLegSymbol
                               , gsBody = gNoLegsBody''''''''' }
                               where
-                              gNoLegsBody''''''''' = 
+                              gNoLegsBody''''''''' =
                                  LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                                  LT.insert (tnum tLegSecurityID) tLegSecurityID $
                                  LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -15829,7 +15829,7 @@ mMassQuote = FMSpec
                                        { tName = "NoLegSecurityAltID"
                                        , tnum = tnum tNoLegSecurityAltID
                                        , tparser = gNoLegSecurityAltIDP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''''''''' }
 
                                     gNoLegSecurityAltIDP'''''''''''' = groupP gNoLegSecurityAltIDSpec''''''''''''
                                     gNoLegSecurityAltIDSpec'''''''''''' = FGSpec
@@ -15837,7 +15837,7 @@ mMassQuote = FMSpec
                                        , gsSeperator = tLegSecurityAltID
                                        , gsBody = gNoLegSecurityAltIDBody'''''''''''' }
                                        where
-                                       gNoLegSecurityAltIDBody'''''''''''' = 
+                                       gNoLegSecurityAltIDBody'''''''''''' =
                                           LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                           LT.new
 
 
@@ -15845,7 +15845,7 @@ mMassQuote = FMSpec
                               { tName = "NoSecurityAltID"
                               , tnum = tnum tNoSecurityAltID
                               , tparser = gNoSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''''''''' }
 
                            gNoSecurityAltIDP''''''''' = groupP gNoSecurityAltIDSpec'''''''''
                            gNoSecurityAltIDSpec''''''''' = FGSpec
@@ -15853,7 +15853,7 @@ mMassQuote = FMSpec
                               , gsSeperator = tSecurityAltID
                               , gsBody = gNoSecurityAltIDBody''''''''' }
                               where
-                              gNoSecurityAltIDBody''''''''' = 
+                              gNoSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                                  LT.new
 
 
@@ -15861,7 +15861,7 @@ mMassQuote = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -15869,14 +15869,14 @@ mMassQuote = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -15884,7 +15884,7 @@ mMassQuote = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -15898,7 +15898,7 @@ mBusinessMessageReject = FMSpec
    , msBody = mBusinessMessageRejectBody
    , msTrailer = trailerFIX44 }
    where
-   mBusinessMessageRejectBody = 
+   mBusinessMessageRejectBody =
       LT.insert (tnum tRefSeqNum) tRefSeqNum $
       LT.insert (tnum tRefMsgType) tRefMsgType $
       LT.insert (tnum tBusinessRejectRefID) tBusinessRejectRefID $
@@ -15916,7 +15916,7 @@ mBidRequest = FMSpec
    , msBody = mBidRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mBidRequestBody = 
+   mBidRequestBody =
       LT.insert (tnum tBidID) tBidID $
       LT.insert (tnum tClientBidID) tClientBidID $
       LT.insert (tnum tBidRequestTransType) tBidRequestTransType $
@@ -15951,7 +15951,7 @@ mBidRequest = FMSpec
             { tName = "NoBidComponents"
             , tnum = tnum tNoBidComponents
             , tparser = gNoBidComponentsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoBidComponentsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoBidComponentsSpec''' }
 
          gNoBidComponentsP''' = groupP gNoBidComponentsSpec'''
          gNoBidComponentsSpec''' = FGSpec
@@ -15959,7 +15959,7 @@ mBidRequest = FMSpec
             , gsSeperator = tListID
             , gsBody = gNoBidComponentsBody''' }
             where
-            gNoBidComponentsBody''' = 
+            gNoBidComponentsBody''' =
                LT.insert (tnum tSide) tSide $
                LT.insert (tnum tTradingSessionID) tTradingSessionID $
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID $
@@ -15973,7 +15973,7 @@ mBidRequest = FMSpec
             { tName = "NoBidDescriptors"
             , tnum = tnum tNoBidDescriptors
             , tparser = gNoBidDescriptorsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoBidDescriptorsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoBidDescriptorsSpec''' }
 
          gNoBidDescriptorsP''' = groupP gNoBidDescriptorsSpec'''
          gNoBidDescriptorsSpec''' = FGSpec
@@ -15981,7 +15981,7 @@ mBidRequest = FMSpec
             , gsSeperator = tBidDescriptorType
             , gsBody = gNoBidDescriptorsBody''' }
             where
-            gNoBidDescriptorsBody''' = 
+            gNoBidDescriptorsBody''' =
                LT.insert (tnum tBidDescriptor) tBidDescriptor $
                LT.insert (tnum tSideValueInd) tSideValueInd $
                LT.insert (tnum tLiquidityValue) tLiquidityValue $
@@ -16003,7 +16003,7 @@ mBidResponse = FMSpec
    , msBody = mBidResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mBidResponseBody = 
+   mBidResponseBody =
       LT.insert (tnum tBidID) tBidID $
       LT.insert (tnum tClientBidID) tClientBidID $
       LT.insert (tnum tNoBidComponents) gNoBidComponents'''       LT.new
@@ -16012,7 +16012,7 @@ mBidResponse = FMSpec
             { tName = "NoBidComponents"
             , tnum = tnum tNoBidComponents
             , tparser = gNoBidComponentsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoBidComponentsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoBidComponentsSpec''' }
 
          gNoBidComponentsP''' = groupP gNoBidComponentsSpec'''
          gNoBidComponentsSpec''' = FGSpec
@@ -16020,7 +16020,7 @@ mBidResponse = FMSpec
             , gsSeperator = tCommission
             , gsBody = gNoBidComponentsBody''' }
             where
-            gNoBidComponentsBody''' = 
+            gNoBidComponentsBody''' =
                LT.insert (tnum tCommType) tCommType $
                LT.insert (tnum tCommCurrency) tCommCurrency $
                LT.insert (tnum tFundRenewWaiv) tFundRenewWaiv $
@@ -16049,7 +16049,7 @@ mListStrikePrice = FMSpec
    , msBody = mListStrikePriceBody
    , msTrailer = trailerFIX44 }
    where
-   mListStrikePriceBody = 
+   mListStrikePriceBody =
       LT.insert (tnum tListID) tListID $
       LT.insert (tnum tTotNoStrikes) tTotNoStrikes $
       LT.insert (tnum tLastFragment) tLastFragment $
@@ -16060,7 +16060,7 @@ mListStrikePrice = FMSpec
             { tName = "NoStrikes"
             , tnum = tnum tNoStrikes
             , tparser = gNoStrikesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStrikesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStrikesSpec''' }
 
          gNoStrikesP''' = groupP gNoStrikesSpec'''
          gNoStrikesSpec''' = FGSpec
@@ -16068,7 +16068,7 @@ mListStrikePrice = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoStrikesBody''' }
             where
-            gNoStrikesBody''' = 
+            gNoStrikesBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -16115,7 +16115,7 @@ mListStrikePrice = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -16123,7 +16123,7 @@ mListStrikePrice = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -16132,7 +16132,7 @@ mListStrikePrice = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -16140,7 +16140,7 @@ mListStrikePrice = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
 
@@ -16148,7 +16148,7 @@ mListStrikePrice = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -16156,7 +16156,7 @@ mListStrikePrice = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -16216,7 +16216,7 @@ mListStrikePrice = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -16224,14 +16224,14 @@ mListStrikePrice = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -16239,7 +16239,7 @@ mListStrikePrice = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -16253,7 +16253,7 @@ mRegistrationInstructions = FMSpec
    , msBody = mRegistrationInstructionsBody
    , msTrailer = trailerFIX44 }
    where
-   mRegistrationInstructionsBody = 
+   mRegistrationInstructionsBody =
       LT.insert (tnum tRegistID) tRegistID $
       LT.insert (tnum tRegistTransType) tRegistTransType $
       LT.insert (tnum tRegistRefID) tRegistRefID $
@@ -16271,7 +16271,7 @@ mRegistrationInstructions = FMSpec
             { tName = "NoDistribInsts"
             , tnum = tnum tNoDistribInsts
             , tparser = gNoDistribInstsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDistribInstsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDistribInstsSpec''' }
 
          gNoDistribInstsP''' = groupP gNoDistribInstsSpec'''
          gNoDistribInstsSpec''' = FGSpec
@@ -16279,7 +16279,7 @@ mRegistrationInstructions = FMSpec
             , gsSeperator = tDistribPaymentMethod
             , gsBody = gNoDistribInstsBody''' }
             where
-            gNoDistribInstsBody''' = 
+            gNoDistribInstsBody''' =
                LT.insert (tnum tDistribPercentage) tDistribPercentage $
                LT.insert (tnum tCashDistribCurr) tCashDistribCurr $
                LT.insert (tnum tCashDistribAgentName) tCashDistribAgentName $
@@ -16292,7 +16292,7 @@ mRegistrationInstructions = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -16300,7 +16300,7 @@ mRegistrationInstructions = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -16309,7 +16309,7 @@ mRegistrationInstructions = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -16317,7 +16317,7 @@ mRegistrationInstructions = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -16325,7 +16325,7 @@ mRegistrationInstructions = FMSpec
             { tName = "NoRegistDtls"
             , tnum = tnum tNoRegistDtls
             , tparser = gNoRegistDtlsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRegistDtlsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRegistDtlsSpec''' }
 
          gNoRegistDtlsP''' = groupP gNoRegistDtlsSpec'''
          gNoRegistDtlsSpec''' = FGSpec
@@ -16333,7 +16333,7 @@ mRegistrationInstructions = FMSpec
             , gsSeperator = tRegistDtls
             , gsBody = gNoRegistDtlsBody''' }
             where
-            gNoRegistDtlsBody''' = 
+            gNoRegistDtlsBody''' =
                LT.insert (tnum tRegistEmail) tRegistEmail $
                LT.insert (tnum tMailingDtls) tMailingDtls $
                LT.insert (tnum tMailingInst) tMailingInst $
@@ -16346,7 +16346,7 @@ mRegistrationInstructions = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -16354,7 +16354,7 @@ mRegistrationInstructions = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -16363,7 +16363,7 @@ mRegistrationInstructions = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -16371,7 +16371,7 @@ mRegistrationInstructions = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -16386,7 +16386,7 @@ mRegistrationInstructionsResponse = FMSpec
    , msBody = mRegistrationInstructionsResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mRegistrationInstructionsResponseBody = 
+   mRegistrationInstructionsResponseBody =
       LT.insert (tnum tRegistID) tRegistID $
       LT.insert (tnum tRegistTransType) tRegistTransType $
       LT.insert (tnum tRegistRefID) tRegistRefID $
@@ -16402,7 +16402,7 @@ mRegistrationInstructionsResponse = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -16410,7 +16410,7 @@ mRegistrationInstructionsResponse = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -16419,7 +16419,7 @@ mRegistrationInstructionsResponse = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -16427,7 +16427,7 @@ mRegistrationInstructionsResponse = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -16441,7 +16441,7 @@ mOrderMassCancelRequest = FMSpec
    , msBody = mOrderMassCancelRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderMassCancelRequestBody = 
+   mOrderMassCancelRequestBody =
       LT.insert (tnum tClOrdID) tClOrdID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
       LT.insert (tnum tMassCancelRequestType) tMassCancelRequestType $
@@ -16545,7 +16545,7 @@ mOrderMassCancelRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -16553,7 +16553,7 @@ mOrderMassCancelRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -16562,7 +16562,7 @@ mOrderMassCancelRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -16570,14 +16570,14 @@ mOrderMassCancelRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyingSecurityAltID''' = FIXTag
             { tName = "NoUnderlyingSecurityAltID"
             , tnum = tnum tNoUnderlyingSecurityAltID
             , tparser = gNoUnderlyingSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
 
          gNoUnderlyingSecurityAltIDP''' = groupP gNoUnderlyingSecurityAltIDSpec'''
          gNoUnderlyingSecurityAltIDSpec''' = FGSpec
@@ -16585,14 +16585,14 @@ mOrderMassCancelRequest = FMSpec
             , gsSeperator = tUnderlyingSecurityAltID
             , gsBody = gNoUnderlyingSecurityAltIDBody''' }
             where
-            gNoUnderlyingSecurityAltIDBody''' = 
+            gNoUnderlyingSecurityAltIDBody''' =
                LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                LT.new
 
          gNoUnderlyingStips''' = FIXTag
             { tName = "NoUnderlyingStips"
             , tnum = tnum tNoUnderlyingStips
             , tparser = gNoUnderlyingStipsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''' }
 
          gNoUnderlyingStipsP''' = groupP gNoUnderlyingStipsSpec'''
          gNoUnderlyingStipsSpec''' = FGSpec
@@ -16600,7 +16600,7 @@ mOrderMassCancelRequest = FMSpec
             , gsSeperator = tUnderlyingStipType
             , gsBody = gNoUnderlyingStipsBody''' }
             where
-            gNoUnderlyingStipsBody''' = 
+            gNoUnderlyingStipsBody''' =
                LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                LT.new
 
 
@@ -16613,7 +16613,7 @@ mOrderMassCancelReport = FMSpec
    , msBody = mOrderMassCancelReportBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderMassCancelReportBody = 
+   mOrderMassCancelReportBody =
       LT.insert (tnum tClOrdID) tClOrdID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
       LT.insert (tnum tOrderID) tOrderID $
@@ -16723,7 +16723,7 @@ mOrderMassCancelReport = FMSpec
             { tName = "NoAffectedOrders"
             , tnum = tnum tNoAffectedOrders
             , tparser = gNoAffectedOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAffectedOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAffectedOrdersSpec''' }
 
          gNoAffectedOrdersP''' = groupP gNoAffectedOrdersSpec'''
          gNoAffectedOrdersSpec''' = FGSpec
@@ -16731,7 +16731,7 @@ mOrderMassCancelReport = FMSpec
             , gsSeperator = tOrigClOrdID
             , gsBody = gNoAffectedOrdersBody''' }
             where
-            gNoAffectedOrdersBody''' = 
+            gNoAffectedOrdersBody''' =
                LT.insert (tnum tAffectedOrderID) tAffectedOrderID $
                LT.insert (tnum tAffectedSecondaryOrderID) tAffectedSecondaryOrderID                LT.new
 
@@ -16739,7 +16739,7 @@ mOrderMassCancelReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -16747,7 +16747,7 @@ mOrderMassCancelReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -16756,7 +16756,7 @@ mOrderMassCancelReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -16764,14 +16764,14 @@ mOrderMassCancelReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyingSecurityAltID''' = FIXTag
             { tName = "NoUnderlyingSecurityAltID"
             , tnum = tnum tNoUnderlyingSecurityAltID
             , tparser = gNoUnderlyingSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
 
          gNoUnderlyingSecurityAltIDP''' = groupP gNoUnderlyingSecurityAltIDSpec'''
          gNoUnderlyingSecurityAltIDSpec''' = FGSpec
@@ -16779,14 +16779,14 @@ mOrderMassCancelReport = FMSpec
             , gsSeperator = tUnderlyingSecurityAltID
             , gsBody = gNoUnderlyingSecurityAltIDBody''' }
             where
-            gNoUnderlyingSecurityAltIDBody''' = 
+            gNoUnderlyingSecurityAltIDBody''' =
                LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                LT.new
 
          gNoUnderlyingStips''' = FIXTag
             { tName = "NoUnderlyingStips"
             , tnum = tnum tNoUnderlyingStips
             , tparser = gNoUnderlyingStipsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''' }
 
          gNoUnderlyingStipsP''' = groupP gNoUnderlyingStipsSpec'''
          gNoUnderlyingStipsSpec''' = FGSpec
@@ -16794,7 +16794,7 @@ mOrderMassCancelReport = FMSpec
             , gsSeperator = tUnderlyingStipType
             , gsBody = gNoUnderlyingStipsBody''' }
             where
-            gNoUnderlyingStipsBody''' = 
+            gNoUnderlyingStipsBody''' =
                LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                LT.new
 
 
@@ -16807,7 +16807,7 @@ mNewOrderCross = FMSpec
    , msBody = mNewOrderCrossBody
    , msTrailer = trailerFIX44 }
    where
-   mNewOrderCrossBody = 
+   mNewOrderCrossBody =
       LT.insert (tnum tCrossID) tCrossID $
       LT.insert (tnum tCrossType) tCrossType $
       LT.insert (tnum tCrossPrioritization) tCrossPrioritization $
@@ -16922,7 +16922,7 @@ mNewOrderCross = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -16930,7 +16930,7 @@ mNewOrderCross = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -16939,7 +16939,7 @@ mNewOrderCross = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -16947,7 +16947,7 @@ mNewOrderCross = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -16994,7 +16994,7 @@ mNewOrderCross = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -17002,7 +17002,7 @@ mNewOrderCross = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -17010,7 +17010,7 @@ mNewOrderCross = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -17018,14 +17018,14 @@ mNewOrderCross = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoSides''' = FIXTag
             { tName = "NoSides"
             , tnum = tnum tNoSides
             , tparser = gNoSidesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSidesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSidesSpec''' }
 
          gNoSidesP''' = groupP gNoSidesSpec'''
          gNoSidesSpec''' = FGSpec
@@ -17033,7 +17033,7 @@ mNewOrderCross = FMSpec
             , gsSeperator = tSide
             , gsBody = gNoSidesBody''' }
             where
-            gNoSidesBody''' = 
+            gNoSidesBody''' =
                LT.insert (tnum tClOrdID) tClOrdID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
                LT.insert (tnum tClOrdLinkID) tClOrdLinkID $
@@ -17078,7 +17078,7 @@ mNewOrderCross = FMSpec
                      { tName = "NoAllocs"
                      , tnum = tnum tNoAllocs
                      , tparser = gNoAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec'''''' }
 
                   gNoAllocsP'''''' = groupP gNoAllocsSpec''''''
                   gNoAllocsSpec'''''' = FGSpec
@@ -17086,7 +17086,7 @@ mNewOrderCross = FMSpec
                      , gsSeperator = tAllocAccount
                      , gsBody = gNoAllocsBody'''''' }
                      where
-                     gNoAllocsBody'''''' = 
+                     gNoAllocsBody'''''' =
                         LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                         LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                         LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -17097,7 +17097,7 @@ mNewOrderCross = FMSpec
                               { tName = "NoNestedPartyIDs"
                               , tnum = tnum tNoNestedPartyIDs
                               , tparser = gNoNestedPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
 
                            gNoNestedPartyIDsP''''''''' = groupP gNoNestedPartyIDsSpec'''''''''
                            gNoNestedPartyIDsSpec''''''''' = FGSpec
@@ -17105,7 +17105,7 @@ mNewOrderCross = FMSpec
                               , gsSeperator = tNestedPartyID
                               , gsBody = gNoNestedPartyIDsBody''''''''' }
                               where
-                              gNoNestedPartyIDsBody''''''''' = 
+                              gNoNestedPartyIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                                  LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                                  LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs''''''''''''                                  LT.new
@@ -17114,7 +17114,7 @@ mNewOrderCross = FMSpec
                                        { tName = "NoNestedPartySubIDs"
                                        , tnum = tnum tNoNestedPartySubIDs
                                        , tparser = gNoNestedPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
 
                                     gNoNestedPartySubIDsP'''''''''''' = groupP gNoNestedPartySubIDsSpec''''''''''''
                                     gNoNestedPartySubIDsSpec'''''''''''' = FGSpec
@@ -17122,7 +17122,7 @@ mNewOrderCross = FMSpec
                                        , gsSeperator = tNestedPartySubID
                                        , gsBody = gNoNestedPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNestedPartySubIDsBody'''''''''''' = 
+                                       gNoNestedPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                           LT.new
 
 
@@ -17131,7 +17131,7 @@ mNewOrderCross = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -17139,7 +17139,7 @@ mNewOrderCross = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -17148,7 +17148,7 @@ mNewOrderCross = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -17156,7 +17156,7 @@ mNewOrderCross = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -17165,7 +17165,7 @@ mNewOrderCross = FMSpec
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -17173,14 +17173,14 @@ mNewOrderCross = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -17188,14 +17188,14 @@ mNewOrderCross = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -17203,7 +17203,7 @@ mNewOrderCross = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -17254,7 +17254,7 @@ mNewOrderCross = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -17262,14 +17262,14 @@ mNewOrderCross = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -17277,7 +17277,7 @@ mNewOrderCross = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -17291,7 +17291,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
    , msBody = mCrossOrderCancelReplaceRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mCrossOrderCancelReplaceRequestBody = 
+   mCrossOrderCancelReplaceRequestBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tCrossID) tCrossID $
       LT.insert (tnum tOrigCrossID) tOrigCrossID $
@@ -17408,7 +17408,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -17416,7 +17416,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -17425,7 +17425,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -17433,7 +17433,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -17480,7 +17480,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -17488,7 +17488,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -17496,7 +17496,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -17504,14 +17504,14 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoSides''' = FIXTag
             { tName = "NoSides"
             , tnum = tnum tNoSides
             , tparser = gNoSidesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSidesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSidesSpec''' }
 
          gNoSidesP''' = groupP gNoSidesSpec'''
          gNoSidesSpec''' = FGSpec
@@ -17519,7 +17519,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tSide
             , gsBody = gNoSidesBody''' }
             where
-            gNoSidesBody''' = 
+            gNoSidesBody''' =
                LT.insert (tnum tOrigClOrdID) tOrigClOrdID $
                LT.insert (tnum tClOrdID) tClOrdID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -17566,7 +17566,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      { tName = "NoAllocs"
                      , tnum = tnum tNoAllocs
                      , tparser = gNoAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec'''''' }
 
                   gNoAllocsP'''''' = groupP gNoAllocsSpec''''''
                   gNoAllocsSpec'''''' = FGSpec
@@ -17574,7 +17574,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tAllocAccount
                      , gsBody = gNoAllocsBody'''''' }
                      where
-                     gNoAllocsBody'''''' = 
+                     gNoAllocsBody'''''' =
                         LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                         LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                         LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -17585,7 +17585,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                               { tName = "NoNestedPartyIDs"
                               , tnum = tnum tNoNestedPartyIDs
                               , tparser = gNoNestedPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
 
                            gNoNestedPartyIDsP''''''''' = groupP gNoNestedPartyIDsSpec'''''''''
                            gNoNestedPartyIDsSpec''''''''' = FGSpec
@@ -17593,7 +17593,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                               , gsSeperator = tNestedPartyID
                               , gsBody = gNoNestedPartyIDsBody''''''''' }
                               where
-                              gNoNestedPartyIDsBody''''''''' = 
+                              gNoNestedPartyIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                                  LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                                  LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs''''''''''''                                  LT.new
@@ -17602,7 +17602,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                                        { tName = "NoNestedPartySubIDs"
                                        , tnum = tnum tNoNestedPartySubIDs
                                        , tparser = gNoNestedPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
 
                                     gNoNestedPartySubIDsP'''''''''''' = groupP gNoNestedPartySubIDsSpec''''''''''''
                                     gNoNestedPartySubIDsSpec'''''''''''' = FGSpec
@@ -17610,7 +17610,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                                        , gsSeperator = tNestedPartySubID
                                        , gsBody = gNoNestedPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNestedPartySubIDsBody'''''''''''' = 
+                                       gNoNestedPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                           LT.new
 
 
@@ -17619,7 +17619,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -17627,7 +17627,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -17636,7 +17636,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -17644,7 +17644,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -17653,7 +17653,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -17661,14 +17661,14 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -17676,14 +17676,14 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -17691,7 +17691,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -17742,7 +17742,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -17750,14 +17750,14 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -17765,7 +17765,7 @@ mCrossOrderCancelReplaceRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -17779,7 +17779,7 @@ mCrossOrderCancelRequest = FMSpec
    , msBody = mCrossOrderCancelRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mCrossOrderCancelRequestBody = 
+   mCrossOrderCancelRequestBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tCrossID) tCrossID $
       LT.insert (tnum tOrigCrossID) tOrigCrossID $
@@ -17836,7 +17836,7 @@ mCrossOrderCancelRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -17844,7 +17844,7 @@ mCrossOrderCancelRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -17853,7 +17853,7 @@ mCrossOrderCancelRequest = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -17861,7 +17861,7 @@ mCrossOrderCancelRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -17908,7 +17908,7 @@ mCrossOrderCancelRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -17916,7 +17916,7 @@ mCrossOrderCancelRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -17924,7 +17924,7 @@ mCrossOrderCancelRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -17932,14 +17932,14 @@ mCrossOrderCancelRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoSides''' = FIXTag
             { tName = "NoSides"
             , tnum = tnum tNoSides
             , tparser = gNoSidesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSidesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSidesSpec''' }
 
          gNoSidesP''' = groupP gNoSidesSpec'''
          gNoSidesSpec''' = FGSpec
@@ -17947,7 +17947,7 @@ mCrossOrderCancelRequest = FMSpec
             , gsSeperator = tSide
             , gsBody = gNoSidesBody''' }
             where
-            gNoSidesBody''' = 
+            gNoSidesBody''' =
                LT.insert (tnum tOrigClOrdID) tOrigClOrdID $
                LT.insert (tnum tClOrdID) tClOrdID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -17970,7 +17970,7 @@ mCrossOrderCancelRequest = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -17978,7 +17978,7 @@ mCrossOrderCancelRequest = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -17987,7 +17987,7 @@ mCrossOrderCancelRequest = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -17995,7 +17995,7 @@ mCrossOrderCancelRequest = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -18004,7 +18004,7 @@ mCrossOrderCancelRequest = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -18012,7 +18012,7 @@ mCrossOrderCancelRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -18063,7 +18063,7 @@ mCrossOrderCancelRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -18071,14 +18071,14 @@ mCrossOrderCancelRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -18086,7 +18086,7 @@ mCrossOrderCancelRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -18100,7 +18100,7 @@ mSecurityTypeRequest = FMSpec
    , msBody = mSecurityTypeRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityTypeRequestBody = 
+   mSecurityTypeRequestBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tText) tText $
       LT.insert (tnum tEncodedTextLen) tEncodedTextLen $
@@ -18120,7 +18120,7 @@ mSecurityTypes = FMSpec
    , msBody = mSecurityTypesBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityTypesBody = 
+   mSecurityTypesBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityResponseID) tSecurityResponseID $
       LT.insert (tnum tSecurityResponseType) tSecurityResponseType $
@@ -18138,7 +18138,7 @@ mSecurityTypes = FMSpec
             { tName = "NoSecurityTypes"
             , tnum = tnum tNoSecurityTypes
             , tparser = gNoSecurityTypesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityTypesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityTypesSpec''' }
 
          gNoSecurityTypesP''' = groupP gNoSecurityTypesSpec'''
          gNoSecurityTypesSpec''' = FGSpec
@@ -18146,7 +18146,7 @@ mSecurityTypes = FMSpec
             , gsSeperator = tSecurityType
             , gsBody = gNoSecurityTypesBody''' }
             where
-            gNoSecurityTypesBody''' = 
+            gNoSecurityTypesBody''' =
                LT.insert (tnum tSecuritySubType) tSecuritySubType $
                LT.insert (tnum tProduct) tProduct $
                LT.insert (tnum tCFICode) tCFICode                LT.new
@@ -18161,7 +18161,7 @@ mSecurityListRequest = FMSpec
    , msBody = mSecurityListRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityListRequestBody = 
+   mSecurityListRequestBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityListRequestType) tSecurityListRequestType $
       LT.insert (tnum tSymbol) tSymbol $
@@ -18232,7 +18232,7 @@ mSecurityListRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -18240,7 +18240,7 @@ mSecurityListRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -18249,7 +18249,7 @@ mSecurityListRequest = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -18257,14 +18257,14 @@ mSecurityListRequest = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -18272,7 +18272,7 @@ mSecurityListRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -18319,7 +18319,7 @@ mSecurityListRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -18327,7 +18327,7 @@ mSecurityListRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -18335,7 +18335,7 @@ mSecurityListRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -18343,14 +18343,14 @@ mSecurityListRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -18358,7 +18358,7 @@ mSecurityListRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -18409,7 +18409,7 @@ mSecurityListRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -18417,14 +18417,14 @@ mSecurityListRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -18432,7 +18432,7 @@ mSecurityListRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -18446,7 +18446,7 @@ mSecurityList = FMSpec
    , msBody = mSecurityListBody
    , msTrailer = trailerFIX44 }
    where
-   mSecurityListBody = 
+   mSecurityListBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityResponseID) tSecurityResponseID $
       LT.insert (tnum tSecurityRequestResult) tSecurityRequestResult $
@@ -18458,7 +18458,7 @@ mSecurityList = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -18466,7 +18466,7 @@ mSecurityList = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -18551,7 +18551,7 @@ mSecurityList = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -18559,7 +18559,7 @@ mSecurityList = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -18568,7 +18568,7 @@ mSecurityList = FMSpec
                      { tName = "NoInstrAttrib"
                      , tnum = tnum tNoInstrAttrib
                      , tparser = gNoInstrAttribP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec'''''' }
 
                   gNoInstrAttribP'''''' = groupP gNoInstrAttribSpec''''''
                   gNoInstrAttribSpec'''''' = FGSpec
@@ -18576,14 +18576,14 @@ mSecurityList = FMSpec
                      , gsSeperator = tInstrAttribType
                      , gsBody = gNoInstrAttribBody'''''' }
                      where
-                     gNoInstrAttribBody'''''' = 
+                     gNoInstrAttribBody'''''' =
                         LT.insert (tnum tInstrAttribValue) tInstrAttribValue                         LT.new
 
                   gNoLegs'''''' = FIXTag
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -18591,7 +18591,7 @@ mSecurityList = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -18646,7 +18646,7 @@ mSecurityList = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -18654,14 +18654,14 @@ mSecurityList = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
                            gNoLegStipulations''''''''' = FIXTag
                               { tName = "NoLegStipulations"
                               , tnum = tnum tNoLegStipulations
                               , tparser = gNoLegStipulationsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec''''''''' }
 
                            gNoLegStipulationsP''''''''' = groupP gNoLegStipulationsSpec'''''''''
                            gNoLegStipulationsSpec''''''''' = FGSpec
@@ -18669,7 +18669,7 @@ mSecurityList = FMSpec
                               , gsSeperator = tLegStipulationType
                               , gsBody = gNoLegStipulationsBody''''''''' }
                               where
-                              gNoLegStipulationsBody''''''''' = 
+                              gNoLegStipulationsBody''''''''' =
                                  LT.insert (tnum tLegStipulationValue) tLegStipulationValue                                  LT.new
 
 
@@ -18677,7 +18677,7 @@ mSecurityList = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -18685,14 +18685,14 @@ mSecurityList = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoStipulations'''''' = FIXTag
                      { tName = "NoStipulations"
                      , tnum = tnum tNoStipulations
                      , tparser = gNoStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec'''''' }
 
                   gNoStipulationsP'''''' = groupP gNoStipulationsSpec''''''
                   gNoStipulationsSpec'''''' = FGSpec
@@ -18700,14 +18700,14 @@ mSecurityList = FMSpec
                      , gsSeperator = tStipulationType
                      , gsBody = gNoStipulationsBody'''''' }
                      where
-                     gNoStipulationsBody'''''' = 
+                     gNoStipulationsBody'''''' =
                         LT.insert (tnum tStipulationValue) tStipulationValue                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -18715,7 +18715,7 @@ mSecurityList = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -18766,7 +18766,7 @@ mSecurityList = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -18774,14 +18774,14 @@ mSecurityList = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -18789,7 +18789,7 @@ mSecurityList = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -18804,7 +18804,7 @@ mDerivativeSecurityListRequest = FMSpec
    , msBody = mDerivativeSecurityListRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mDerivativeSecurityListRequestBody = 
+   mDerivativeSecurityListRequestBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityListRequestType) tSecurityListRequestType $
       LT.insert (tnum tUnderlyingSymbol) tUnderlyingSymbol $
@@ -18866,7 +18866,7 @@ mDerivativeSecurityListRequest = FMSpec
             { tName = "NoUnderlyingSecurityAltID"
             , tnum = tnum tNoUnderlyingSecurityAltID
             , tparser = gNoUnderlyingSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
 
          gNoUnderlyingSecurityAltIDP''' = groupP gNoUnderlyingSecurityAltIDSpec'''
          gNoUnderlyingSecurityAltIDSpec''' = FGSpec
@@ -18874,14 +18874,14 @@ mDerivativeSecurityListRequest = FMSpec
             , gsSeperator = tUnderlyingSecurityAltID
             , gsBody = gNoUnderlyingSecurityAltIDBody''' }
             where
-            gNoUnderlyingSecurityAltIDBody''' = 
+            gNoUnderlyingSecurityAltIDBody''' =
                LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                LT.new
 
          gNoUnderlyingStips''' = FIXTag
             { tName = "NoUnderlyingStips"
             , tnum = tnum tNoUnderlyingStips
             , tparser = gNoUnderlyingStipsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''' }
 
          gNoUnderlyingStipsP''' = groupP gNoUnderlyingStipsSpec'''
          gNoUnderlyingStipsSpec''' = FGSpec
@@ -18889,7 +18889,7 @@ mDerivativeSecurityListRequest = FMSpec
             , gsSeperator = tUnderlyingStipType
             , gsBody = gNoUnderlyingStipsBody''' }
             where
-            gNoUnderlyingStipsBody''' = 
+            gNoUnderlyingStipsBody''' =
                LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                LT.new
 
 
@@ -18902,7 +18902,7 @@ mDerivativeSecurityList = FMSpec
    , msBody = mDerivativeSecurityListBody
    , msTrailer = trailerFIX44 }
    where
-   mDerivativeSecurityListBody = 
+   mDerivativeSecurityListBody =
       LT.insert (tnum tSecurityReqID) tSecurityReqID $
       LT.insert (tnum tSecurityResponseID) tSecurityResponseID $
       LT.insert (tnum tSecurityRequestResult) tSecurityRequestResult $
@@ -18960,7 +18960,7 @@ mDerivativeSecurityList = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -18968,7 +18968,7 @@ mDerivativeSecurityList = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -19026,7 +19026,7 @@ mDerivativeSecurityList = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -19034,7 +19034,7 @@ mDerivativeSecurityList = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -19043,7 +19043,7 @@ mDerivativeSecurityList = FMSpec
                      { tName = "NoInstrAttrib"
                      , tnum = tnum tNoInstrAttrib
                      , tparser = gNoInstrAttribP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec'''''' }
 
                   gNoInstrAttribP'''''' = groupP gNoInstrAttribSpec''''''
                   gNoInstrAttribSpec'''''' = FGSpec
@@ -19051,14 +19051,14 @@ mDerivativeSecurityList = FMSpec
                      , gsSeperator = tInstrAttribType
                      , gsBody = gNoInstrAttribBody'''''' }
                      where
-                     gNoInstrAttribBody'''''' = 
+                     gNoInstrAttribBody'''''' =
                         LT.insert (tnum tInstrAttribValue) tInstrAttribValue                         LT.new
 
                   gNoLegs'''''' = FIXTag
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -19066,7 +19066,7 @@ mDerivativeSecurityList = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -19113,7 +19113,7 @@ mDerivativeSecurityList = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -19121,7 +19121,7 @@ mDerivativeSecurityList = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
 
@@ -19129,7 +19129,7 @@ mDerivativeSecurityList = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -19137,7 +19137,7 @@ mDerivativeSecurityList = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
 
@@ -19145,7 +19145,7 @@ mDerivativeSecurityList = FMSpec
             { tName = "NoUnderlyingSecurityAltID"
             , tnum = tnum tNoUnderlyingSecurityAltID
             , tparser = gNoUnderlyingSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
 
          gNoUnderlyingSecurityAltIDP''' = groupP gNoUnderlyingSecurityAltIDSpec'''
          gNoUnderlyingSecurityAltIDSpec''' = FGSpec
@@ -19153,14 +19153,14 @@ mDerivativeSecurityList = FMSpec
             , gsSeperator = tUnderlyingSecurityAltID
             , gsBody = gNoUnderlyingSecurityAltIDBody''' }
             where
-            gNoUnderlyingSecurityAltIDBody''' = 
+            gNoUnderlyingSecurityAltIDBody''' =
                LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                LT.new
 
          gNoUnderlyingStips''' = FIXTag
             { tName = "NoUnderlyingStips"
             , tnum = tnum tNoUnderlyingStips
             , tparser = gNoUnderlyingStipsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''' }
 
          gNoUnderlyingStipsP''' = groupP gNoUnderlyingStipsSpec'''
          gNoUnderlyingStipsSpec''' = FGSpec
@@ -19168,7 +19168,7 @@ mDerivativeSecurityList = FMSpec
             , gsSeperator = tUnderlyingStipType
             , gsBody = gNoUnderlyingStipsBody''' }
             where
-            gNoUnderlyingStipsBody''' = 
+            gNoUnderlyingStipsBody''' =
                LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                LT.new
 
 
@@ -19181,7 +19181,7 @@ mNewOrderMultileg = FMSpec
    , msBody = mNewOrderMultilegBody
    , msTrailer = trailerFIX44 }
    where
-   mNewOrderMultilegBody = 
+   mNewOrderMultilegBody =
       LT.insert (tnum tClOrdID) tClOrdID $
       LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
       LT.insert (tnum tClOrdLinkID) tClOrdLinkID $
@@ -19317,7 +19317,7 @@ mNewOrderMultileg = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -19325,7 +19325,7 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -19336,7 +19336,7 @@ mNewOrderMultileg = FMSpec
                      { tName = "NoNested3PartyIDs"
                      , tnum = tnum tNoNested3PartyIDs
                      , tparser = gNoNested3PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested3PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested3PartyIDsSpec'''''' }
 
                   gNoNested3PartyIDsP'''''' = groupP gNoNested3PartyIDsSpec''''''
                   gNoNested3PartyIDsSpec'''''' = FGSpec
@@ -19344,7 +19344,7 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tNested3PartyID
                      , gsBody = gNoNested3PartyIDsBody'''''' }
                      where
-                     gNoNested3PartyIDsBody'''''' = 
+                     gNoNested3PartyIDsBody'''''' =
                         LT.insert (tnum tNested3PartyIDSource) tNested3PartyIDSource $
                         LT.insert (tnum tNested3PartyRole) tNested3PartyRole $
                         LT.insert (tnum tNoNested3PartySubIDs) gNoNested3PartySubIDs'''''''''                         LT.new
@@ -19353,7 +19353,7 @@ mNewOrderMultileg = FMSpec
                               { tName = "NoNested3PartySubIDs"
                               , tnum = tnum tNoNested3PartySubIDs
                               , tparser = gNoNested3PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested3PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested3PartySubIDsSpec''''''''' }
 
                            gNoNested3PartySubIDsP''''''''' = groupP gNoNested3PartySubIDsSpec'''''''''
                            gNoNested3PartySubIDsSpec''''''''' = FGSpec
@@ -19361,7 +19361,7 @@ mNewOrderMultileg = FMSpec
                               , gsSeperator = tNested3PartySubID
                               , gsBody = gNoNested3PartySubIDsBody''''''''' }
                               where
-                              gNoNested3PartySubIDsBody''''''''' = 
+                              gNoNested3PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested3PartySubIDType) tNested3PartySubIDType                                  LT.new
 
 
@@ -19370,7 +19370,7 @@ mNewOrderMultileg = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -19378,7 +19378,7 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -19387,7 +19387,7 @@ mNewOrderMultileg = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -19395,7 +19395,7 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -19453,7 +19453,7 @@ mNewOrderMultileg = FMSpec
                      { tName = "NoLegAllocs"
                      , tnum = tnum tNoLegAllocs
                      , tparser = gNoLegAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegAllocsSpec'''''' }
 
                   gNoLegAllocsP'''''' = groupP gNoLegAllocsSpec''''''
                   gNoLegAllocsSpec'''''' = FGSpec
@@ -19461,7 +19461,7 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tLegAllocAccount
                      , gsBody = gNoLegAllocsBody'''''' }
                      where
-                     gNoLegAllocsBody'''''' = 
+                     gNoLegAllocsBody'''''' =
                         LT.insert (tnum tLegIndividualAllocID) tLegIndividualAllocID $
                         LT.insert (tnum tNoNested2PartyIDs) gNoNested2PartyIDs''''''''' $
                         LT.insert (tnum tLegAllocQty) tLegAllocQty $
@@ -19472,7 +19472,7 @@ mNewOrderMultileg = FMSpec
                               { tName = "NoNested2PartyIDs"
                               , tnum = tnum tNoNested2PartyIDs
                               , tparser = gNoNested2PartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
 
                            gNoNested2PartyIDsP''''''''' = groupP gNoNested2PartyIDsSpec'''''''''
                            gNoNested2PartyIDsSpec''''''''' = FGSpec
@@ -19480,7 +19480,7 @@ mNewOrderMultileg = FMSpec
                               , gsSeperator = tNested2PartyID
                               , gsBody = gNoNested2PartyIDsBody''''''''' }
                               where
-                              gNoNested2PartyIDsBody''''''''' = 
+                              gNoNested2PartyIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                                  LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                                  LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs''''''''''''                                  LT.new
@@ -19489,7 +19489,7 @@ mNewOrderMultileg = FMSpec
                                        { tName = "NoNested2PartySubIDs"
                                        , tnum = tnum tNoNested2PartySubIDs
                                        , tparser = gNoNested2PartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
 
                                     gNoNested2PartySubIDsP'''''''''''' = groupP gNoNested2PartySubIDsSpec''''''''''''
                                     gNoNested2PartySubIDsSpec'''''''''''' = FGSpec
@@ -19497,7 +19497,7 @@ mNewOrderMultileg = FMSpec
                                        , gsSeperator = tNested2PartySubID
                                        , gsBody = gNoNested2PartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNested2PartySubIDsBody'''''''''''' = 
+                                       gNoNested2PartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                           LT.new
 
 
@@ -19506,7 +19506,7 @@ mNewOrderMultileg = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -19514,14 +19514,14 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -19529,14 +19529,14 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -19544,7 +19544,7 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -19553,7 +19553,7 @@ mNewOrderMultileg = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -19561,7 +19561,7 @@ mNewOrderMultileg = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -19570,7 +19570,7 @@ mNewOrderMultileg = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -19578,7 +19578,7 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -19587,7 +19587,7 @@ mNewOrderMultileg = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -19595,7 +19595,7 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -19603,7 +19603,7 @@ mNewOrderMultileg = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -19611,14 +19611,14 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -19626,14 +19626,14 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -19641,7 +19641,7 @@ mNewOrderMultileg = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -19692,7 +19692,7 @@ mNewOrderMultileg = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -19700,14 +19700,14 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -19715,7 +19715,7 @@ mNewOrderMultileg = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -19729,7 +19729,7 @@ mMultilegOrderCancelReplace = FMSpec
    , msBody = mMultilegOrderCancelReplaceBody
    , msTrailer = trailerFIX44 }
    where
-   mMultilegOrderCancelReplaceBody = 
+   mMultilegOrderCancelReplaceBody =
       LT.insert (tnum tOrderID) tOrderID $
       LT.insert (tnum tOrigClOrdID) tOrigClOrdID $
       LT.insert (tnum tClOrdID) tClOrdID $
@@ -19868,7 +19868,7 @@ mMultilegOrderCancelReplace = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -19876,7 +19876,7 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -19887,7 +19887,7 @@ mMultilegOrderCancelReplace = FMSpec
                      { tName = "NoNested3PartyIDs"
                      , tnum = tnum tNoNested3PartyIDs
                      , tparser = gNoNested3PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested3PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested3PartyIDsSpec'''''' }
 
                   gNoNested3PartyIDsP'''''' = groupP gNoNested3PartyIDsSpec''''''
                   gNoNested3PartyIDsSpec'''''' = FGSpec
@@ -19895,7 +19895,7 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tNested3PartyID
                      , gsBody = gNoNested3PartyIDsBody'''''' }
                      where
-                     gNoNested3PartyIDsBody'''''' = 
+                     gNoNested3PartyIDsBody'''''' =
                         LT.insert (tnum tNested3PartyIDSource) tNested3PartyIDSource $
                         LT.insert (tnum tNested3PartyRole) tNested3PartyRole $
                         LT.insert (tnum tNoNested3PartySubIDs) gNoNested3PartySubIDs'''''''''                         LT.new
@@ -19904,7 +19904,7 @@ mMultilegOrderCancelReplace = FMSpec
                               { tName = "NoNested3PartySubIDs"
                               , tnum = tnum tNoNested3PartySubIDs
                               , tparser = gNoNested3PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested3PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested3PartySubIDsSpec''''''''' }
 
                            gNoNested3PartySubIDsP''''''''' = groupP gNoNested3PartySubIDsSpec'''''''''
                            gNoNested3PartySubIDsSpec''''''''' = FGSpec
@@ -19912,7 +19912,7 @@ mMultilegOrderCancelReplace = FMSpec
                               , gsSeperator = tNested3PartySubID
                               , gsBody = gNoNested3PartySubIDsBody''''''''' }
                               where
-                              gNoNested3PartySubIDsBody''''''''' = 
+                              gNoNested3PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested3PartySubIDType) tNested3PartySubIDType                                  LT.new
 
 
@@ -19921,7 +19921,7 @@ mMultilegOrderCancelReplace = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -19929,7 +19929,7 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -19938,7 +19938,7 @@ mMultilegOrderCancelReplace = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -19946,7 +19946,7 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -20004,7 +20004,7 @@ mMultilegOrderCancelReplace = FMSpec
                      { tName = "NoLegAllocs"
                      , tnum = tnum tNoLegAllocs
                      , tparser = gNoLegAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegAllocsSpec'''''' }
 
                   gNoLegAllocsP'''''' = groupP gNoLegAllocsSpec''''''
                   gNoLegAllocsSpec'''''' = FGSpec
@@ -20012,7 +20012,7 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tLegAllocAccount
                      , gsBody = gNoLegAllocsBody'''''' }
                      where
-                     gNoLegAllocsBody'''''' = 
+                     gNoLegAllocsBody'''''' =
                         LT.insert (tnum tLegIndividualAllocID) tLegIndividualAllocID $
                         LT.insert (tnum tNoNested2PartyIDs) gNoNested2PartyIDs''''''''' $
                         LT.insert (tnum tLegAllocQty) tLegAllocQty $
@@ -20023,7 +20023,7 @@ mMultilegOrderCancelReplace = FMSpec
                               { tName = "NoNested2PartyIDs"
                               , tnum = tnum tNoNested2PartyIDs
                               , tparser = gNoNested2PartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
 
                            gNoNested2PartyIDsP''''''''' = groupP gNoNested2PartyIDsSpec'''''''''
                            gNoNested2PartyIDsSpec''''''''' = FGSpec
@@ -20031,7 +20031,7 @@ mMultilegOrderCancelReplace = FMSpec
                               , gsSeperator = tNested2PartyID
                               , gsBody = gNoNested2PartyIDsBody''''''''' }
                               where
-                              gNoNested2PartyIDsBody''''''''' = 
+                              gNoNested2PartyIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                                  LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                                  LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs''''''''''''                                  LT.new
@@ -20040,7 +20040,7 @@ mMultilegOrderCancelReplace = FMSpec
                                        { tName = "NoNested2PartySubIDs"
                                        , tnum = tnum tNoNested2PartySubIDs
                                        , tparser = gNoNested2PartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
 
                                     gNoNested2PartySubIDsP'''''''''''' = groupP gNoNested2PartySubIDsSpec''''''''''''
                                     gNoNested2PartySubIDsSpec'''''''''''' = FGSpec
@@ -20048,7 +20048,7 @@ mMultilegOrderCancelReplace = FMSpec
                                        , gsSeperator = tNested2PartySubID
                                        , gsBody = gNoNested2PartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNested2PartySubIDsBody'''''''''''' = 
+                                       gNoNested2PartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                           LT.new
 
 
@@ -20057,7 +20057,7 @@ mMultilegOrderCancelReplace = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -20065,14 +20065,14 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -20080,14 +20080,14 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -20095,7 +20095,7 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -20104,7 +20104,7 @@ mMultilegOrderCancelReplace = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -20112,7 +20112,7 @@ mMultilegOrderCancelReplace = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -20121,7 +20121,7 @@ mMultilegOrderCancelReplace = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -20129,7 +20129,7 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -20138,7 +20138,7 @@ mMultilegOrderCancelReplace = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -20146,7 +20146,7 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -20154,7 +20154,7 @@ mMultilegOrderCancelReplace = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -20162,14 +20162,14 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -20177,14 +20177,14 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -20192,7 +20192,7 @@ mMultilegOrderCancelReplace = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -20243,7 +20243,7 @@ mMultilegOrderCancelReplace = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -20251,14 +20251,14 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -20266,7 +20266,7 @@ mMultilegOrderCancelReplace = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -20280,7 +20280,7 @@ mTradeCaptureReportRequest = FMSpec
    , msBody = mTradeCaptureReportRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mTradeCaptureReportRequestBody = 
+   mTradeCaptureReportRequestBody =
       LT.insert (tnum tTradeRequestID) tTradeRequestID $
       LT.insert (tnum tTradeRequestType) tTradeRequestType $
       LT.insert (tnum tSubscriptionRequestType) tSubscriptionRequestType $
@@ -20373,7 +20373,7 @@ mTradeCaptureReportRequest = FMSpec
             { tName = "NoDates"
             , tnum = tnum tNoDates
             , tparser = gNoDatesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDatesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDatesSpec''' }
 
          gNoDatesP''' = groupP gNoDatesSpec'''
          gNoDatesSpec''' = FGSpec
@@ -20381,14 +20381,14 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tTradeDate
             , gsBody = gNoDatesBody''' }
             where
-            gNoDatesBody''' = 
+            gNoDatesBody''' =
                LT.insert (tnum tTransactTime) tTransactTime                LT.new
 
          gNoEvents''' = FIXTag
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -20396,7 +20396,7 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -20405,7 +20405,7 @@ mTradeCaptureReportRequest = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -20413,14 +20413,14 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -20428,7 +20428,7 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -20475,7 +20475,7 @@ mTradeCaptureReportRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -20483,7 +20483,7 @@ mTradeCaptureReportRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -20491,7 +20491,7 @@ mTradeCaptureReportRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -20499,7 +20499,7 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -20508,7 +20508,7 @@ mTradeCaptureReportRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -20516,7 +20516,7 @@ mTradeCaptureReportRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -20524,7 +20524,7 @@ mTradeCaptureReportRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -20532,14 +20532,14 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -20547,7 +20547,7 @@ mTradeCaptureReportRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -20598,7 +20598,7 @@ mTradeCaptureReportRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -20606,14 +20606,14 @@ mTradeCaptureReportRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -20621,7 +20621,7 @@ mTradeCaptureReportRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -20635,7 +20635,7 @@ mTradeCaptureReport = FMSpec
    , msBody = mTradeCaptureReportBody
    , msTrailer = trailerFIX44 }
    where
-   mTradeCaptureReportBody = 
+   mTradeCaptureReportBody =
       LT.insert (tnum tTradeReportID) tTradeReportID $
       LT.insert (tnum tTradeReportTransType) tTradeReportTransType $
       LT.insert (tnum tTradeReportType) tTradeReportType $
@@ -20760,7 +20760,7 @@ mTradeCaptureReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -20768,7 +20768,7 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -20777,7 +20777,7 @@ mTradeCaptureReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -20785,7 +20785,7 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -20843,7 +20843,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -20851,14 +20851,14 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -20866,14 +20866,14 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -20881,7 +20881,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -20890,7 +20890,7 @@ mTradeCaptureReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -20898,7 +20898,7 @@ mTradeCaptureReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -20907,7 +20907,7 @@ mTradeCaptureReport = FMSpec
             { tName = "NoPosAmt"
             , tnum = tnum tNoPosAmt
             , tparser = gNoPosAmtP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPosAmtSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPosAmtSpec''' }
 
          gNoPosAmtP''' = groupP gNoPosAmtSpec'''
          gNoPosAmtSpec''' = FGSpec
@@ -20915,14 +20915,14 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tPosAmtType
             , gsBody = gNoPosAmtBody''' }
             where
-            gNoPosAmtBody''' = 
+            gNoPosAmtBody''' =
                LT.insert (tnum tPosAmt) tPosAmt                LT.new
 
          gNoSecurityAltID''' = FIXTag
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -20930,14 +20930,14 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoSides''' = FIXTag
             { tName = "NoSides"
             , tnum = tnum tNoSides
             , tparser = gNoSidesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSidesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSidesSpec''' }
 
          gNoSidesP''' = groupP gNoSidesSpec'''
          gNoSidesSpec''' = FGSpec
@@ -20945,7 +20945,7 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tSide
             , gsBody = gNoSidesBody''' }
             where
-            gNoSidesBody''' = 
+            gNoSidesBody''' =
                LT.insert (tnum tOrderID) tOrderID $
                LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
                LT.insert (tnum tClOrdID) tClOrdID $
@@ -21015,7 +21015,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoAllocs"
                      , tnum = tnum tNoAllocs
                      , tparser = gNoAllocsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec'''''' }
 
                   gNoAllocsP'''''' = groupP gNoAllocsSpec''''''
                   gNoAllocsSpec'''''' = FGSpec
@@ -21023,7 +21023,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tAllocAccount
                      , gsBody = gNoAllocsBody'''''' }
                      where
-                     gNoAllocsBody'''''' = 
+                     gNoAllocsBody'''''' =
                         LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                         LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                         LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -21034,7 +21034,7 @@ mTradeCaptureReport = FMSpec
                               { tName = "NoNested2PartyIDs"
                               , tnum = tnum tNoNested2PartyIDs
                               , tparser = gNoNested2PartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec''''''''' }
 
                            gNoNested2PartyIDsP''''''''' = groupP gNoNested2PartyIDsSpec'''''''''
                            gNoNested2PartyIDsSpec''''''''' = FGSpec
@@ -21042,7 +21042,7 @@ mTradeCaptureReport = FMSpec
                               , gsSeperator = tNested2PartyID
                               , gsBody = gNoNested2PartyIDsBody''''''''' }
                               where
-                              gNoNested2PartyIDsBody''''''''' = 
+                              gNoNested2PartyIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                                  LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                                  LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs''''''''''''                                  LT.new
@@ -21051,7 +21051,7 @@ mTradeCaptureReport = FMSpec
                                        { tName = "NoNested2PartySubIDs"
                                        , tnum = tnum tNoNested2PartySubIDs
                                        , tparser = gNoNested2PartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec'''''''''''' }
 
                                     gNoNested2PartySubIDsP'''''''''''' = groupP gNoNested2PartySubIDsSpec''''''''''''
                                     gNoNested2PartySubIDsSpec'''''''''''' = FGSpec
@@ -21059,7 +21059,7 @@ mTradeCaptureReport = FMSpec
                                        , gsSeperator = tNested2PartySubID
                                        , gsBody = gNoNested2PartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNested2PartySubIDsBody'''''''''''' = 
+                                       gNoNested2PartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                           LT.new
 
 
@@ -21068,7 +21068,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoClearingInstructions"
                      , tnum = tnum tNoClearingInstructions
                      , tparser = gNoClearingInstructionsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoClearingInstructionsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoClearingInstructionsSpec'''''' }
 
                   gNoClearingInstructionsP'''''' = groupP gNoClearingInstructionsSpec''''''
                   gNoClearingInstructionsSpec'''''' = FGSpec
@@ -21076,14 +21076,14 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tClearingInstruction
                      , gsBody = gNoClearingInstructionsBody'''''' }
                      where
-                     gNoClearingInstructionsBody'''''' = 
+                     gNoClearingInstructionsBody'''''' =
                         LT.new
 
                   gNoContAmts'''''' = FIXTag
                      { tName = "NoContAmts"
                      , tnum = tnum tNoContAmts
                      , tparser = gNoContAmtsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoContAmtsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoContAmtsSpec'''''' }
 
                   gNoContAmtsP'''''' = groupP gNoContAmtsSpec''''''
                   gNoContAmtsSpec'''''' = FGSpec
@@ -21091,7 +21091,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tContAmtType
                      , gsBody = gNoContAmtsBody'''''' }
                      where
-                     gNoContAmtsBody'''''' = 
+                     gNoContAmtsBody'''''' =
                         LT.insert (tnum tContAmtValue) tContAmtValue $
                         LT.insert (tnum tContAmtCurr) tContAmtCurr                         LT.new
 
@@ -21099,7 +21099,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoMiscFees"
                      , tnum = tnum tNoMiscFees
                      , tparser = gNoMiscFeesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec'''''' }
 
                   gNoMiscFeesP'''''' = groupP gNoMiscFeesSpec''''''
                   gNoMiscFeesSpec'''''' = FGSpec
@@ -21107,7 +21107,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tMiscFeeAmt
                      , gsBody = gNoMiscFeesBody'''''' }
                      where
-                     gNoMiscFeesBody'''''' = 
+                     gNoMiscFeesBody'''''' =
                         LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                         LT.insert (tnum tMiscFeeType) tMiscFeeType $
                         LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                         LT.new
@@ -21116,7 +21116,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -21124,7 +21124,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -21133,7 +21133,7 @@ mTradeCaptureReport = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -21141,7 +21141,7 @@ mTradeCaptureReport = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -21149,7 +21149,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoStipulations"
                      , tnum = tnum tNoStipulations
                      , tparser = gNoStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec'''''' }
 
                   gNoStipulationsP'''''' = groupP gNoStipulationsSpec''''''
                   gNoStipulationsSpec'''''' = FGSpec
@@ -21157,7 +21157,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tStipulationType
                      , gsBody = gNoStipulationsBody'''''' }
                      where
-                     gNoStipulationsBody'''''' = 
+                     gNoStipulationsBody'''''' =
                         LT.insert (tnum tStipulationValue) tStipulationValue                         LT.new
 
 
@@ -21165,7 +21165,7 @@ mTradeCaptureReport = FMSpec
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -21173,7 +21173,7 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -21181,7 +21181,7 @@ mTradeCaptureReport = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -21189,7 +21189,7 @@ mTradeCaptureReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -21240,7 +21240,7 @@ mTradeCaptureReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -21248,14 +21248,14 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -21263,7 +21263,7 @@ mTradeCaptureReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -21277,7 +21277,7 @@ mOrderMassStatusRequest = FMSpec
    , msBody = mOrderMassStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mOrderMassStatusRequestBody = 
+   mOrderMassStatusRequestBody =
       LT.insert (tnum tMassStatusReqID) tMassStatusReqID $
       LT.insert (tnum tMassStatusReqType) tMassStatusReqType $
       LT.insert (tnum tNoPartyIDs) gNoPartyIDs''' $
@@ -21379,7 +21379,7 @@ mOrderMassStatusRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -21387,7 +21387,7 @@ mOrderMassStatusRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -21396,7 +21396,7 @@ mOrderMassStatusRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -21404,7 +21404,7 @@ mOrderMassStatusRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -21413,7 +21413,7 @@ mOrderMassStatusRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -21421,7 +21421,7 @@ mOrderMassStatusRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -21429,7 +21429,7 @@ mOrderMassStatusRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -21437,14 +21437,14 @@ mOrderMassStatusRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyingSecurityAltID''' = FIXTag
             { tName = "NoUnderlyingSecurityAltID"
             , tnum = tnum tNoUnderlyingSecurityAltID
             , tparser = gNoUnderlyingSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''' }
 
          gNoUnderlyingSecurityAltIDP''' = groupP gNoUnderlyingSecurityAltIDSpec'''
          gNoUnderlyingSecurityAltIDSpec''' = FGSpec
@@ -21452,14 +21452,14 @@ mOrderMassStatusRequest = FMSpec
             , gsSeperator = tUnderlyingSecurityAltID
             , gsBody = gNoUnderlyingSecurityAltIDBody''' }
             where
-            gNoUnderlyingSecurityAltIDBody''' = 
+            gNoUnderlyingSecurityAltIDBody''' =
                LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                LT.new
 
          gNoUnderlyingStips''' = FIXTag
             { tName = "NoUnderlyingStips"
             , tnum = tnum tNoUnderlyingStips
             , tparser = gNoUnderlyingStipsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''' }
 
          gNoUnderlyingStipsP''' = groupP gNoUnderlyingStipsSpec'''
          gNoUnderlyingStipsSpec''' = FGSpec
@@ -21467,7 +21467,7 @@ mOrderMassStatusRequest = FMSpec
             , gsSeperator = tUnderlyingStipType
             , gsBody = gNoUnderlyingStipsBody''' }
             where
-            gNoUnderlyingStipsBody''' = 
+            gNoUnderlyingStipsBody''' =
                LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                LT.new
 
 
@@ -21480,7 +21480,7 @@ mQuoteRequestReject = FMSpec
    , msBody = mQuoteRequestRejectBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteRequestRejectBody = 
+   mQuoteRequestRejectBody =
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tRFQReqID) tRFQReqID $
       LT.insert (tnum tQuoteRequestRejectReason) tQuoteRequestRejectReason $
@@ -21493,7 +21493,7 @@ mQuoteRequestReject = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -21501,7 +21501,7 @@ mQuoteRequestReject = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -21604,7 +21604,7 @@ mQuoteRequestReject = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -21612,7 +21612,7 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -21621,7 +21621,7 @@ mQuoteRequestReject = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -21629,7 +21629,7 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -21687,7 +21687,7 @@ mQuoteRequestReject = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -21695,14 +21695,14 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
                            gNoLegStipulations''''''''' = FIXTag
                               { tName = "NoLegStipulations"
                               , tnum = tnum tNoLegStipulations
                               , tparser = gNoLegStipulationsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec''''''''' }
 
                            gNoLegStipulationsP''''''''' = groupP gNoLegStipulationsSpec'''''''''
                            gNoLegStipulationsSpec''''''''' = FGSpec
@@ -21710,14 +21710,14 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tLegStipulationType
                               , gsBody = gNoLegStipulationsBody''''''''' }
                               where
-                              gNoLegStipulationsBody''''''''' = 
+                              gNoLegStipulationsBody''''''''' =
                                  LT.insert (tnum tLegStipulationValue) tLegStipulationValue                                  LT.new
 
                            gNoNestedPartyIDs''''''''' = FIXTag
                               { tName = "NoNestedPartyIDs"
                               , tnum = tnum tNoNestedPartyIDs
                               , tparser = gNoNestedPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec''''''''' }
 
                            gNoNestedPartyIDsP''''''''' = groupP gNoNestedPartyIDsSpec'''''''''
                            gNoNestedPartyIDsSpec''''''''' = FGSpec
@@ -21725,7 +21725,7 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tNestedPartyID
                               , gsBody = gNoNestedPartyIDsBody''''''''' }
                               where
-                              gNoNestedPartyIDsBody''''''''' = 
+                              gNoNestedPartyIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                                  LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                                  LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs''''''''''''                                  LT.new
@@ -21734,7 +21734,7 @@ mQuoteRequestReject = FMSpec
                                        { tName = "NoNestedPartySubIDs"
                                        , tnum = tnum tNoNestedPartySubIDs
                                        , tparser = gNoNestedPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec'''''''''''' }
 
                                     gNoNestedPartySubIDsP'''''''''''' = groupP gNoNestedPartySubIDsSpec''''''''''''
                                     gNoNestedPartySubIDsSpec'''''''''''' = FGSpec
@@ -21742,7 +21742,7 @@ mQuoteRequestReject = FMSpec
                                        , gsSeperator = tNestedPartySubID
                                        , gsBody = gNoNestedPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoNestedPartySubIDsBody'''''''''''' = 
+                                       gNoNestedPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                           LT.new
 
 
@@ -21751,7 +21751,7 @@ mQuoteRequestReject = FMSpec
                      { tName = "NoPartyIDs"
                      , tnum = tnum tNoPartyIDs
                      , tparser = gNoPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec'''''' }
 
                   gNoPartyIDsP'''''' = groupP gNoPartyIDsSpec''''''
                   gNoPartyIDsSpec'''''' = FGSpec
@@ -21759,7 +21759,7 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tPartyID
                      , gsBody = gNoPartyIDsBody'''''' }
                      where
-                     gNoPartyIDsBody'''''' = 
+                     gNoPartyIDsBody'''''' =
                         LT.insert (tnum tPartyIDSource) tPartyIDSource $
                         LT.insert (tnum tPartyRole) tPartyRole $
                         LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs'''''''''                         LT.new
@@ -21768,7 +21768,7 @@ mQuoteRequestReject = FMSpec
                               { tName = "NoPartySubIDs"
                               , tnum = tnum tNoPartySubIDs
                               , tparser = gNoPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec''''''''' }
 
                            gNoPartySubIDsP''''''''' = groupP gNoPartySubIDsSpec'''''''''
                            gNoPartySubIDsSpec''''''''' = FGSpec
@@ -21776,7 +21776,7 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tPartySubID
                               , gsBody = gNoPartySubIDsBody''''''''' }
                               where
-                              gNoPartySubIDsBody''''''''' = 
+                              gNoPartySubIDsBody''''''''' =
                                  LT.insert (tnum tPartySubIDType) tPartySubIDType                                  LT.new
 
 
@@ -21784,7 +21784,7 @@ mQuoteRequestReject = FMSpec
                      { tName = "NoQuoteQualifiers"
                      , tnum = tnum tNoQuoteQualifiers
                      , tparser = gNoQuoteQualifiersP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoQuoteQualifiersSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoQuoteQualifiersSpec'''''' }
 
                   gNoQuoteQualifiersP'''''' = groupP gNoQuoteQualifiersSpec''''''
                   gNoQuoteQualifiersSpec'''''' = FGSpec
@@ -21792,14 +21792,14 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tQuoteQualifier
                      , gsBody = gNoQuoteQualifiersBody'''''' }
                      where
-                     gNoQuoteQualifiersBody'''''' = 
+                     gNoQuoteQualifiersBody'''''' =
                         LT.new
 
                   gNoSecurityAltID'''''' = FIXTag
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -21807,14 +21807,14 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoStipulations'''''' = FIXTag
                      { tName = "NoStipulations"
                      , tnum = tnum tNoStipulations
                      , tparser = gNoStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec'''''' }
 
                   gNoStipulationsP'''''' = groupP gNoStipulationsSpec''''''
                   gNoStipulationsSpec'''''' = FGSpec
@@ -21822,14 +21822,14 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tStipulationType
                      , gsBody = gNoStipulationsBody'''''' }
                      where
-                     gNoStipulationsBody'''''' = 
+                     gNoStipulationsBody'''''' =
                         LT.insert (tnum tStipulationValue) tStipulationValue                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -21837,7 +21837,7 @@ mQuoteRequestReject = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -21888,7 +21888,7 @@ mQuoteRequestReject = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -21896,14 +21896,14 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -21911,7 +21911,7 @@ mQuoteRequestReject = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -21926,7 +21926,7 @@ mRFQRequest = FMSpec
    , msBody = mRFQRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mRFQRequestBody = 
+   mRFQRequestBody =
       LT.insert (tnum tRFQReqID) tRFQReqID $
       LT.insert (tnum tNoRelatedSym) gNoRelatedSym''' $
       LT.insert (tnum tSubscriptionRequestType) tSubscriptionRequestType       LT.new
@@ -21935,7 +21935,7 @@ mRFQRequest = FMSpec
             { tName = "NoRelatedSym"
             , tnum = tnum tNoRelatedSym
             , tparser = gNoRelatedSymP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoRelatedSymSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoRelatedSymSpec''' }
 
          gNoRelatedSymP''' = groupP gNoRelatedSymSpec'''
          gNoRelatedSymSpec''' = FGSpec
@@ -21943,7 +21943,7 @@ mRFQRequest = FMSpec
             , gsSeperator = tSymbol
             , gsBody = gNoRelatedSymBody''' }
             where
-            gNoRelatedSymBody''' = 
+            gNoRelatedSymBody''' =
                LT.insert (tnum tSymbolSfx) tSymbolSfx $
                LT.insert (tnum tSecurityID) tSecurityID $
                LT.insert (tnum tSecurityIDSource) tSecurityIDSource $
@@ -21997,7 +21997,7 @@ mRFQRequest = FMSpec
                      { tName = "NoEvents"
                      , tnum = tnum tNoEvents
                      , tparser = gNoEventsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoEventsSpec'''''' }
 
                   gNoEventsP'''''' = groupP gNoEventsSpec''''''
                   gNoEventsSpec'''''' = FGSpec
@@ -22005,7 +22005,7 @@ mRFQRequest = FMSpec
                      , gsSeperator = tEventType
                      , gsBody = gNoEventsBody'''''' }
                      where
-                     gNoEventsBody'''''' = 
+                     gNoEventsBody'''''' =
                         LT.insert (tnum tEventDate) tEventDate $
                         LT.insert (tnum tEventPx) tEventPx $
                         LT.insert (tnum tEventText) tEventText                         LT.new
@@ -22014,7 +22014,7 @@ mRFQRequest = FMSpec
                      { tName = "NoLegs"
                      , tnum = tnum tNoLegs
                      , tparser = gNoLegsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegsSpec'''''' }
 
                   gNoLegsP'''''' = groupP gNoLegsSpec''''''
                   gNoLegsSpec'''''' = FGSpec
@@ -22022,7 +22022,7 @@ mRFQRequest = FMSpec
                      , gsSeperator = tLegSymbol
                      , gsBody = gNoLegsBody'''''' }
                      where
-                     gNoLegsBody'''''' = 
+                     gNoLegsBody'''''' =
                         LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                         LT.insert (tnum tLegSecurityID) tLegSecurityID $
                         LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -22069,7 +22069,7 @@ mRFQRequest = FMSpec
                               { tName = "NoLegSecurityAltID"
                               , tnum = tnum tNoLegSecurityAltID
                               , tparser = gNoLegSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec''''''''' }
 
                            gNoLegSecurityAltIDP''''''''' = groupP gNoLegSecurityAltIDSpec'''''''''
                            gNoLegSecurityAltIDSpec''''''''' = FGSpec
@@ -22077,7 +22077,7 @@ mRFQRequest = FMSpec
                               , gsSeperator = tLegSecurityAltID
                               , gsBody = gNoLegSecurityAltIDBody''''''''' }
                               where
-                              gNoLegSecurityAltIDBody''''''''' = 
+                              gNoLegSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                                  LT.new
 
 
@@ -22085,7 +22085,7 @@ mRFQRequest = FMSpec
                      { tName = "NoSecurityAltID"
                      , tnum = tnum tNoSecurityAltID
                      , tparser = gNoSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec'''''' }
 
                   gNoSecurityAltIDP'''''' = groupP gNoSecurityAltIDSpec''''''
                   gNoSecurityAltIDSpec'''''' = FGSpec
@@ -22093,14 +22093,14 @@ mRFQRequest = FMSpec
                      , gsSeperator = tSecurityAltID
                      , gsBody = gNoSecurityAltIDBody'''''' }
                      where
-                     gNoSecurityAltIDBody'''''' = 
+                     gNoSecurityAltIDBody'''''' =
                         LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                         LT.new
 
                   gNoUnderlyings'''''' = FIXTag
                      { tName = "NoUnderlyings"
                      , tnum = tnum tNoUnderlyings
                      , tparser = gNoUnderlyingsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec'''''' }
 
                   gNoUnderlyingsP'''''' = groupP gNoUnderlyingsSpec''''''
                   gNoUnderlyingsSpec'''''' = FGSpec
@@ -22108,7 +22108,7 @@ mRFQRequest = FMSpec
                      , gsSeperator = tUnderlyingSymbol
                      , gsBody = gNoUnderlyingsBody'''''' }
                      where
-                     gNoUnderlyingsBody'''''' = 
+                     gNoUnderlyingsBody'''''' =
                         LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                         LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                         LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -22159,7 +22159,7 @@ mRFQRequest = FMSpec
                               { tName = "NoUnderlyingSecurityAltID"
                               , tnum = tnum tNoUnderlyingSecurityAltID
                               , tparser = gNoUnderlyingSecurityAltIDP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec''''''''' }
 
                            gNoUnderlyingSecurityAltIDP''''''''' = groupP gNoUnderlyingSecurityAltIDSpec'''''''''
                            gNoUnderlyingSecurityAltIDSpec''''''''' = FGSpec
@@ -22167,14 +22167,14 @@ mRFQRequest = FMSpec
                               , gsSeperator = tUnderlyingSecurityAltID
                               , gsBody = gNoUnderlyingSecurityAltIDBody''''''''' }
                               where
-                              gNoUnderlyingSecurityAltIDBody''''''''' = 
+                              gNoUnderlyingSecurityAltIDBody''''''''' =
                                  LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                                  LT.new
 
                            gNoUnderlyingStips''''''''' = FIXTag
                               { tName = "NoUnderlyingStips"
                               , tnum = tnum tNoUnderlyingStips
                               , tparser = gNoUnderlyingStipsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec''''''''' }
 
                            gNoUnderlyingStipsP''''''''' = groupP gNoUnderlyingStipsSpec'''''''''
                            gNoUnderlyingStipsSpec''''''''' = FGSpec
@@ -22182,7 +22182,7 @@ mRFQRequest = FMSpec
                               , gsSeperator = tUnderlyingStipType
                               , gsBody = gNoUnderlyingStipsBody''''''''' }
                               where
-                              gNoUnderlyingStipsBody''''''''' = 
+                              gNoUnderlyingStipsBody''''''''' =
                                  LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                                  LT.new
 
 
@@ -22197,7 +22197,7 @@ mQuoteStatusReport = FMSpec
    , msBody = mQuoteStatusReportBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteStatusReportBody = 
+   mQuoteStatusReportBody =
       LT.insert (tnum tQuoteStatusReqID) tQuoteStatusReqID $
       LT.insert (tnum tQuoteReqID) tQuoteReqID $
       LT.insert (tnum tQuoteID) tQuoteID $
@@ -22329,7 +22329,7 @@ mQuoteStatusReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -22337,7 +22337,7 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -22346,7 +22346,7 @@ mQuoteStatusReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -22354,7 +22354,7 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -22407,7 +22407,7 @@ mQuoteStatusReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -22415,14 +22415,14 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -22430,14 +22430,14 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -22445,7 +22445,7 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -22454,7 +22454,7 @@ mQuoteStatusReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -22462,7 +22462,7 @@ mQuoteStatusReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -22471,7 +22471,7 @@ mQuoteStatusReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -22479,7 +22479,7 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -22488,7 +22488,7 @@ mQuoteStatusReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -22496,7 +22496,7 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -22504,7 +22504,7 @@ mQuoteStatusReport = FMSpec
             { tName = "NoQuoteQualifiers"
             , tnum = tnum tNoQuoteQualifiers
             , tparser = gNoQuoteQualifiersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteQualifiersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteQualifiersSpec''' }
 
          gNoQuoteQualifiersP''' = groupP gNoQuoteQualifiersSpec'''
          gNoQuoteQualifiersSpec''' = FGSpec
@@ -22512,14 +22512,14 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tQuoteQualifier
             , gsBody = gNoQuoteQualifiersBody''' }
             where
-            gNoQuoteQualifiersBody''' = 
+            gNoQuoteQualifiersBody''' =
                LT.new
 
          gNoSecurityAltID''' = FIXTag
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -22527,14 +22527,14 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -22542,14 +22542,14 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -22557,7 +22557,7 @@ mQuoteStatusReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -22608,7 +22608,7 @@ mQuoteStatusReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -22616,14 +22616,14 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -22631,7 +22631,7 @@ mQuoteStatusReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -22645,7 +22645,7 @@ mQuoteResponse = FMSpec
    , msBody = mQuoteResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mQuoteResponseBody = 
+   mQuoteResponseBody =
       LT.insert (tnum tQuoteRespID) tQuoteRespID $
       LT.insert (tnum tQuoteID) tQuoteID $
       LT.insert (tnum tQuoteRespType) tQuoteRespType $
@@ -22777,7 +22777,7 @@ mQuoteResponse = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -22785,7 +22785,7 @@ mQuoteResponse = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -22794,7 +22794,7 @@ mQuoteResponse = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -22802,7 +22802,7 @@ mQuoteResponse = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -22863,7 +22863,7 @@ mQuoteResponse = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -22871,14 +22871,14 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -22886,14 +22886,14 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -22901,7 +22901,7 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -22910,7 +22910,7 @@ mQuoteResponse = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -22918,7 +22918,7 @@ mQuoteResponse = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -22927,7 +22927,7 @@ mQuoteResponse = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -22935,7 +22935,7 @@ mQuoteResponse = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -22944,7 +22944,7 @@ mQuoteResponse = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -22952,7 +22952,7 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -22960,7 +22960,7 @@ mQuoteResponse = FMSpec
             { tName = "NoQuoteQualifiers"
             , tnum = tnum tNoQuoteQualifiers
             , tparser = gNoQuoteQualifiersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoQuoteQualifiersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoQuoteQualifiersSpec''' }
 
          gNoQuoteQualifiersP''' = groupP gNoQuoteQualifiersSpec'''
          gNoQuoteQualifiersSpec''' = FGSpec
@@ -22968,14 +22968,14 @@ mQuoteResponse = FMSpec
             , gsSeperator = tQuoteQualifier
             , gsBody = gNoQuoteQualifiersBody''' }
             where
-            gNoQuoteQualifiersBody''' = 
+            gNoQuoteQualifiersBody''' =
                LT.new
 
          gNoSecurityAltID''' = FIXTag
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -22983,14 +22983,14 @@ mQuoteResponse = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -22998,14 +22998,14 @@ mQuoteResponse = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -23013,7 +23013,7 @@ mQuoteResponse = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -23064,7 +23064,7 @@ mQuoteResponse = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -23072,14 +23072,14 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -23087,7 +23087,7 @@ mQuoteResponse = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -23101,7 +23101,7 @@ mConfirmation = FMSpec
    , msBody = mConfirmationBody
    , msTrailer = trailerFIX44 }
    where
-   mConfirmationBody = 
+   mConfirmationBody =
       LT.insert (tnum tConfirmID) tConfirmID $
       LT.insert (tnum tConfirmRefID) tConfirmRefID $
       LT.insert (tnum tConfirmReqID) tConfirmReqID $
@@ -23242,7 +23242,7 @@ mConfirmation = FMSpec
             { tName = "NoCapacities"
             , tnum = tnum tNoCapacities
             , tparser = gNoCapacitiesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoCapacitiesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoCapacitiesSpec''' }
 
          gNoCapacitiesP''' = groupP gNoCapacitiesSpec'''
          gNoCapacitiesSpec''' = FGSpec
@@ -23250,7 +23250,7 @@ mConfirmation = FMSpec
             , gsSeperator = tOrderCapacity
             , gsBody = gNoCapacitiesBody''' }
             where
-            gNoCapacitiesBody''' = 
+            gNoCapacitiesBody''' =
                LT.insert (tnum tOrderRestrictions) tOrderRestrictions $
                LT.insert (tnum tOrderCapacityQty) tOrderCapacityQty                LT.new
 
@@ -23258,7 +23258,7 @@ mConfirmation = FMSpec
             { tName = "NoDlvyInst"
             , tnum = tnum tNoDlvyInst
             , tparser = gNoDlvyInstP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec''' }
 
          gNoDlvyInstP''' = groupP gNoDlvyInstSpec'''
          gNoDlvyInstSpec''' = FGSpec
@@ -23266,7 +23266,7 @@ mConfirmation = FMSpec
             , gsSeperator = tSettlInstSource
             , gsBody = gNoDlvyInstBody''' }
             where
-            gNoDlvyInstBody''' = 
+            gNoDlvyInstBody''' =
                LT.insert (tnum tDlvyInstType) tDlvyInstType $
                LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs''''''                LT.new
                where
@@ -23274,7 +23274,7 @@ mConfirmation = FMSpec
                      { tName = "NoSettlPartyIDs"
                      , tnum = tnum tNoSettlPartyIDs
                      , tparser = gNoSettlPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec'''''' }
 
                   gNoSettlPartyIDsP'''''' = groupP gNoSettlPartyIDsSpec''''''
                   gNoSettlPartyIDsSpec'''''' = FGSpec
@@ -23282,7 +23282,7 @@ mConfirmation = FMSpec
                      , gsSeperator = tSettlPartyID
                      , gsBody = gNoSettlPartyIDsBody'''''' }
                      where
-                     gNoSettlPartyIDsBody'''''' = 
+                     gNoSettlPartyIDsBody'''''' =
                         LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                         LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                         LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs'''''''''                         LT.new
@@ -23291,7 +23291,7 @@ mConfirmation = FMSpec
                               { tName = "NoSettlPartySubIDs"
                               , tnum = tnum tNoSettlPartySubIDs
                               , tparser = gNoSettlPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
 
                            gNoSettlPartySubIDsP''''''''' = groupP gNoSettlPartySubIDsSpec'''''''''
                            gNoSettlPartySubIDsSpec''''''''' = FGSpec
@@ -23299,7 +23299,7 @@ mConfirmation = FMSpec
                               , gsSeperator = tSettlPartySubID
                               , gsBody = gNoSettlPartySubIDsBody''''''''' }
                               where
-                              gNoSettlPartySubIDsBody''''''''' = 
+                              gNoSettlPartySubIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                  LT.new
 
 
@@ -23308,7 +23308,7 @@ mConfirmation = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -23316,7 +23316,7 @@ mConfirmation = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -23325,7 +23325,7 @@ mConfirmation = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -23333,14 +23333,14 @@ mConfirmation = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -23348,7 +23348,7 @@ mConfirmation = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -23395,7 +23395,7 @@ mConfirmation = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -23403,7 +23403,7 @@ mConfirmation = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -23411,7 +23411,7 @@ mConfirmation = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -23419,7 +23419,7 @@ mConfirmation = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -23428,7 +23428,7 @@ mConfirmation = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -23436,7 +23436,7 @@ mConfirmation = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tOrderID) tOrderID $
                LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -23450,7 +23450,7 @@ mConfirmation = FMSpec
                      { tName = "NoNested2PartyIDs"
                      , tnum = tnum tNoNested2PartyIDs
                      , tparser = gNoNested2PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec'''''' }
 
                   gNoNested2PartyIDsP'''''' = groupP gNoNested2PartyIDsSpec''''''
                   gNoNested2PartyIDsSpec'''''' = FGSpec
@@ -23458,7 +23458,7 @@ mConfirmation = FMSpec
                      , gsSeperator = tNested2PartyID
                      , gsBody = gNoNested2PartyIDsBody'''''' }
                      where
-                     gNoNested2PartyIDsBody'''''' = 
+                     gNoNested2PartyIDsBody'''''' =
                         LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                         LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                         LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs'''''''''                         LT.new
@@ -23467,7 +23467,7 @@ mConfirmation = FMSpec
                               { tName = "NoNested2PartySubIDs"
                               , tnum = tnum tNoNested2PartySubIDs
                               , tparser = gNoNested2PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
 
                            gNoNested2PartySubIDsP''''''''' = groupP gNoNested2PartySubIDsSpec'''''''''
                            gNoNested2PartySubIDsSpec''''''''' = FGSpec
@@ -23475,7 +23475,7 @@ mConfirmation = FMSpec
                               , gsSeperator = tNested2PartySubID
                               , gsBody = gNoNested2PartySubIDsBody''''''''' }
                               where
-                              gNoNested2PartySubIDsBody''''''''' = 
+                              gNoNested2PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                  LT.new
 
 
@@ -23484,7 +23484,7 @@ mConfirmation = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -23492,7 +23492,7 @@ mConfirmation = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -23501,7 +23501,7 @@ mConfirmation = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -23509,7 +23509,7 @@ mConfirmation = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -23517,7 +23517,7 @@ mConfirmation = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -23525,14 +23525,14 @@ mConfirmation = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -23540,14 +23540,14 @@ mConfirmation = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -23555,7 +23555,7 @@ mConfirmation = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -23563,7 +23563,7 @@ mConfirmation = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -23571,7 +23571,7 @@ mConfirmation = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -23622,7 +23622,7 @@ mConfirmation = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -23630,14 +23630,14 @@ mConfirmation = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -23645,7 +23645,7 @@ mConfirmation = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -23659,7 +23659,7 @@ mPositionMaintenanceRequest = FMSpec
    , msBody = mPositionMaintenanceRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mPositionMaintenanceRequestBody = 
+   mPositionMaintenanceRequestBody =
       LT.insert (tnum tPosReqID) tPosReqID $
       LT.insert (tnum tPosTransType) tPosTransType $
       LT.insert (tnum tPosMaintAction) tPosMaintAction $
@@ -23732,7 +23732,7 @@ mPositionMaintenanceRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -23740,7 +23740,7 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -23749,7 +23749,7 @@ mPositionMaintenanceRequest = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -23757,7 +23757,7 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -23804,7 +23804,7 @@ mPositionMaintenanceRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -23812,7 +23812,7 @@ mPositionMaintenanceRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -23820,7 +23820,7 @@ mPositionMaintenanceRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -23828,7 +23828,7 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -23837,7 +23837,7 @@ mPositionMaintenanceRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -23845,7 +23845,7 @@ mPositionMaintenanceRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -23853,7 +23853,7 @@ mPositionMaintenanceRequest = FMSpec
             { tName = "NoPositions"
             , tnum = tnum tNoPositions
             , tparser = gNoPositionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPositionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPositionsSpec''' }
 
          gNoPositionsP''' = groupP gNoPositionsSpec'''
          gNoPositionsSpec''' = FGSpec
@@ -23861,7 +23861,7 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tPosType
             , gsBody = gNoPositionsBody''' }
             where
-            gNoPositionsBody''' = 
+            gNoPositionsBody''' =
                LT.insert (tnum tLongQty) tLongQty $
                LT.insert (tnum tShortQty) tShortQty $
                LT.insert (tnum tPosQtyStatus) tPosQtyStatus $
@@ -23871,7 +23871,7 @@ mPositionMaintenanceRequest = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -23879,7 +23879,7 @@ mPositionMaintenanceRequest = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -23888,7 +23888,7 @@ mPositionMaintenanceRequest = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -23896,7 +23896,7 @@ mPositionMaintenanceRequest = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -23905,7 +23905,7 @@ mPositionMaintenanceRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -23913,14 +23913,14 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -23928,14 +23928,14 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -23943,7 +23943,7 @@ mPositionMaintenanceRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -23994,7 +23994,7 @@ mPositionMaintenanceRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -24002,14 +24002,14 @@ mPositionMaintenanceRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -24017,7 +24017,7 @@ mPositionMaintenanceRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -24031,7 +24031,7 @@ mPositionMaintenanceReport = FMSpec
    , msBody = mPositionMaintenanceReportBody
    , msTrailer = trailerFIX44 }
    where
-   mPositionMaintenanceReportBody = 
+   mPositionMaintenanceReportBody =
       LT.insert (tnum tPosMaintRptID) tPosMaintRptID $
       LT.insert (tnum tPosTransType) tPosTransType $
       LT.insert (tnum tPosReqID) tPosReqID $
@@ -24105,7 +24105,7 @@ mPositionMaintenanceReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -24113,7 +24113,7 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -24122,7 +24122,7 @@ mPositionMaintenanceReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -24130,7 +24130,7 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -24177,7 +24177,7 @@ mPositionMaintenanceReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -24185,7 +24185,7 @@ mPositionMaintenanceReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -24193,7 +24193,7 @@ mPositionMaintenanceReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -24201,7 +24201,7 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -24210,7 +24210,7 @@ mPositionMaintenanceReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -24218,7 +24218,7 @@ mPositionMaintenanceReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -24226,7 +24226,7 @@ mPositionMaintenanceReport = FMSpec
             { tName = "NoPosAmt"
             , tnum = tnum tNoPosAmt
             , tparser = gNoPosAmtP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPosAmtSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPosAmtSpec''' }
 
          gNoPosAmtP''' = groupP gNoPosAmtSpec'''
          gNoPosAmtSpec''' = FGSpec
@@ -24234,14 +24234,14 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tPosAmtType
             , gsBody = gNoPosAmtBody''' }
             where
-            gNoPosAmtBody''' = 
+            gNoPosAmtBody''' =
                LT.insert (tnum tPosAmt) tPosAmt                LT.new
 
          gNoPositions''' = FIXTag
             { tName = "NoPositions"
             , tnum = tnum tNoPositions
             , tparser = gNoPositionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPositionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPositionsSpec''' }
 
          gNoPositionsP''' = groupP gNoPositionsSpec'''
          gNoPositionsSpec''' = FGSpec
@@ -24249,7 +24249,7 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tPosType
             , gsBody = gNoPositionsBody''' }
             where
-            gNoPositionsBody''' = 
+            gNoPositionsBody''' =
                LT.insert (tnum tLongQty) tLongQty $
                LT.insert (tnum tShortQty) tShortQty $
                LT.insert (tnum tPosQtyStatus) tPosQtyStatus $
@@ -24259,7 +24259,7 @@ mPositionMaintenanceReport = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -24267,7 +24267,7 @@ mPositionMaintenanceReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -24276,7 +24276,7 @@ mPositionMaintenanceReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -24284,7 +24284,7 @@ mPositionMaintenanceReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -24293,7 +24293,7 @@ mPositionMaintenanceReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -24301,14 +24301,14 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -24316,14 +24316,14 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -24331,7 +24331,7 @@ mPositionMaintenanceReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -24382,7 +24382,7 @@ mPositionMaintenanceReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -24390,14 +24390,14 @@ mPositionMaintenanceReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -24405,7 +24405,7 @@ mPositionMaintenanceReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -24419,7 +24419,7 @@ mRequestForPositions = FMSpec
    , msBody = mRequestForPositionsBody
    , msTrailer = trailerFIX44 }
    where
-   mRequestForPositionsBody = 
+   mRequestForPositionsBody =
       LT.insert (tnum tPosReqID) tPosReqID $
       LT.insert (tnum tPosReqType) tPosReqType $
       LT.insert (tnum tMatchStatus) tMatchStatus $
@@ -24488,7 +24488,7 @@ mRequestForPositions = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -24496,7 +24496,7 @@ mRequestForPositions = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -24505,7 +24505,7 @@ mRequestForPositions = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -24513,7 +24513,7 @@ mRequestForPositions = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -24560,7 +24560,7 @@ mRequestForPositions = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -24568,7 +24568,7 @@ mRequestForPositions = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -24576,7 +24576,7 @@ mRequestForPositions = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -24584,7 +24584,7 @@ mRequestForPositions = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -24593,7 +24593,7 @@ mRequestForPositions = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -24601,7 +24601,7 @@ mRequestForPositions = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -24609,7 +24609,7 @@ mRequestForPositions = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -24617,14 +24617,14 @@ mRequestForPositions = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTradingSessions''' = FIXTag
             { tName = "NoTradingSessions"
             , tnum = tnum tNoTradingSessions
             , tparser = gNoTradingSessionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradingSessionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradingSessionsSpec''' }
 
          gNoTradingSessionsP''' = groupP gNoTradingSessionsSpec'''
          gNoTradingSessionsSpec''' = FGSpec
@@ -24632,14 +24632,14 @@ mRequestForPositions = FMSpec
             , gsSeperator = tTradingSessionID
             , gsBody = gNoTradingSessionsBody''' }
             where
-            gNoTradingSessionsBody''' = 
+            gNoTradingSessionsBody''' =
                LT.insert (tnum tTradingSessionSubID) tTradingSessionSubID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -24647,7 +24647,7 @@ mRequestForPositions = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -24698,7 +24698,7 @@ mRequestForPositions = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -24706,14 +24706,14 @@ mRequestForPositions = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -24721,7 +24721,7 @@ mRequestForPositions = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -24735,7 +24735,7 @@ mRequestForPositionsAck = FMSpec
    , msBody = mRequestForPositionsAckBody
    , msTrailer = trailerFIX44 }
    where
-   mRequestForPositionsAckBody = 
+   mRequestForPositionsAckBody =
       LT.insert (tnum tPosMaintRptID) tPosMaintRptID $
       LT.insert (tnum tPosReqID) tPosReqID $
       LT.insert (tnum tTotalNumPosReports) tTotalNumPosReports $
@@ -24801,7 +24801,7 @@ mRequestForPositionsAck = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -24809,7 +24809,7 @@ mRequestForPositionsAck = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -24818,7 +24818,7 @@ mRequestForPositionsAck = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -24826,7 +24826,7 @@ mRequestForPositionsAck = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -24873,7 +24873,7 @@ mRequestForPositionsAck = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -24881,7 +24881,7 @@ mRequestForPositionsAck = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -24889,7 +24889,7 @@ mRequestForPositionsAck = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -24897,7 +24897,7 @@ mRequestForPositionsAck = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -24906,7 +24906,7 @@ mRequestForPositionsAck = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -24914,7 +24914,7 @@ mRequestForPositionsAck = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -24922,7 +24922,7 @@ mRequestForPositionsAck = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -24930,14 +24930,14 @@ mRequestForPositionsAck = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -24945,7 +24945,7 @@ mRequestForPositionsAck = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -24996,7 +24996,7 @@ mRequestForPositionsAck = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -25004,14 +25004,14 @@ mRequestForPositionsAck = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -25019,7 +25019,7 @@ mRequestForPositionsAck = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -25033,7 +25033,7 @@ mPositionReport = FMSpec
    , msBody = mPositionReportBody
    , msTrailer = trailerFIX44 }
    where
-   mPositionReportBody = 
+   mPositionReportBody =
       LT.insert (tnum tPosMaintRptID) tPosMaintRptID $
       LT.insert (tnum tPosReqID) tPosReqID $
       LT.insert (tnum tPosReqType) tPosReqType $
@@ -25108,7 +25108,7 @@ mPositionReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -25116,7 +25116,7 @@ mPositionReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -25125,7 +25125,7 @@ mPositionReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -25133,7 +25133,7 @@ mPositionReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -25180,7 +25180,7 @@ mPositionReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -25188,7 +25188,7 @@ mPositionReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -25196,7 +25196,7 @@ mPositionReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -25204,7 +25204,7 @@ mPositionReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -25213,7 +25213,7 @@ mPositionReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -25221,7 +25221,7 @@ mPositionReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -25229,7 +25229,7 @@ mPositionReport = FMSpec
             { tName = "NoPosAmt"
             , tnum = tnum tNoPosAmt
             , tparser = gNoPosAmtP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPosAmtSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPosAmtSpec''' }
 
          gNoPosAmtP''' = groupP gNoPosAmtSpec'''
          gNoPosAmtSpec''' = FGSpec
@@ -25237,14 +25237,14 @@ mPositionReport = FMSpec
             , gsSeperator = tPosAmtType
             , gsBody = gNoPosAmtBody''' }
             where
-            gNoPosAmtBody''' = 
+            gNoPosAmtBody''' =
                LT.insert (tnum tPosAmt) tPosAmt                LT.new
 
          gNoPositions''' = FIXTag
             { tName = "NoPositions"
             , tnum = tnum tNoPositions
             , tparser = gNoPositionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPositionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPositionsSpec''' }
 
          gNoPositionsP''' = groupP gNoPositionsSpec'''
          gNoPositionsSpec''' = FGSpec
@@ -25252,7 +25252,7 @@ mPositionReport = FMSpec
             , gsSeperator = tPosType
             , gsBody = gNoPositionsBody''' }
             where
-            gNoPositionsBody''' = 
+            gNoPositionsBody''' =
                LT.insert (tnum tLongQty) tLongQty $
                LT.insert (tnum tShortQty) tShortQty $
                LT.insert (tnum tPosQtyStatus) tPosQtyStatus $
@@ -25262,7 +25262,7 @@ mPositionReport = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -25270,7 +25270,7 @@ mPositionReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -25279,7 +25279,7 @@ mPositionReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -25287,7 +25287,7 @@ mPositionReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -25296,7 +25296,7 @@ mPositionReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -25304,14 +25304,14 @@ mPositionReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -25319,7 +25319,7 @@ mPositionReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -25372,7 +25372,7 @@ mPositionReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -25380,14 +25380,14 @@ mPositionReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -25395,7 +25395,7 @@ mPositionReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -25409,7 +25409,7 @@ mTradeCaptureReportRequestAck = FMSpec
    , msBody = mTradeCaptureReportRequestAckBody
    , msTrailer = trailerFIX44 }
    where
-   mTradeCaptureReportRequestAckBody = 
+   mTradeCaptureReportRequestAckBody =
       LT.insert (tnum tTradeRequestID) tTradeRequestID $
       LT.insert (tnum tTradeRequestType) tTradeRequestType $
       LT.insert (tnum tSubscriptionRequestType) tSubscriptionRequestType $
@@ -25471,7 +25471,7 @@ mTradeCaptureReportRequestAck = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -25479,7 +25479,7 @@ mTradeCaptureReportRequestAck = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -25488,7 +25488,7 @@ mTradeCaptureReportRequestAck = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -25496,7 +25496,7 @@ mTradeCaptureReportRequestAck = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -25543,7 +25543,7 @@ mTradeCaptureReportRequestAck = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -25551,7 +25551,7 @@ mTradeCaptureReportRequestAck = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -25559,7 +25559,7 @@ mTradeCaptureReportRequestAck = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -25567,14 +25567,14 @@ mTradeCaptureReportRequestAck = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -25582,7 +25582,7 @@ mTradeCaptureReportRequestAck = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -25633,7 +25633,7 @@ mTradeCaptureReportRequestAck = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -25641,14 +25641,14 @@ mTradeCaptureReportRequestAck = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -25656,7 +25656,7 @@ mTradeCaptureReportRequestAck = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -25670,7 +25670,7 @@ mTradeCaptureReportAck = FMSpec
    , msBody = mTradeCaptureReportAckBody
    , msTrailer = trailerFIX44 }
    where
-   mTradeCaptureReportAckBody = 
+   mTradeCaptureReportAckBody =
       LT.insert (tnum tTradeReportID) tTradeReportID $
       LT.insert (tnum tTradeReportTransType) tTradeReportTransType $
       LT.insert (tnum tTradeReportType) tTradeReportType $
@@ -25754,7 +25754,7 @@ mTradeCaptureReportAck = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -25762,7 +25762,7 @@ mTradeCaptureReportAck = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocSettlCurrency) tAllocSettlCurrency $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -25773,7 +25773,7 @@ mTradeCaptureReportAck = FMSpec
                      { tName = "NoNested2PartyIDs"
                      , tnum = tnum tNoNested2PartyIDs
                      , tparser = gNoNested2PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec'''''' }
 
                   gNoNested2PartyIDsP'''''' = groupP gNoNested2PartyIDsSpec''''''
                   gNoNested2PartyIDsSpec'''''' = FGSpec
@@ -25781,7 +25781,7 @@ mTradeCaptureReportAck = FMSpec
                      , gsSeperator = tNested2PartyID
                      , gsBody = gNoNested2PartyIDsBody'''''' }
                      where
-                     gNoNested2PartyIDsBody'''''' = 
+                     gNoNested2PartyIDsBody'''''' =
                         LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                         LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                         LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs'''''''''                         LT.new
@@ -25790,7 +25790,7 @@ mTradeCaptureReportAck = FMSpec
                               { tName = "NoNested2PartySubIDs"
                               , tnum = tnum tNoNested2PartySubIDs
                               , tparser = gNoNested2PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
 
                            gNoNested2PartySubIDsP''''''''' = groupP gNoNested2PartySubIDsSpec'''''''''
                            gNoNested2PartySubIDsSpec''''''''' = FGSpec
@@ -25798,7 +25798,7 @@ mTradeCaptureReportAck = FMSpec
                               , gsSeperator = tNested2PartySubID
                               , gsBody = gNoNested2PartySubIDsBody''''''''' }
                               where
-                              gNoNested2PartySubIDsBody''''''''' = 
+                              gNoNested2PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                  LT.new
 
 
@@ -25807,7 +25807,7 @@ mTradeCaptureReportAck = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -25815,7 +25815,7 @@ mTradeCaptureReportAck = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -25824,7 +25824,7 @@ mTradeCaptureReportAck = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -25832,7 +25832,7 @@ mTradeCaptureReportAck = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -25890,7 +25890,7 @@ mTradeCaptureReportAck = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -25898,14 +25898,14 @@ mTradeCaptureReportAck = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
                   gNoLegStipulations'''''' = FIXTag
                      { tName = "NoLegStipulations"
                      , tnum = tnum tNoLegStipulations
                      , tparser = gNoLegStipulationsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegStipulationsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegStipulationsSpec'''''' }
 
                   gNoLegStipulationsP'''''' = groupP gNoLegStipulationsSpec''''''
                   gNoLegStipulationsSpec'''''' = FGSpec
@@ -25913,14 +25913,14 @@ mTradeCaptureReportAck = FMSpec
                      , gsSeperator = tLegStipulationType
                      , gsBody = gNoLegStipulationsBody'''''' }
                      where
-                     gNoLegStipulationsBody'''''' = 
+                     gNoLegStipulationsBody'''''' =
                         LT.insert (tnum tLegStipulationValue) tLegStipulationValue                         LT.new
 
                   gNoNestedPartyIDs'''''' = FIXTag
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -25928,7 +25928,7 @@ mTradeCaptureReportAck = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -25937,7 +25937,7 @@ mTradeCaptureReportAck = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -25945,7 +25945,7 @@ mTradeCaptureReportAck = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -25954,7 +25954,7 @@ mTradeCaptureReportAck = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -25962,14 +25962,14 @@ mTradeCaptureReportAck = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -25977,7 +25977,7 @@ mTradeCaptureReportAck = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -25991,7 +25991,7 @@ mAllocationReport = FMSpec
    , msBody = mAllocationReportBody
    , msTrailer = trailerFIX44 }
    where
-   mAllocationReportBody = 
+   mAllocationReportBody =
       LT.insert (tnum tAllocReportID) tAllocReportID $
       LT.insert (tnum tAllocID) tAllocID $
       LT.insert (tnum tAllocTransType) tAllocTransType $
@@ -26127,7 +26127,7 @@ mAllocationReport = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -26135,7 +26135,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tMatchStatus) tMatchStatus $
                LT.insert (tnum tAllocPrice) tAllocPrice $
@@ -26176,7 +26176,7 @@ mAllocationReport = FMSpec
                      { tName = "NoClearingInstructions"
                      , tnum = tnum tNoClearingInstructions
                      , tparser = gNoClearingInstructionsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoClearingInstructionsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoClearingInstructionsSpec'''''' }
 
                   gNoClearingInstructionsP'''''' = groupP gNoClearingInstructionsSpec''''''
                   gNoClearingInstructionsSpec'''''' = FGSpec
@@ -26184,14 +26184,14 @@ mAllocationReport = FMSpec
                      , gsSeperator = tClearingInstruction
                      , gsBody = gNoClearingInstructionsBody'''''' }
                      where
-                     gNoClearingInstructionsBody'''''' = 
+                     gNoClearingInstructionsBody'''''' =
                         LT.new
 
                   gNoDlvyInst'''''' = FIXTag
                      { tName = "NoDlvyInst"
                      , tnum = tnum tNoDlvyInst
                      , tparser = gNoDlvyInstP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec'''''' }
 
                   gNoDlvyInstP'''''' = groupP gNoDlvyInstSpec''''''
                   gNoDlvyInstSpec'''''' = FGSpec
@@ -26199,7 +26199,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tSettlInstSource
                      , gsBody = gNoDlvyInstBody'''''' }
                      where
-                     gNoDlvyInstBody'''''' = 
+                     gNoDlvyInstBody'''''' =
                         LT.insert (tnum tDlvyInstType) tDlvyInstType $
                         LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs'''''''''                         LT.new
                         where
@@ -26207,7 +26207,7 @@ mAllocationReport = FMSpec
                               { tName = "NoSettlPartyIDs"
                               , tnum = tnum tNoSettlPartyIDs
                               , tparser = gNoSettlPartyIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec''''''''' }
 
                            gNoSettlPartyIDsP''''''''' = groupP gNoSettlPartyIDsSpec'''''''''
                            gNoSettlPartyIDsSpec''''''''' = FGSpec
@@ -26215,7 +26215,7 @@ mAllocationReport = FMSpec
                               , gsSeperator = tSettlPartyID
                               , gsBody = gNoSettlPartyIDsBody''''''''' }
                               where
-                              gNoSettlPartyIDsBody''''''''' = 
+                              gNoSettlPartyIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                                  LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                                  LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs''''''''''''                                  LT.new
@@ -26224,7 +26224,7 @@ mAllocationReport = FMSpec
                                        { tName = "NoSettlPartySubIDs"
                                        , tnum = tnum tNoSettlPartySubIDs
                                        , tparser = gNoSettlPartySubIDsP''''''''''''
-                                       , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
+                                       , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec'''''''''''' }
 
                                     gNoSettlPartySubIDsP'''''''''''' = groupP gNoSettlPartySubIDsSpec''''''''''''
                                     gNoSettlPartySubIDsSpec'''''''''''' = FGSpec
@@ -26232,7 +26232,7 @@ mAllocationReport = FMSpec
                                        , gsSeperator = tSettlPartySubID
                                        , gsBody = gNoSettlPartySubIDsBody'''''''''''' }
                                        where
-                                       gNoSettlPartySubIDsBody'''''''''''' = 
+                                       gNoSettlPartySubIDsBody'''''''''''' =
                                           LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                           LT.new
 
 
@@ -26241,7 +26241,7 @@ mAllocationReport = FMSpec
                      { tName = "NoMiscFees"
                      , tnum = tnum tNoMiscFees
                      , tparser = gNoMiscFeesP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec'''''' }
 
                   gNoMiscFeesP'''''' = groupP gNoMiscFeesSpec''''''
                   gNoMiscFeesSpec'''''' = FGSpec
@@ -26249,7 +26249,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tMiscFeeAmt
                      , gsBody = gNoMiscFeesBody'''''' }
                      where
-                     gNoMiscFeesBody'''''' = 
+                     gNoMiscFeesBody'''''' =
                         LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                         LT.insert (tnum tMiscFeeType) tMiscFeeType $
                         LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                         LT.new
@@ -26258,7 +26258,7 @@ mAllocationReport = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -26266,7 +26266,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -26275,7 +26275,7 @@ mAllocationReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -26283,7 +26283,7 @@ mAllocationReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -26292,7 +26292,7 @@ mAllocationReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -26300,7 +26300,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -26309,7 +26309,7 @@ mAllocationReport = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -26317,7 +26317,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tLastQty
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.insert (tnum tExecID) tExecID $
                LT.insert (tnum tSecondaryExecID) tSecondaryExecID $
                LT.insert (tnum tLastPx) tLastPx $
@@ -26328,7 +26328,7 @@ mAllocationReport = FMSpec
             { tName = "NoInstrAttrib"
             , tnum = tnum tNoInstrAttrib
             , tparser = gNoInstrAttribP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoInstrAttribSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoInstrAttribSpec''' }
 
          gNoInstrAttribP''' = groupP gNoInstrAttribSpec'''
          gNoInstrAttribSpec''' = FGSpec
@@ -26336,14 +26336,14 @@ mAllocationReport = FMSpec
             , gsSeperator = tInstrAttribType
             , gsBody = gNoInstrAttribBody''' }
             where
-            gNoInstrAttribBody''' = 
+            gNoInstrAttribBody''' =
                LT.insert (tnum tInstrAttribValue) tInstrAttribValue                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -26351,7 +26351,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -26398,7 +26398,7 @@ mAllocationReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -26406,7 +26406,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -26414,7 +26414,7 @@ mAllocationReport = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -26422,7 +26422,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tOrderID) tOrderID $
                LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -26436,7 +26436,7 @@ mAllocationReport = FMSpec
                      { tName = "NoNested2PartyIDs"
                      , tnum = tnum tNoNested2PartyIDs
                      , tparser = gNoNested2PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec'''''' }
 
                   gNoNested2PartyIDsP'''''' = groupP gNoNested2PartyIDsSpec''''''
                   gNoNested2PartyIDsSpec'''''' = FGSpec
@@ -26444,7 +26444,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tNested2PartyID
                      , gsBody = gNoNested2PartyIDsBody'''''' }
                      where
-                     gNoNested2PartyIDsBody'''''' = 
+                     gNoNested2PartyIDsBody'''''' =
                         LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                         LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                         LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs'''''''''                         LT.new
@@ -26453,7 +26453,7 @@ mAllocationReport = FMSpec
                               { tName = "NoNested2PartySubIDs"
                               , tnum = tnum tNoNested2PartySubIDs
                               , tparser = gNoNested2PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
 
                            gNoNested2PartySubIDsP''''''''' = groupP gNoNested2PartySubIDsSpec'''''''''
                            gNoNested2PartySubIDsSpec''''''''' = FGSpec
@@ -26461,7 +26461,7 @@ mAllocationReport = FMSpec
                               , gsSeperator = tNested2PartySubID
                               , gsBody = gNoNested2PartySubIDsBody''''''''' }
                               where
-                              gNoNested2PartySubIDsBody''''''''' = 
+                              gNoNested2PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                  LT.new
 
 
@@ -26470,7 +26470,7 @@ mAllocationReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -26478,7 +26478,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -26487,7 +26487,7 @@ mAllocationReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -26495,7 +26495,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -26503,7 +26503,7 @@ mAllocationReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -26511,14 +26511,14 @@ mAllocationReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -26526,14 +26526,14 @@ mAllocationReport = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -26541,7 +26541,7 @@ mAllocationReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -26592,7 +26592,7 @@ mAllocationReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -26600,14 +26600,14 @@ mAllocationReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -26615,7 +26615,7 @@ mAllocationReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -26629,7 +26629,7 @@ mAllocationReportAck = FMSpec
    , msBody = mAllocationReportAckBody
    , msTrailer = trailerFIX44 }
    where
-   mAllocationReportAckBody = 
+   mAllocationReportAckBody =
       LT.insert (tnum tAllocReportID) tAllocReportID $
       LT.insert (tnum tAllocID) tAllocID $
       LT.insert (tnum tNoPartyIDs) gNoPartyIDs''' $
@@ -26652,7 +26652,7 @@ mAllocationReportAck = FMSpec
             { tName = "NoAllocs"
             , tnum = tnum tNoAllocs
             , tparser = gNoAllocsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoAllocsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoAllocsSpec''' }
 
          gNoAllocsP''' = groupP gNoAllocsSpec'''
          gNoAllocsSpec''' = FGSpec
@@ -26660,7 +26660,7 @@ mAllocationReportAck = FMSpec
             , gsSeperator = tAllocAccount
             , gsBody = gNoAllocsBody''' }
             where
-            gNoAllocsBody''' = 
+            gNoAllocsBody''' =
                LT.insert (tnum tAllocAcctIDSource) tAllocAcctIDSource $
                LT.insert (tnum tAllocPrice) tAllocPrice $
                LT.insert (tnum tIndividualAllocID) tIndividualAllocID $
@@ -26673,7 +26673,7 @@ mAllocationReportAck = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -26681,7 +26681,7 @@ mAllocationReportAck = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -26690,7 +26690,7 @@ mAllocationReportAck = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -26698,7 +26698,7 @@ mAllocationReportAck = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -26712,7 +26712,7 @@ mConfirmationAck = FMSpec
    , msBody = mConfirmationAckBody
    , msTrailer = trailerFIX44 }
    where
-   mConfirmationAckBody = 
+   mConfirmationAckBody =
       LT.insert (tnum tConfirmID) tConfirmID $
       LT.insert (tnum tTradeDate) tTradeDate $
       LT.insert (tnum tTransactTime) tTransactTime $
@@ -26732,7 +26732,7 @@ mSettlementInstructionRequest = FMSpec
    , msBody = mSettlementInstructionRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mSettlementInstructionRequestBody = 
+   mSettlementInstructionRequestBody =
       LT.insert (tnum tSettlInstReqID) tSettlInstReqID $
       LT.insert (tnum tTransactTime) tTransactTime $
       LT.insert (tnum tNoPartyIDs) gNoPartyIDs''' $
@@ -26753,7 +26753,7 @@ mSettlementInstructionRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -26761,7 +26761,7 @@ mSettlementInstructionRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -26770,7 +26770,7 @@ mSettlementInstructionRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -26778,7 +26778,7 @@ mSettlementInstructionRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -26792,7 +26792,7 @@ mAssignmentReport = FMSpec
    , msBody = mAssignmentReportBody
    , msTrailer = trailerFIX44 }
    where
-   mAssignmentReportBody = 
+   mAssignmentReportBody =
       LT.insert (tnum tAsgnRptID) tAsgnRptID $
       LT.insert (tnum tTotNumAssignmentReports) tTotNumAssignmentReports $
       LT.insert (tnum tLastRptRequested) tLastRptRequested $
@@ -26866,7 +26866,7 @@ mAssignmentReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -26874,7 +26874,7 @@ mAssignmentReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -26883,7 +26883,7 @@ mAssignmentReport = FMSpec
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -26891,7 +26891,7 @@ mAssignmentReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -26938,7 +26938,7 @@ mAssignmentReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -26946,7 +26946,7 @@ mAssignmentReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -26954,7 +26954,7 @@ mAssignmentReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -26962,7 +26962,7 @@ mAssignmentReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -26971,7 +26971,7 @@ mAssignmentReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -26979,7 +26979,7 @@ mAssignmentReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -26987,7 +26987,7 @@ mAssignmentReport = FMSpec
             { tName = "NoPosAmt"
             , tnum = tnum tNoPosAmt
             , tparser = gNoPosAmtP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPosAmtSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPosAmtSpec''' }
 
          gNoPosAmtP''' = groupP gNoPosAmtSpec'''
          gNoPosAmtSpec''' = FGSpec
@@ -26995,14 +26995,14 @@ mAssignmentReport = FMSpec
             , gsSeperator = tPosAmtType
             , gsBody = gNoPosAmtBody''' }
             where
-            gNoPosAmtBody''' = 
+            gNoPosAmtBody''' =
                LT.insert (tnum tPosAmt) tPosAmt                LT.new
 
          gNoPositions''' = FIXTag
             { tName = "NoPositions"
             , tnum = tnum tNoPositions
             , tparser = gNoPositionsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPositionsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPositionsSpec''' }
 
          gNoPositionsP''' = groupP gNoPositionsSpec'''
          gNoPositionsSpec''' = FGSpec
@@ -27010,7 +27010,7 @@ mAssignmentReport = FMSpec
             , gsSeperator = tPosType
             , gsBody = gNoPositionsBody''' }
             where
-            gNoPositionsBody''' = 
+            gNoPositionsBody''' =
                LT.insert (tnum tLongQty) tLongQty $
                LT.insert (tnum tShortQty) tShortQty $
                LT.insert (tnum tPosQtyStatus) tPosQtyStatus $
@@ -27020,7 +27020,7 @@ mAssignmentReport = FMSpec
                      { tName = "NoNestedPartyIDs"
                      , tnum = tnum tNoNestedPartyIDs
                      , tparser = gNoNestedPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNestedPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNestedPartyIDsSpec'''''' }
 
                   gNoNestedPartyIDsP'''''' = groupP gNoNestedPartyIDsSpec''''''
                   gNoNestedPartyIDsSpec'''''' = FGSpec
@@ -27028,7 +27028,7 @@ mAssignmentReport = FMSpec
                      , gsSeperator = tNestedPartyID
                      , gsBody = gNoNestedPartyIDsBody'''''' }
                      where
-                     gNoNestedPartyIDsBody'''''' = 
+                     gNoNestedPartyIDsBody'''''' =
                         LT.insert (tnum tNestedPartyIDSource) tNestedPartyIDSource $
                         LT.insert (tnum tNestedPartyRole) tNestedPartyRole $
                         LT.insert (tnum tNoNestedPartySubIDs) gNoNestedPartySubIDs'''''''''                         LT.new
@@ -27037,7 +27037,7 @@ mAssignmentReport = FMSpec
                               { tName = "NoNestedPartySubIDs"
                               , tnum = tnum tNoNestedPartySubIDs
                               , tparser = gNoNestedPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNestedPartySubIDsSpec''''''''' }
 
                            gNoNestedPartySubIDsP''''''''' = groupP gNoNestedPartySubIDsSpec'''''''''
                            gNoNestedPartySubIDsSpec''''''''' = FGSpec
@@ -27045,7 +27045,7 @@ mAssignmentReport = FMSpec
                               , gsSeperator = tNestedPartySubID
                               , gsBody = gNoNestedPartySubIDsBody''''''''' }
                               where
-                              gNoNestedPartySubIDsBody''''''''' = 
+                              gNoNestedPartySubIDsBody''''''''' =
                                  LT.insert (tnum tNestedPartySubIDType) tNestedPartySubIDType                                  LT.new
 
 
@@ -27054,7 +27054,7 @@ mAssignmentReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -27062,14 +27062,14 @@ mAssignmentReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -27077,7 +27077,7 @@ mAssignmentReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -27128,7 +27128,7 @@ mAssignmentReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -27136,14 +27136,14 @@ mAssignmentReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -27151,7 +27151,7 @@ mAssignmentReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -27165,7 +27165,7 @@ mCollateralRequest = FMSpec
    , msBody = mCollateralRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralRequestBody = 
+   mCollateralRequestBody =
       LT.insert (tnum tCollReqID) tCollReqID $
       LT.insert (tnum tCollAsgnReason) tCollAsgnReason $
       LT.insert (tnum tTransactTime) tTransactTime $
@@ -27270,7 +27270,7 @@ mCollateralRequest = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -27278,7 +27278,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -27287,7 +27287,7 @@ mCollateralRequest = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -27295,14 +27295,14 @@ mCollateralRequest = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -27310,7 +27310,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -27357,7 +27357,7 @@ mCollateralRequest = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -27365,7 +27365,7 @@ mCollateralRequest = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -27373,7 +27373,7 @@ mCollateralRequest = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -27381,7 +27381,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -27390,7 +27390,7 @@ mCollateralRequest = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -27398,7 +27398,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -27407,7 +27407,7 @@ mCollateralRequest = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -27415,7 +27415,7 @@ mCollateralRequest = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -27423,7 +27423,7 @@ mCollateralRequest = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -27431,14 +27431,14 @@ mCollateralRequest = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -27446,14 +27446,14 @@ mCollateralRequest = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -27461,14 +27461,14 @@ mCollateralRequest = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -27476,7 +27476,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -27484,7 +27484,7 @@ mCollateralRequest = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -27492,7 +27492,7 @@ mCollateralRequest = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -27544,7 +27544,7 @@ mCollateralRequest = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -27552,14 +27552,14 @@ mCollateralRequest = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -27567,7 +27567,7 @@ mCollateralRequest = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -27581,7 +27581,7 @@ mCollateralAssignment = FMSpec
    , msBody = mCollateralAssignmentBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralAssignmentBody = 
+   mCollateralAssignmentBody =
       LT.insert (tnum tCollAsgnID) tCollAsgnID $
       LT.insert (tnum tCollReqID) tCollReqID $
       LT.insert (tnum tCollAsgnReason) tCollAsgnReason $
@@ -27694,7 +27694,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoDlvyInst"
             , tnum = tnum tNoDlvyInst
             , tparser = gNoDlvyInstP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec''' }
 
          gNoDlvyInstP''' = groupP gNoDlvyInstSpec'''
          gNoDlvyInstSpec''' = FGSpec
@@ -27702,7 +27702,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tSettlInstSource
             , gsBody = gNoDlvyInstBody''' }
             where
-            gNoDlvyInstBody''' = 
+            gNoDlvyInstBody''' =
                LT.insert (tnum tDlvyInstType) tDlvyInstType $
                LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs''''''                LT.new
                where
@@ -27710,7 +27710,7 @@ mCollateralAssignment = FMSpec
                      { tName = "NoSettlPartyIDs"
                      , tnum = tnum tNoSettlPartyIDs
                      , tparser = gNoSettlPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec'''''' }
 
                   gNoSettlPartyIDsP'''''' = groupP gNoSettlPartyIDsSpec''''''
                   gNoSettlPartyIDsSpec'''''' = FGSpec
@@ -27718,7 +27718,7 @@ mCollateralAssignment = FMSpec
                      , gsSeperator = tSettlPartyID
                      , gsBody = gNoSettlPartyIDsBody'''''' }
                      where
-                     gNoSettlPartyIDsBody'''''' = 
+                     gNoSettlPartyIDsBody'''''' =
                         LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                         LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                         LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs'''''''''                         LT.new
@@ -27727,7 +27727,7 @@ mCollateralAssignment = FMSpec
                               { tName = "NoSettlPartySubIDs"
                               , tnum = tnum tNoSettlPartySubIDs
                               , tparser = gNoSettlPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
 
                            gNoSettlPartySubIDsP''''''''' = groupP gNoSettlPartySubIDsSpec'''''''''
                            gNoSettlPartySubIDsSpec''''''''' = FGSpec
@@ -27735,7 +27735,7 @@ mCollateralAssignment = FMSpec
                               , gsSeperator = tSettlPartySubID
                               , gsBody = gNoSettlPartySubIDsBody''''''''' }
                               where
-                              gNoSettlPartySubIDsBody''''''''' = 
+                              gNoSettlPartySubIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                  LT.new
 
 
@@ -27744,7 +27744,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -27752,7 +27752,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -27761,7 +27761,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -27769,14 +27769,14 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -27784,7 +27784,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -27831,7 +27831,7 @@ mCollateralAssignment = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -27839,7 +27839,7 @@ mCollateralAssignment = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -27847,7 +27847,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -27855,7 +27855,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -27864,7 +27864,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -27872,7 +27872,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -27881,7 +27881,7 @@ mCollateralAssignment = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -27889,7 +27889,7 @@ mCollateralAssignment = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -27897,7 +27897,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -27905,14 +27905,14 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -27920,14 +27920,14 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -27935,14 +27935,14 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -27950,7 +27950,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -27958,7 +27958,7 @@ mCollateralAssignment = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -27966,7 +27966,7 @@ mCollateralAssignment = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -28018,7 +28018,7 @@ mCollateralAssignment = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -28026,14 +28026,14 @@ mCollateralAssignment = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -28041,7 +28041,7 @@ mCollateralAssignment = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -28055,7 +28055,7 @@ mCollateralResponse = FMSpec
    , msBody = mCollateralResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralResponseBody = 
+   mCollateralResponseBody =
       LT.insert (tnum tCollRespID) tCollRespID $
       LT.insert (tnum tCollAsgnID) tCollAsgnID $
       LT.insert (tnum tCollReqID) tCollReqID $
@@ -28159,7 +28159,7 @@ mCollateralResponse = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -28167,7 +28167,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -28176,7 +28176,7 @@ mCollateralResponse = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -28184,14 +28184,14 @@ mCollateralResponse = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -28199,7 +28199,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -28246,7 +28246,7 @@ mCollateralResponse = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -28254,7 +28254,7 @@ mCollateralResponse = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -28262,7 +28262,7 @@ mCollateralResponse = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -28270,7 +28270,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -28279,7 +28279,7 @@ mCollateralResponse = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -28287,7 +28287,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -28296,7 +28296,7 @@ mCollateralResponse = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -28304,7 +28304,7 @@ mCollateralResponse = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -28312,7 +28312,7 @@ mCollateralResponse = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -28320,14 +28320,14 @@ mCollateralResponse = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -28335,14 +28335,14 @@ mCollateralResponse = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -28350,14 +28350,14 @@ mCollateralResponse = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -28365,7 +28365,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -28373,7 +28373,7 @@ mCollateralResponse = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -28381,7 +28381,7 @@ mCollateralResponse = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -28433,7 +28433,7 @@ mCollateralResponse = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -28441,14 +28441,14 @@ mCollateralResponse = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -28456,7 +28456,7 @@ mCollateralResponse = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -28470,7 +28470,7 @@ mCollateralReport = FMSpec
    , msBody = mCollateralReportBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralReportBody = 
+   mCollateralReportBody =
       LT.insert (tnum tCollRptID) tCollRptID $
       LT.insert (tnum tCollInquiryID) tCollInquiryID $
       LT.insert (tnum tCollStatus) tCollStatus $
@@ -28581,7 +28581,7 @@ mCollateralReport = FMSpec
             { tName = "NoDlvyInst"
             , tnum = tnum tNoDlvyInst
             , tparser = gNoDlvyInstP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec''' }
 
          gNoDlvyInstP''' = groupP gNoDlvyInstSpec'''
          gNoDlvyInstSpec''' = FGSpec
@@ -28589,7 +28589,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tSettlInstSource
             , gsBody = gNoDlvyInstBody''' }
             where
-            gNoDlvyInstBody''' = 
+            gNoDlvyInstBody''' =
                LT.insert (tnum tDlvyInstType) tDlvyInstType $
                LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs''''''                LT.new
                where
@@ -28597,7 +28597,7 @@ mCollateralReport = FMSpec
                      { tName = "NoSettlPartyIDs"
                      , tnum = tnum tNoSettlPartyIDs
                      , tparser = gNoSettlPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec'''''' }
 
                   gNoSettlPartyIDsP'''''' = groupP gNoSettlPartyIDsSpec''''''
                   gNoSettlPartyIDsSpec'''''' = FGSpec
@@ -28605,7 +28605,7 @@ mCollateralReport = FMSpec
                      , gsSeperator = tSettlPartyID
                      , gsBody = gNoSettlPartyIDsBody'''''' }
                      where
-                     gNoSettlPartyIDsBody'''''' = 
+                     gNoSettlPartyIDsBody'''''' =
                         LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                         LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                         LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs'''''''''                         LT.new
@@ -28614,7 +28614,7 @@ mCollateralReport = FMSpec
                               { tName = "NoSettlPartySubIDs"
                               , tnum = tnum tNoSettlPartySubIDs
                               , tparser = gNoSettlPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
 
                            gNoSettlPartySubIDsP''''''''' = groupP gNoSettlPartySubIDsSpec'''''''''
                            gNoSettlPartySubIDsSpec''''''''' = FGSpec
@@ -28622,7 +28622,7 @@ mCollateralReport = FMSpec
                               , gsSeperator = tSettlPartySubID
                               , gsBody = gNoSettlPartySubIDsBody''''''''' }
                               where
-                              gNoSettlPartySubIDsBody''''''''' = 
+                              gNoSettlPartySubIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                  LT.new
 
 
@@ -28631,7 +28631,7 @@ mCollateralReport = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -28639,7 +28639,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -28648,7 +28648,7 @@ mCollateralReport = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -28656,14 +28656,14 @@ mCollateralReport = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -28671,7 +28671,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -28718,7 +28718,7 @@ mCollateralReport = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -28726,7 +28726,7 @@ mCollateralReport = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -28734,7 +28734,7 @@ mCollateralReport = FMSpec
             { tName = "NoMiscFees"
             , tnum = tnum tNoMiscFees
             , tparser = gNoMiscFeesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoMiscFeesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoMiscFeesSpec''' }
 
          gNoMiscFeesP''' = groupP gNoMiscFeesSpec'''
          gNoMiscFeesSpec''' = FGSpec
@@ -28742,7 +28742,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tMiscFeeAmt
             , gsBody = gNoMiscFeesBody''' }
             where
-            gNoMiscFeesBody''' = 
+            gNoMiscFeesBody''' =
                LT.insert (tnum tMiscFeeCurr) tMiscFeeCurr $
                LT.insert (tnum tMiscFeeType) tMiscFeeType $
                LT.insert (tnum tMiscFeeBasis) tMiscFeeBasis                LT.new
@@ -28751,7 +28751,7 @@ mCollateralReport = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -28759,7 +28759,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -28768,7 +28768,7 @@ mCollateralReport = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -28776,7 +28776,7 @@ mCollateralReport = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -28784,7 +28784,7 @@ mCollateralReport = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -28792,14 +28792,14 @@ mCollateralReport = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -28807,14 +28807,14 @@ mCollateralReport = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -28822,14 +28822,14 @@ mCollateralReport = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -28837,7 +28837,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -28845,7 +28845,7 @@ mCollateralReport = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -28853,7 +28853,7 @@ mCollateralReport = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -28904,7 +28904,7 @@ mCollateralReport = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -28912,14 +28912,14 @@ mCollateralReport = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -28927,7 +28927,7 @@ mCollateralReport = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -28941,7 +28941,7 @@ mCollateralInquiry = FMSpec
    , msBody = mCollateralInquiryBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralInquiryBody = 
+   mCollateralInquiryBody =
       LT.insert (tnum tCollInquiryID) tCollInquiryID $
       LT.insert (tnum tNoCollInquiryQualifier) gNoCollInquiryQualifier''' $
       LT.insert (tnum tSubscriptionRequestType) tSubscriptionRequestType $
@@ -29051,7 +29051,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoCollInquiryQualifier"
             , tnum = tnum tNoCollInquiryQualifier
             , tparser = gNoCollInquiryQualifierP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoCollInquiryQualifierSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoCollInquiryQualifierSpec''' }
 
          gNoCollInquiryQualifierP''' = groupP gNoCollInquiryQualifierSpec'''
          gNoCollInquiryQualifierSpec''' = FGSpec
@@ -29059,14 +29059,14 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tCollInquiryQualifier
             , gsBody = gNoCollInquiryQualifierBody''' }
             where
-            gNoCollInquiryQualifierBody''' = 
+            gNoCollInquiryQualifierBody''' =
                LT.new
 
          gNoDlvyInst''' = FIXTag
             { tName = "NoDlvyInst"
             , tnum = tnum tNoDlvyInst
             , tparser = gNoDlvyInstP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoDlvyInstSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoDlvyInstSpec''' }
 
          gNoDlvyInstP''' = groupP gNoDlvyInstSpec'''
          gNoDlvyInstSpec''' = FGSpec
@@ -29074,7 +29074,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tSettlInstSource
             , gsBody = gNoDlvyInstBody''' }
             where
-            gNoDlvyInstBody''' = 
+            gNoDlvyInstBody''' =
                LT.insert (tnum tDlvyInstType) tDlvyInstType $
                LT.insert (tnum tNoSettlPartyIDs) gNoSettlPartyIDs''''''                LT.new
                where
@@ -29082,7 +29082,7 @@ mCollateralInquiry = FMSpec
                      { tName = "NoSettlPartyIDs"
                      , tnum = tnum tNoSettlPartyIDs
                      , tparser = gNoSettlPartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoSettlPartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoSettlPartyIDsSpec'''''' }
 
                   gNoSettlPartyIDsP'''''' = groupP gNoSettlPartyIDsSpec''''''
                   gNoSettlPartyIDsSpec'''''' = FGSpec
@@ -29090,7 +29090,7 @@ mCollateralInquiry = FMSpec
                      , gsSeperator = tSettlPartyID
                      , gsBody = gNoSettlPartyIDsBody'''''' }
                      where
-                     gNoSettlPartyIDsBody'''''' = 
+                     gNoSettlPartyIDsBody'''''' =
                         LT.insert (tnum tSettlPartyIDSource) tSettlPartyIDSource $
                         LT.insert (tnum tSettlPartyRole) tSettlPartyRole $
                         LT.insert (tnum tNoSettlPartySubIDs) gNoSettlPartySubIDs'''''''''                         LT.new
@@ -29099,7 +29099,7 @@ mCollateralInquiry = FMSpec
                               { tName = "NoSettlPartySubIDs"
                               , tnum = tnum tNoSettlPartySubIDs
                               , tparser = gNoSettlPartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoSettlPartySubIDsSpec''''''''' }
 
                            gNoSettlPartySubIDsP''''''''' = groupP gNoSettlPartySubIDsSpec'''''''''
                            gNoSettlPartySubIDsSpec''''''''' = FGSpec
@@ -29107,7 +29107,7 @@ mCollateralInquiry = FMSpec
                               , gsSeperator = tSettlPartySubID
                               , gsBody = gNoSettlPartySubIDsBody''''''''' }
                               where
-                              gNoSettlPartySubIDsBody''''''''' = 
+                              gNoSettlPartySubIDsBody''''''''' =
                                  LT.insert (tnum tSettlPartySubIDType) tSettlPartySubIDType                                  LT.new
 
 
@@ -29116,7 +29116,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -29124,7 +29124,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -29133,7 +29133,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -29141,14 +29141,14 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -29156,7 +29156,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -29203,7 +29203,7 @@ mCollateralInquiry = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -29211,7 +29211,7 @@ mCollateralInquiry = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -29219,7 +29219,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -29227,7 +29227,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -29236,7 +29236,7 @@ mCollateralInquiry = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -29244,7 +29244,7 @@ mCollateralInquiry = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -29252,7 +29252,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -29260,14 +29260,14 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoStipulations''' = FIXTag
             { tName = "NoStipulations"
             , tnum = tnum tNoStipulations
             , tparser = gNoStipulationsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoStipulationsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoStipulationsSpec''' }
 
          gNoStipulationsP''' = groupP gNoStipulationsSpec'''
          gNoStipulationsSpec''' = FGSpec
@@ -29275,14 +29275,14 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tStipulationType
             , gsBody = gNoStipulationsBody''' }
             where
-            gNoStipulationsBody''' = 
+            gNoStipulationsBody''' =
                LT.insert (tnum tStipulationValue) tStipulationValue                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -29290,14 +29290,14 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoTrdRegTimestamps''' = FIXTag
             { tName = "NoTrdRegTimestamps"
             , tnum = tnum tNoTrdRegTimestamps
             , tparser = gNoTrdRegTimestampsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTrdRegTimestampsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTrdRegTimestampsSpec''' }
 
          gNoTrdRegTimestampsP''' = groupP gNoTrdRegTimestampsSpec'''
          gNoTrdRegTimestampsSpec''' = FGSpec
@@ -29305,7 +29305,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tTrdRegTimestamp
             , gsBody = gNoTrdRegTimestampsBody''' }
             where
-            gNoTrdRegTimestampsBody''' = 
+            gNoTrdRegTimestampsBody''' =
                LT.insert (tnum tTrdRegTimestampType) tTrdRegTimestampType $
                LT.insert (tnum tTrdRegTimestampOrigin) tTrdRegTimestampOrigin                LT.new
 
@@ -29313,7 +29313,7 @@ mCollateralInquiry = FMSpec
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -29321,7 +29321,7 @@ mCollateralInquiry = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -29372,7 +29372,7 @@ mCollateralInquiry = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -29380,14 +29380,14 @@ mCollateralInquiry = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -29395,7 +29395,7 @@ mCollateralInquiry = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -29409,7 +29409,7 @@ mNetworkCounterpartySystemStatusRequest = FMSpec
    , msBody = mNetworkCounterpartySystemStatusRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mNetworkCounterpartySystemStatusRequestBody = 
+   mNetworkCounterpartySystemStatusRequestBody =
       LT.insert (tnum tNetworkRequestType) tNetworkRequestType $
       LT.insert (tnum tNetworkRequestID) tNetworkRequestID $
       LT.insert (tnum tNoCompIDs) gNoCompIDs'''       LT.new
@@ -29418,7 +29418,7 @@ mNetworkCounterpartySystemStatusRequest = FMSpec
             { tName = "NoCompIDs"
             , tnum = tnum tNoCompIDs
             , tparser = gNoCompIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoCompIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoCompIDsSpec''' }
 
          gNoCompIDsP''' = groupP gNoCompIDsSpec'''
          gNoCompIDsSpec''' = FGSpec
@@ -29426,7 +29426,7 @@ mNetworkCounterpartySystemStatusRequest = FMSpec
             , gsSeperator = tRefCompID
             , gsBody = gNoCompIDsBody''' }
             where
-            gNoCompIDsBody''' = 
+            gNoCompIDsBody''' =
                LT.insert (tnum tRefSubID) tRefSubID $
                LT.insert (tnum tLocationID) tLocationID $
                LT.insert (tnum tDeskID) tDeskID                LT.new
@@ -29441,7 +29441,7 @@ mNetworkCounterpartySystemStatusResponse = FMSpec
    , msBody = mNetworkCounterpartySystemStatusResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mNetworkCounterpartySystemStatusResponseBody = 
+   mNetworkCounterpartySystemStatusResponseBody =
       LT.insert (tnum tNetworkStatusResponseType) tNetworkStatusResponseType $
       LT.insert (tnum tNetworkRequestID) tNetworkRequestID $
       LT.insert (tnum tNetworkResponseID) tNetworkResponseID $
@@ -29452,7 +29452,7 @@ mNetworkCounterpartySystemStatusResponse = FMSpec
             { tName = "NoCompIDs"
             , tnum = tnum tNoCompIDs
             , tparser = gNoCompIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoCompIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoCompIDsSpec''' }
 
          gNoCompIDsP''' = groupP gNoCompIDsSpec'''
          gNoCompIDsSpec''' = FGSpec
@@ -29460,7 +29460,7 @@ mNetworkCounterpartySystemStatusResponse = FMSpec
             , gsSeperator = tRefCompID
             , gsBody = gNoCompIDsBody''' }
             where
-            gNoCompIDsBody''' = 
+            gNoCompIDsBody''' =
                LT.insert (tnum tRefSubID) tRefSubID $
                LT.insert (tnum tLocationID) tLocationID $
                LT.insert (tnum tDeskID) tDeskID $
@@ -29477,7 +29477,7 @@ mUserRequest = FMSpec
    , msBody = mUserRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mUserRequestBody = 
+   mUserRequestBody =
       LT.insert (tnum tUserRequestID) tUserRequestID $
       LT.insert (tnum tUserRequestType) tUserRequestType $
       LT.insert (tnum tUsername) tUsername $
@@ -29495,7 +29495,7 @@ mUserResponse = FMSpec
    , msBody = mUserResponseBody
    , msTrailer = trailerFIX44 }
    where
-   mUserResponseBody = 
+   mUserResponseBody =
       LT.insert (tnum tUserRequestID) tUserRequestID $
       LT.insert (tnum tUsername) tUsername $
       LT.insert (tnum tUserStatus) tUserStatus $
@@ -29510,7 +29510,7 @@ mCollateralInquiryAck = FMSpec
    , msBody = mCollateralInquiryAckBody
    , msTrailer = trailerFIX44 }
    where
-   mCollateralInquiryAckBody = 
+   mCollateralInquiryAckBody =
       LT.insert (tnum tCollInquiryID) tCollInquiryID $
       LT.insert (tnum tCollInquiryStatus) tCollInquiryStatus $
       LT.insert (tnum tCollInquiryResult) tCollInquiryResult $
@@ -29597,7 +29597,7 @@ mCollateralInquiryAck = FMSpec
             { tName = "NoCollInquiryQualifier"
             , tnum = tnum tNoCollInquiryQualifier
             , tparser = gNoCollInquiryQualifierP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoCollInquiryQualifierSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoCollInquiryQualifierSpec''' }
 
          gNoCollInquiryQualifierP''' = groupP gNoCollInquiryQualifierSpec'''
          gNoCollInquiryQualifierSpec''' = FGSpec
@@ -29605,14 +29605,14 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tCollInquiryQualifier
             , gsBody = gNoCollInquiryQualifierBody''' }
             where
-            gNoCollInquiryQualifierBody''' = 
+            gNoCollInquiryQualifierBody''' =
                LT.new
 
          gNoEvents''' = FIXTag
             { tName = "NoEvents"
             , tnum = tnum tNoEvents
             , tparser = gNoEventsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoEventsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoEventsSpec''' }
 
          gNoEventsP''' = groupP gNoEventsSpec'''
          gNoEventsSpec''' = FGSpec
@@ -29620,7 +29620,7 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tEventType
             , gsBody = gNoEventsBody''' }
             where
-            gNoEventsBody''' = 
+            gNoEventsBody''' =
                LT.insert (tnum tEventDate) tEventDate $
                LT.insert (tnum tEventPx) tEventPx $
                LT.insert (tnum tEventText) tEventText                LT.new
@@ -29629,7 +29629,7 @@ mCollateralInquiryAck = FMSpec
             { tName = "NoExecs"
             , tnum = tnum tNoExecs
             , tparser = gNoExecsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoExecsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoExecsSpec''' }
 
          gNoExecsP''' = groupP gNoExecsSpec'''
          gNoExecsSpec''' = FGSpec
@@ -29637,14 +29637,14 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tExecID
             , gsBody = gNoExecsBody''' }
             where
-            gNoExecsBody''' = 
+            gNoExecsBody''' =
                LT.new
 
          gNoLegs''' = FIXTag
             { tName = "NoLegs"
             , tnum = tnum tNoLegs
             , tparser = gNoLegsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoLegsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoLegsSpec''' }
 
          gNoLegsP''' = groupP gNoLegsSpec'''
          gNoLegsSpec''' = FGSpec
@@ -29652,7 +29652,7 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tLegSymbol
             , gsBody = gNoLegsBody''' }
             where
-            gNoLegsBody''' = 
+            gNoLegsBody''' =
                LT.insert (tnum tLegSymbolSfx) tLegSymbolSfx $
                LT.insert (tnum tLegSecurityID) tLegSecurityID $
                LT.insert (tnum tLegSecurityIDSource) tLegSecurityIDSource $
@@ -29699,7 +29699,7 @@ mCollateralInquiryAck = FMSpec
                      { tName = "NoLegSecurityAltID"
                      , tnum = tnum tNoLegSecurityAltID
                      , tparser = gNoLegSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoLegSecurityAltIDSpec'''''' }
 
                   gNoLegSecurityAltIDP'''''' = groupP gNoLegSecurityAltIDSpec''''''
                   gNoLegSecurityAltIDSpec'''''' = FGSpec
@@ -29707,7 +29707,7 @@ mCollateralInquiryAck = FMSpec
                      , gsSeperator = tLegSecurityAltID
                      , gsBody = gNoLegSecurityAltIDBody'''''' }
                      where
-                     gNoLegSecurityAltIDBody'''''' = 
+                     gNoLegSecurityAltIDBody'''''' =
                         LT.insert (tnum tLegSecurityAltIDSource) tLegSecurityAltIDSource                         LT.new
 
 
@@ -29715,7 +29715,7 @@ mCollateralInquiryAck = FMSpec
             { tName = "NoPartyIDs"
             , tnum = tnum tNoPartyIDs
             , tparser = gNoPartyIDsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoPartyIDsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoPartyIDsSpec''' }
 
          gNoPartyIDsP''' = groupP gNoPartyIDsSpec'''
          gNoPartyIDsSpec''' = FGSpec
@@ -29723,7 +29723,7 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tPartyID
             , gsBody = gNoPartyIDsBody''' }
             where
-            gNoPartyIDsBody''' = 
+            gNoPartyIDsBody''' =
                LT.insert (tnum tPartyIDSource) tPartyIDSource $
                LT.insert (tnum tPartyRole) tPartyRole $
                LT.insert (tnum tNoPartySubIDs) gNoPartySubIDs''''''                LT.new
@@ -29732,7 +29732,7 @@ mCollateralInquiryAck = FMSpec
                      { tName = "NoPartySubIDs"
                      , tnum = tnum tNoPartySubIDs
                      , tparser = gNoPartySubIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoPartySubIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoPartySubIDsSpec'''''' }
 
                   gNoPartySubIDsP'''''' = groupP gNoPartySubIDsSpec''''''
                   gNoPartySubIDsSpec'''''' = FGSpec
@@ -29740,7 +29740,7 @@ mCollateralInquiryAck = FMSpec
                      , gsSeperator = tPartySubID
                      , gsBody = gNoPartySubIDsBody'''''' }
                      where
-                     gNoPartySubIDsBody'''''' = 
+                     gNoPartySubIDsBody'''''' =
                         LT.insert (tnum tPartySubIDType) tPartySubIDType                         LT.new
 
 
@@ -29748,7 +29748,7 @@ mCollateralInquiryAck = FMSpec
             { tName = "NoSecurityAltID"
             , tnum = tnum tNoSecurityAltID
             , tparser = gNoSecurityAltIDP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoSecurityAltIDSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoSecurityAltIDSpec''' }
 
          gNoSecurityAltIDP''' = groupP gNoSecurityAltIDSpec'''
          gNoSecurityAltIDSpec''' = FGSpec
@@ -29756,14 +29756,14 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tSecurityAltID
             , gsBody = gNoSecurityAltIDBody''' }
             where
-            gNoSecurityAltIDBody''' = 
+            gNoSecurityAltIDBody''' =
                LT.insert (tnum tSecurityAltIDSource) tSecurityAltIDSource                LT.new
 
          gNoTrades''' = FIXTag
             { tName = "NoTrades"
             , tnum = tnum tNoTrades
             , tparser = gNoTradesP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoTradesSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoTradesSpec''' }
 
          gNoTradesP''' = groupP gNoTradesSpec'''
          gNoTradesSpec''' = FGSpec
@@ -29771,14 +29771,14 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tTradeReportID
             , gsBody = gNoTradesBody''' }
             where
-            gNoTradesBody''' = 
+            gNoTradesBody''' =
                LT.insert (tnum tSecondaryTradeReportID) tSecondaryTradeReportID                LT.new
 
          gNoUnderlyings''' = FIXTag
             { tName = "NoUnderlyings"
             , tnum = tnum tNoUnderlyings
             , tparser = gNoUnderlyingsP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingsSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoUnderlyingsSpec''' }
 
          gNoUnderlyingsP''' = groupP gNoUnderlyingsSpec'''
          gNoUnderlyingsSpec''' = FGSpec
@@ -29786,7 +29786,7 @@ mCollateralInquiryAck = FMSpec
             , gsSeperator = tUnderlyingSymbol
             , gsBody = gNoUnderlyingsBody''' }
             where
-            gNoUnderlyingsBody''' = 
+            gNoUnderlyingsBody''' =
                LT.insert (tnum tUnderlyingSymbolSfx) tUnderlyingSymbolSfx $
                LT.insert (tnum tUnderlyingSecurityID) tUnderlyingSecurityID $
                LT.insert (tnum tUnderlyingSecurityIDSource) tUnderlyingSecurityIDSource $
@@ -29837,7 +29837,7 @@ mCollateralInquiryAck = FMSpec
                      { tName = "NoUnderlyingSecurityAltID"
                      , tnum = tnum tNoUnderlyingSecurityAltID
                      , tparser = gNoUnderlyingSecurityAltIDP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingSecurityAltIDSpec'''''' }
 
                   gNoUnderlyingSecurityAltIDP'''''' = groupP gNoUnderlyingSecurityAltIDSpec''''''
                   gNoUnderlyingSecurityAltIDSpec'''''' = FGSpec
@@ -29845,14 +29845,14 @@ mCollateralInquiryAck = FMSpec
                      , gsSeperator = tUnderlyingSecurityAltID
                      , gsBody = gNoUnderlyingSecurityAltIDBody'''''' }
                      where
-                     gNoUnderlyingSecurityAltIDBody'''''' = 
+                     gNoUnderlyingSecurityAltIDBody'''''' =
                         LT.insert (tnum tUnderlyingSecurityAltIDSource) tUnderlyingSecurityAltIDSource                         LT.new
 
                   gNoUnderlyingStips'''''' = FIXTag
                      { tName = "NoUnderlyingStips"
                      , tnum = tnum tNoUnderlyingStips
                      , tparser = gNoUnderlyingStipsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoUnderlyingStipsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoUnderlyingStipsSpec'''''' }
 
                   gNoUnderlyingStipsP'''''' = groupP gNoUnderlyingStipsSpec''''''
                   gNoUnderlyingStipsSpec'''''' = FGSpec
@@ -29860,7 +29860,7 @@ mCollateralInquiryAck = FMSpec
                      , gsSeperator = tUnderlyingStipType
                      , gsBody = gNoUnderlyingStipsBody'''''' }
                      where
-                     gNoUnderlyingStipsBody'''''' = 
+                     gNoUnderlyingStipsBody'''''' =
                         LT.insert (tnum tUnderlyingStipValue) tUnderlyingStipValue                         LT.new
 
 
@@ -29874,7 +29874,7 @@ mConfirmationRequest = FMSpec
    , msBody = mConfirmationRequestBody
    , msTrailer = trailerFIX44 }
    where
-   mConfirmationRequestBody = 
+   mConfirmationRequestBody =
       LT.insert (tnum tConfirmReqID) tConfirmReqID $
       LT.insert (tnum tConfirmType) tConfirmType $
       LT.insert (tnum tNoOrders) gNoOrders''' $
@@ -29893,7 +29893,7 @@ mConfirmationRequest = FMSpec
             { tName = "NoOrders"
             , tnum = tnum tNoOrders
             , tparser = gNoOrdersP'''
-            , arbitraryValue = arbibtraryFIXGroup gNoOrdersSpec''' }
+            , arbitraryValue = arbitraryFIXGroup gNoOrdersSpec''' }
 
          gNoOrdersP''' = groupP gNoOrdersSpec'''
          gNoOrdersSpec''' = FGSpec
@@ -29901,7 +29901,7 @@ mConfirmationRequest = FMSpec
             , gsSeperator = tClOrdID
             , gsBody = gNoOrdersBody''' }
             where
-            gNoOrdersBody''' = 
+            gNoOrdersBody''' =
                LT.insert (tnum tOrderID) tOrderID $
                LT.insert (tnum tSecondaryOrderID) tSecondaryOrderID $
                LT.insert (tnum tSecondaryClOrdID) tSecondaryClOrdID $
@@ -29915,7 +29915,7 @@ mConfirmationRequest = FMSpec
                      { tName = "NoNested2PartyIDs"
                      , tnum = tnum tNoNested2PartyIDs
                      , tparser = gNoNested2PartyIDsP''''''
-                     , arbitraryValue = arbibtraryFIXGroup gNoNested2PartyIDsSpec'''''' }
+                     , arbitraryValue = arbitraryFIXGroup gNoNested2PartyIDsSpec'''''' }
 
                   gNoNested2PartyIDsP'''''' = groupP gNoNested2PartyIDsSpec''''''
                   gNoNested2PartyIDsSpec'''''' = FGSpec
@@ -29923,7 +29923,7 @@ mConfirmationRequest = FMSpec
                      , gsSeperator = tNested2PartyID
                      , gsBody = gNoNested2PartyIDsBody'''''' }
                      where
-                     gNoNested2PartyIDsBody'''''' = 
+                     gNoNested2PartyIDsBody'''''' =
                         LT.insert (tnum tNested2PartyIDSource) tNested2PartyIDSource $
                         LT.insert (tnum tNested2PartyRole) tNested2PartyRole $
                         LT.insert (tnum tNoNested2PartySubIDs) gNoNested2PartySubIDs'''''''''                         LT.new
@@ -29932,7 +29932,7 @@ mConfirmationRequest = FMSpec
                               { tName = "NoNested2PartySubIDs"
                               , tnum = tnum tNoNested2PartySubIDs
                               , tparser = gNoNested2PartySubIDsP'''''''''
-                              , arbitraryValue = arbibtraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
+                              , arbitraryValue = arbitraryFIXGroup gNoNested2PartySubIDsSpec''''''''' }
 
                            gNoNested2PartySubIDsP''''''''' = groupP gNoNested2PartySubIDsSpec'''''''''
                            gNoNested2PartySubIDsSpec''''''''' = FGSpec
@@ -29940,7 +29940,7 @@ mConfirmationRequest = FMSpec
                               , gsSeperator = tNested2PartySubID
                               , gsBody = gNoNested2PartySubIDsBody''''''''' }
                               where
-                              gNoNested2PartySubIDsBody''''''''' = 
+                              gNoNested2PartySubIDsBody''''''''' =
                                  LT.insert (tnum tNested2PartySubIDType) tNested2PartySubIDType                                  LT.new
 
 
@@ -29952,7 +29952,7 @@ fix44 = FSpec
    { fsVersion = "FIX.4.4"
    , fsHeader = headerFIX44
    , fsTrailer = trailerFIX44
-   , fsMessages = fix44Messages 
+   , fsMessages = fix44Messages
    , fsTags = fix44Tags }
    where
       fix44Messages =
@@ -30047,7 +30047,7 @@ fix44 = FSpec
           LT.insert (msType mUserRequest) mUserRequest $
           LT.insert (msType mUserResponse) mUserResponse $
           LT.insert (msType mCollateralInquiryAck) mCollateralInquiryAck $
-          LT.insert (msType mConfirmationRequest) mConfirmationRequest           LT.new 
+          LT.insert (msType mConfirmationRequest) mConfirmationRequest           LT.new
       fix44Tags =
           LT.insert (tnum tAccount) tAccount $
           LT.insert (tnum tAdvId) tAdvId $
@@ -31002,4 +31002,4 @@ fix44 = FSpec
           LT.insert (tnum tNested3PartySubIDType) tNested3PartySubIDType $
           LT.insert (tnum tLegContractSettlMonth) tLegContractSettlMonth $
           LT.insert (tnum tLegInterestAccrualDate) tLegInterestAccrualDate $
-          LT.new 
+          LT.new
