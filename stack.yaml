@@ -1,0 +1,10 @@
+flags:
+    fixhs:
+        developer: true
+        with-fix40: true
+        with-fix41: true
+        with-fix42: true
+        with-fix43: true
+        with-fix44: true
+
+resolver: lts-6.0
